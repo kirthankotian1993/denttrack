@@ -19,7 +19,7 @@
             {
               "procedure": "Composite Filling",
               "fee": 1000,
-              "payStatus": "pending",
+              "payStatus": "received",
               "partialAmt": 0
             }
           ]
@@ -146,5 +146,5 @@
       "notes": "Dr.Sindhu"
     }
   ],
-  "savedAt": "2026-03-19T16:43:39.077Z"
+  "savedAt": "2026-03-19T16:43:54.729Z"
 }
