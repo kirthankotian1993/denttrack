@@ -49,7 +49,15 @@
       "location": "Jakkur",
       "phone": "",
       "notes": "Dr.Neha"
+    },
+    {
+      "id": 1773938335458,
+      "name": "Dental Studio",
+      "type": "Dental Clinic",
+      "location": "Jakkur",
+      "phone": "",
+      "notes": "Dr.Veena"
     }
   ],
-  "savedAt": "2026-03-19T16:38:37.713Z"
+  "savedAt": "2026-03-19T16:38:56.959Z"
 }
