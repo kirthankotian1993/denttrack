@@ -7,8 +7,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 <meta name="apple-mobile-web-app-title" content="DentTrack"/>
 <meta name="theme-color" content="#0F6E56"/>
-<title>DentTrack Pro</title>
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%230F6E56'/%3E%3Ctext x='90' y='115' font-size='80' text-anchor='middle' fill='white'%3E%F0%9F%A6%B7%3C/text%3E%3C/svg%3E"/>
+<title>Kirthan Consultation Ledger</title>
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%230F6E56'/%3E%3Ctext x='90' y='115' font-size='80' text-anchor='middle' fill='white'%3E🦷%3C/text%3E%3C/svg%3E"/>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap');
 :root{
@@ -20,207 +20,289 @@
   --gr50:#F1EFE8;--gr100:#D3D1C7;--gr400:#888780;
   --safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px);
   --safe-left:env(safe-area-inset-left,0px);--safe-right:env(safe-area-inset-right,0px);
-  --bg:#fff;--bg2:#f4f6f4;--text:#1a1a1a;--text2:#666;--text3:#999;
-  --border:rgba(0,0,0,0.1);
+  --bg:#fff;--bg2:#f4f6f4;--text:#1a1a1a;--text2:#666;--text3:#999;--border:rgba(0,0,0,0.1);
 }
 @media(prefers-color-scheme:dark){:root{
   --bg:#111;--bg2:#1c1c1e;--text:#f2f2f7;--text2:#aeaeb2;--text3:#636366;
   --border:rgba(255,255,255,0.1);
-  --t50:#0a2e22;--t100:#0d4a32;--t200:#0f5e40;
-  --g50:#0e2408;--g100:#1a4010;--a50:#2e1e00;--a100:#4a3200;
-  --r50:#2e0a0a;--r100:#4a1010;--b50:#081830;--b100:#102440;
+  --t50:#0a2e22;--t100:#0d4a32;--t200:#0f5e40;--g50:#0e2408;--g100:#1a4010;
+  --a50:#2e1e00;--a100:#4a3200;--r50:#2e0a0a;--r100:#4a1010;--b50:#081830;--b100:#102440;
   --gr50:#1c1c1e;--gr100:#2c2c2e;
 }}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html,body{width:100%;height:100%;overflow:hidden;font-family:'DM Sans',-apple-system,sans-serif;background:var(--t600);color:var(--text);-webkit-font-smoothing:antialiased;}
 .app{width:100%;height:100%;display:flex;flex-direction:column;background:var(--bg);overflow:hidden;max-width:430px;margin:0 auto;position:relative;}
-.topbar{background:var(--t600);padding-top:calc(var(--safe-top) + 12px);padding-left:max(20px,var(--safe-left));padding-right:max(20px,var(--safe-right));flex-shrink:0;}
-.topbar-inner{padding-bottom:14px;}
-.greet{font-size:12px;color:rgba(255,255,255,0.72);}
-.brand{font-family:'Playfair Display',serif;font-size:22px;color:#fff;font-weight:600;}
-.dbadge{display:inline-block;margin-top:6px;background:rgba(255,255,255,0.18);border-radius:20px;padding:3px 12px;font-size:11px;color:rgba(255,255,255,0.9);}
-.sumstrip{background:var(--t600);padding:0 14px 16px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;flex-shrink:0;}
-.scard{background:rgba(255,255,255,0.15);border-radius:12px;padding:9px 11px;border:0.5px solid rgba(255,255,255,0.2);}
-.scard .sl{font-size:10px;color:rgba(255,255,255,0.72);margin-bottom:2px;}
-.scard .sv{font-size:19px;font-weight:600;color:#fff;}
-.scard .ss{font-size:10px;color:rgba(255,255,255,0.6);}
-.tabbar{display:flex;background:var(--bg);border-bottom:0.5px solid var(--border);padding:0 4px;overflow-x:auto;flex-shrink:0;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+
+/* ── Setup screen ── */
+.setup-screen{position:absolute;inset:0;background:var(--bg);z-index:500;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:calc(var(--safe-top)+40px) 28px 40px;overflow-y:auto;}
+.setup-screen.hidden{display:none;}
+.setup-logo{font-size:52px;margin-bottom:16px;}
+.setup-title{font-family:'Playfair Display',serif;font-size:24px;color:var(--text);margin-bottom:8px;text-align:center;}
+.setup-sub{font-size:13px;color:var(--text2);text-align:center;line-height:1.6;margin-bottom:28px;}
+.setup-card{background:var(--bg2);border-radius:16px;padding:20px;width:100%;margin-bottom:16px;border:.5px solid var(--border);}
+.setup-card-title{font-size:13px;font-weight:500;color:var(--text);margin-bottom:12px;}
+.setup-step{display:flex;gap:10px;margin-bottom:10px;align-items:flex-start;}
+.setup-step-num{width:22px;height:22px;border-radius:50%;background:var(--t400);color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.setup-step-txt{font-size:12px;color:var(--text2);line-height:1.5;}
+.setup-step-txt strong{color:var(--text);font-weight:500;}
+.setup-inp{width:100%;padding:12px 14px;border:.5px solid var(--border);border-radius:11px;font-size:14px;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);outline:none;-webkit-appearance:none;margin-bottom:12px;min-height:46px;}
+.setup-inp:focus{border-color:var(--t400);}
+.setup-btn{width:100%;padding:14px;background:var(--t400);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;min-height:50px;-webkit-appearance:none;}
+.setup-warn{background:var(--a50);border-radius:10px;padding:11px 14px;font-size:12px;color:var(--a800);line-height:1.5;margin-bottom:16px;border:.5px solid var(--a100);}
+
+/* ── Sync status bar ── */
+.sync-bar{display:flex;align-items:center;justify-content:space-between;padding:5px 14px;background:var(--bg2);border-bottom:.5px solid var(--border);flex-shrink:0;}
+.sync-status{font-size:10px;color:var(--text3);display:flex;align-items:center;gap:5px;}
+.sync-dot{width:7px;height:7px;border-radius:50%;background:var(--gr400);flex-shrink:0;}
+.sync-dot.synced{background:var(--g400);}
+.sync-dot.syncing{background:var(--a400);animation:pulse 1s infinite;}
+.sync-dot.error{background:var(--r400);}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+.sync-btn{background:none;border:.5px solid var(--border);border-radius:7px;padding:3px 9px;font-size:10px;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--text2);-webkit-appearance:none;}
+.sync-settings-btn{background:none;border:none;font-size:14px;cursor:pointer;padding:2px 4px;color:var(--text2);}
+
+/* ── Top bar ── */
+.topbar{background:var(--t600);padding-top:calc(var(--safe-top)+10px);padding-left:max(18px,var(--safe-left));padding-right:max(18px,var(--safe-right));flex-shrink:0;}
+.topbar-inner{padding-bottom:12px;}
+.greet{font-size:11px;color:rgba(255,255,255,.72);}
+.brand{font-family:'Playfair Display',serif;font-size:21px;color:#fff;font-weight:600;}
+.dbadge{display:inline-block;margin-top:5px;background:rgba(255,255,255,.18);border-radius:20px;padding:3px 11px;font-size:11px;color:rgba(255,255,255,.9);}
+.sumstrip{background:var(--t600);padding:0 13px 14px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;flex-shrink:0;}
+.scard{background:rgba(255,255,255,.15);border-radius:11px;padding:9px 10px;border:.5px solid rgba(255,255,255,.2);}
+.scard .sl{font-size:10px;color:rgba(255,255,255,.72);margin-bottom:2px;}
+.scard .sv{font-size:18px;font-weight:600;color:#fff;}
+.scard .ss{font-size:9px;color:rgba(255,255,255,.6);}
+.tabbar{display:flex;background:var(--bg);border-bottom:.5px solid var(--border);padding:0 2px;overflow-x:auto;flex-shrink:0;scrollbar-width:none;}
 .tabbar::-webkit-scrollbar{display:none;}
-.tbtn{flex:0 0 auto;padding:11px 11px;background:none;border:none;border-bottom:2px solid transparent;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;color:var(--text2);cursor:pointer;white-space:nowrap;-webkit-appearance:none;}
+.tbtn{flex:0 0 auto;padding:10px 11px;background:none;border:none;border-bottom:2px solid transparent;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;color:var(--text2);cursor:pointer;white-space:nowrap;-webkit-appearance:none;}
 .tbtn.active{color:var(--t600);border-bottom-color:var(--t400);}
-.content{flex:1;overflow-y:auto;padding:14px;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;}
-.sh{display:flex;justify-content:space-between;align-items:center;margin-bottom:11px;}
+.content{flex:1;overflow-y:auto;padding:13px;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;}
+.sh{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
 .sh h3{font-size:13px;font-weight:500;color:var(--text);}
-.addbtn{background:var(--t400);color:#fff;border:none;border-radius:20px;padding:6px 14px;font-size:11px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;-webkit-appearance:none;min-height:32px;}
-.frow{display:flex;gap:7px;margin-bottom:12px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none;}
+.addbtn{background:var(--t400);color:#fff;border:none;border-radius:20px;padding:5px 13px;font-size:11px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;-webkit-appearance:none;min-height:30px;}
+.frow{display:flex;gap:6px;margin-bottom:10px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none;}
 .frow::-webkit-scrollbar{display:none;}
-.fchip{white-space:nowrap;padding:5px 13px;border-radius:20px;border:0.5px solid var(--border);background:none;font-size:11px;font-family:'DM Sans',sans-serif;cursor:pointer;color:var(--text);-webkit-appearance:none;min-height:30px;}
+.fchip{white-space:nowrap;padding:4px 12px;border-radius:20px;border:.5px solid var(--border);background:none;font-size:11px;font-family:'DM Sans',sans-serif;cursor:pointer;color:var(--text);-webkit-appearance:none;min-height:28px;}
 .fchip.active{background:var(--t50);color:var(--t600);border-color:var(--t200);}
-.vcard{background:var(--bg);border:0.5px solid var(--border);border-radius:14px;padding:13px;margin-bottom:11px;}
+
+/* ── Visit cards ── */
+.vcard{background:var(--bg);border:.5px solid var(--border);border-radius:13px;padding:12px;margin-bottom:10px;}
 .vcard.expanded{border-color:var(--t400);}
-.vch{display:flex;justify-content:space-between;align-items:flex-start;cursor:pointer;}
+.vcard-top{display:flex;justify-content:space-between;align-items:flex-start;cursor:pointer;}
 .vct{font-size:13px;font-weight:500;color:var(--text);}
 .vcd{font-size:10px;color:var(--text2);margin-top:2px;}
-.spill{font-size:10px;font-weight:500;padding:3px 8px;border-radius:20px;flex-shrink:0;}
+.vcard-right{display:flex;align-items:center;gap:6px;margin-left:8px;flex-shrink:0;}
+.spill{font-size:10px;font-weight:500;padding:3px 7px;border-radius:20px;flex-shrink:0;}
 .ppaid{background:var(--g50);color:var(--g800);}
 .ppend{background:var(--a50);color:var(--a800);}
 .ppart{background:var(--b50);color:var(--b800);}
-.vcmeta{display:flex;gap:7px;margin-top:7px;flex-wrap:wrap;cursor:pointer;}
-.mchip{font-size:10px;padding:2px 7px;border-radius:7px;background:var(--t50);color:var(--t600);}
-.vcard-actions{display:flex;gap:7px;margin-top:8px;padding-top:8px;border-top:0.5px solid var(--border);}
-.vact-btn{flex:1;padding:8px;border-radius:9px;font-size:11px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;border:0.5px solid var(--border);background:none;color:var(--text);min-height:36px;-webkit-appearance:none;}
-.vact-btn.edit{color:var(--b800);border-color:var(--b100);background:var(--b50);}
-.vact-btn.del{color:var(--r800);border-color:var(--r100);background:var(--r50);}
-.vcpats{margin-top:9px;border-top:0.5px solid var(--border);padding-top:9px;display:none;}
+.icon-btn{background:none;border:.5px solid var(--border);border-radius:7px;padding:3px 7px;font-size:11px;cursor:pointer;color:var(--text2);font-family:'DM Sans',sans-serif;min-height:26px;-webkit-appearance:none;}
+.icon-btn.del{color:var(--r400);border-color:var(--r100);}
+.vcmeta{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;cursor:pointer;}
+.mchip{font-size:10px;padding:2px 6px;border-radius:6px;background:var(--t50);color:var(--t600);}
+.vcpats{margin-top:8px;border-top:.5px solid var(--border);padding-top:8px;display:none;}
 .vcard.expanded .vcpats{display:block;}
-.pat-block{margin-bottom:10px;padding-bottom:10px;border-bottom:0.5px solid var(--border);}
+.pat-block{margin-bottom:9px;padding-bottom:9px;border-bottom:.5px solid var(--border);}
 .pat-block:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
-.pat-block-header{display:flex;align-items:center;gap:9px;margin-bottom:6px;}
+.pat-block-hdr{display:flex;align-items:center;gap:8px;margin-bottom:5px;}
 .pav{width:30px;height:30px;border-radius:50%;background:var(--t100);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;color:var(--t800);flex-shrink:0;cursor:pointer;}
 .pat-name-col{flex:1;min-width:0;}
 .pname{font-size:12px;font-weight:500;color:var(--text);}
-.pat-subtotal{font-size:10px;color:var(--text2);}
-.proc-row{display:flex;align-items:center;gap:6px;padding:4px 0 4px 39px;}
-.proc-name{flex:1;font-size:11px;color:var(--text2);}
+.pat-sub{font-size:10px;color:var(--text2);}
+.proc-row{display:flex;align-items:center;gap:5px;padding:3px 0 3px 38px;}
+.proc-nm{flex:1;font-size:11px;color:var(--text2);}
 .proc-fee{font-size:11px;font-weight:500;flex-shrink:0;}
 .fpaid{color:var(--g400);}
 .fpend{color:var(--a400);}
-.paybtn{flex-shrink:0;border:none;border-radius:6px;font-size:10px;padding:4px 7px;cursor:pointer;font-family:'DM Sans',sans-serif;min-height:26px;-webkit-appearance:none;}
-.pat-note-display{margin:5px 0 0 39px;font-size:11px;color:var(--text3);font-style:italic;background:var(--bg2);border-radius:6px;padding:5px 8px;border-left:2px solid var(--t200);}
-.vcfoot{display:none;justify-content:space-between;margin-top:8px;padding-top:7px;border-top:0.5px solid var(--border);}
+.paybtn{flex-shrink:0;border:none;border-radius:6px;font-size:10px;padding:3px 7px;cursor:pointer;font-family:'DM Sans',sans-serif;min-height:24px;-webkit-appearance:none;}
+.pat-note-d{margin:4px 0 0 38px;font-size:10px;color:var(--text3);font-style:italic;background:var(--bg2);border-radius:5px;padding:4px 8px;border-left:2px solid var(--t200);}
+.vcfoot{display:none;justify-content:space-between;margin-top:7px;padding-top:6px;border-top:.5px solid var(--border);}
 .vcard.expanded .vcfoot{display:flex;}
 .ftot{font-size:11px;color:var(--text2);}
 .ftot span{font-weight:500;color:var(--text);}
-.empty{text-align:center;padding:40px 16px;color:var(--text3);}
-.empty .ei{font-size:36px;margin-bottom:8px;}
+.empty{text-align:center;padding:36px 14px;color:var(--text3);}
+.empty .ei{font-size:32px;margin-bottom:7px;}
 .empty p{font-size:12px;line-height:1.6;}
-.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:14px;}
-.sblk{background:var(--bg2);border-radius:11px;padding:13px;}
+
+/* ── Analytics ── */
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:13px;}
+.sblk{background:var(--bg2);border-radius:10px;padding:12px;}
 .sblk .sbl{font-size:10px;color:var(--text2);margin-bottom:3px;}
 .sblk .sbv{font-size:20px;font-weight:600;color:var(--text);}
 .sblk .sbs{font-size:10px;color:var(--text3);margin-top:2px;}
-.pbar-wrap{margin-bottom:13px;}
+.pbar-wrap{margin-bottom:12px;}
 .pbar-top{display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px;}
-.pbar-track{height:7px;background:var(--bg2);border-radius:4px;overflow:hidden;}
-.pbar-fill{height:100%;border-radius:4px;}
-.clinic-card{background:var(--bg);border:0.5px solid var(--border);border-radius:14px;padding:13px;margin-bottom:11px;}
+.pbar-track{height:6px;background:var(--bg2);border-radius:3px;overflow:hidden;}
+.pbar-fill{height:100%;border-radius:3px;}
+
+/* ── Clinics ── */
+.clinic-card{background:var(--bg);border:.5px solid var(--border);border-radius:13px;padding:12px;margin-bottom:10px;}
 .clinic-card.expanded{border-color:var(--t400);}
-.clinic-card-hdr{display:flex;align-items:center;gap:11px;cursor:pointer;}
-.clinic-ico{width:40px;height:40px;background:var(--t50);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.clinic-card-hdr{display:flex;align-items:center;gap:10px;}
+.clinic-ico{width:38px;height:38px;background:var(--t50);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
 .clinic-nm{font-size:13px;font-weight:500;color:var(--text);}
 .clinic-tp{font-size:10px;color:var(--text2);margin-top:1px;}
-.clinic-earn{font-size:14px;font-weight:600;color:var(--t600);margin-left:auto;flex-shrink:0;}
-.clinic-stats-row{display:flex;gap:7px;margin-top:10px;}
-.cstat{flex:1;background:var(--bg2);border-radius:8px;padding:6px;text-align:center;}
-.cstat .csl{font-size:9px;color:var(--text2);}
-.cstat .csv{font-size:13px;font-weight:500;color:var(--text);}
-.clinic-breakdown{margin-top:10px;border-top:0.5px solid var(--border);padding-top:10px;display:none;}
+.clinic-earn{font-size:13px;font-weight:600;color:var(--t600);margin-left:auto;flex-shrink:0;}
+.clinic-actions{display:flex;gap:5px;margin-left:6px;}
+.clinic-breakdown{display:none;margin-top:10px;border-top:.5px solid var(--border);padding-top:10px;}
 .clinic-card.expanded .clinic-breakdown{display:block;}
-.brow{display:flex;justify-content:space-between;align-items:flex-start;padding:6px 0;border-bottom:0.5px solid var(--border);}
-.brow:last-child{border-bottom:none;}
-.clinic-actions{display:flex;gap:7px;margin-top:10px;padding-top:8px;border-top:0.5px solid var(--border);}
-.cact{flex:1;padding:8px;border-radius:9px;font-size:11px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;border:0.5px solid var(--border);background:none;color:var(--text);min-height:36px;-webkit-appearance:none;}
-.cact.ce{color:var(--b800);border-color:var(--b100);background:var(--b50);}
-.cact.cd{color:var(--r800);border-color:var(--r100);background:var(--r50);}
-.searchbox{width:100%;padding:10px 12px;border:0.5px solid var(--border);border-radius:10px;font-size:13px;font-family:'DM Sans',sans-serif;background:var(--bg2);color:var(--text);outline:none;margin-bottom:12px;-webkit-appearance:none;}
+.bstats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px;}
+.bstat{background:var(--bg2);border-radius:7px;padding:7px;text-align:center;}
+.bstat .bsl{font-size:9px;color:var(--text2);}
+.bstat .bsv{font-size:13px;font-weight:500;color:var(--text);}
+.visit-row{padding:7px 0;border-bottom:.5px solid var(--border);display:flex;justify-content:space-between;align-items:flex-start;}
+.visit-row:last-child{border-bottom:none;}
+.vr-date{font-size:11px;color:var(--text);font-weight:500;}
+.vr-info{font-size:10px;color:var(--text2);margin-top:1px;}
+
+/* ── Patient history ── */
+.searchbox{width:100%;padding:10px 12px;border:.5px solid var(--border);border-radius:9px;font-size:13px;font-family:'DM Sans',sans-serif;background:var(--bg2);color:var(--text);outline:none;margin-bottom:10px;-webkit-appearance:none;}
 .searchbox:focus{border-color:var(--t400);background:var(--bg);}
-.phcard{background:var(--bg);border:0.5px solid var(--border);border-radius:13px;padding:12px;margin-bottom:10px;cursor:pointer;}
+.phcard{background:var(--bg);border:.5px solid var(--border);border-radius:12px;padding:11px;margin-bottom:9px;cursor:pointer;}
 .phcard.expanded{border-color:var(--t200);}
-.phheader{display:flex;align-items:center;gap:10px;}
-.phav{width:38px;height:38px;border-radius:50%;background:var(--t100);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;color:var(--t800);flex-shrink:0;}
+.phheader{display:flex;align-items:center;gap:9px;}
+.phav{width:36px;height:36px;border-radius:50%;background:var(--t100);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;color:var(--t800);flex-shrink:0;}
 .phname{font-size:13px;font-weight:500;color:var(--text);}
 .phsub{font-size:10px;color:var(--text2);}
-.phstats{display:flex;gap:8px;margin-top:9px;}
-.phstat{flex:1;background:var(--bg2);border-radius:8px;padding:7px;text-align:center;}
+.phstats{display:flex;gap:7px;margin-top:8px;}
+.phstat{flex:1;background:var(--bg2);border-radius:7px;padding:6px;text-align:center;}
 .phstat .psl{font-size:9px;color:var(--text2);}
-.phstat .psv{font-size:14px;font-weight:500;color:var(--text);}
-.phhist{margin-top:10px;border-top:0.5px solid var(--border);padding-top:9px;display:none;}
+.phstat .psv{font-size:13px;font-weight:500;color:var(--text);}
+.phhist{margin-top:9px;border-top:.5px solid var(--border);padding-top:9px;display:none;}
 .phcard.expanded .phhist{display:block;}
-.histrow{display:flex;justify-content:space-between;align-items:flex-start;padding:7px 0;border-bottom:0.5px solid var(--border);}
+.histrow{display:flex;justify-content:space-between;align-items:flex-start;padding:5px 0;border-bottom:.5px solid var(--border);}
 .histrow:last-child{border-bottom:none;}
 .hrdate{font-size:10px;color:var(--text2);margin-top:2px;}
 .hrproc{font-size:11px;color:var(--text);}
-.hrnote{font-size:10px;color:var(--text3);font-style:italic;margin-top:3px;}
-.rembadge{background:var(--r50);color:var(--r800);border-radius:50%;width:16px;height:16px;font-size:9px;font-weight:500;display:inline-flex;align-items:center;justify-content:center;position:relative;top:-2px;left:2px;}
-.remcard{background:var(--bg);border:0.5px solid var(--border);border-radius:13px;padding:12px;margin-bottom:10px;display:flex;gap:10px;align-items:flex-start;}
-.remcard.urgent{border-left:3px solid var(--r400);border-radius:0 13px 13px 0;}
-.remcard.soon{border-left:3px solid var(--a400);border-radius:0 13px 13px 0;}
-.remcard.done{opacity:0.5;}
-.remico{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.hrnote{font-size:10px;color:var(--text3);font-style:italic;margin-top:2px;}
+
+/* ── Reminders ── */
+.rembadge{background:var(--r50);color:var(--r800);border-radius:50%;width:15px;height:15px;font-size:9px;font-weight:500;display:inline-flex;align-items:center;justify-content:center;position:relative;top:-2px;left:1px;}
+.remcard{background:var(--bg);border:.5px solid var(--border);border-radius:12px;padding:11px;margin-bottom:9px;display:flex;gap:9px;align-items:flex-start;}
+.remcard.urgent{border-left:3px solid var(--r400);border-radius:0 12px 12px 0;}
+.remcard.soon{border-left:3px solid var(--a400);border-radius:0 12px 12px 0;}
+.remcard.done{opacity:.5;}
+.remico{width:32px;height:32px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
 .remtitle{font-size:12px;font-weight:500;color:var(--text);}
 .remsub{font-size:10px;color:var(--text2);margin-top:2px;}
-.remtime{font-size:10px;margin-top:4px;}
+.remtime{font-size:10px;margin-top:3px;}
 .remact{margin-left:auto;display:flex;flex-direction:column;gap:5px;align-items:flex-end;flex-shrink:0;}
-.ratbtn{background:none;border:0.5px solid var(--border);border-radius:7px;padding:4px 9px;font-size:10px;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--text);min-height:28px;-webkit-appearance:none;}
-.msel{display:flex;gap:7px;margin-bottom:14px;flex-wrap:wrap;}
-.mselchip{padding:5px 13px;border-radius:20px;border:0.5px solid var(--border);background:none;font-size:11px;font-family:'DM Sans',sans-serif;cursor:pointer;color:var(--text);-webkit-appearance:none;min-height:30px;}
+.ratbtn{background:none;border:.5px solid var(--border);border-radius:7px;padding:4px 9px;font-size:10px;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--text);min-height:28px;-webkit-appearance:none;}
+
+/* ── Report ── */
+.msel{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap;}
+.mselchip{padding:4px 12px;border-radius:20px;border:.5px solid var(--border);background:none;font-size:11px;font-family:'DM Sans',sans-serif;cursor:pointer;color:var(--text);-webkit-appearance:none;min-height:28px;}
 .mselchip.active{background:var(--t50);color:var(--t600);border-color:var(--t400);}
-.rptcard{background:var(--bg);border:0.5px solid var(--border);border-radius:14px;padding:14px;margin-bottom:12px;}
-.rpthead{font-size:13px;font-weight:500;color:var(--text);margin-bottom:12px;}
+.rptcard{background:var(--bg);border:.5px solid var(--border);border-radius:12px;padding:13px;margin-bottom:10px;}
+.rpthead{font-size:13px;font-weight:500;color:var(--text);margin-bottom:10px;}
 .rpttable{width:100%;font-size:11px;border-collapse:collapse;table-layout:fixed;}
-.rpttable th{text-align:left;color:var(--text2);font-weight:500;padding:5px 4px;border-bottom:0.5px solid var(--border);}
-.rpttable td{padding:6px 4px;border-bottom:0.5px solid var(--border);color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.rpttable th{text-align:left;color:var(--text2);font-weight:500;padding:4px 4px;border-bottom:.5px solid var(--border);}
+.rpttable td{padding:5px 4px;border-bottom:.5px solid var(--border);color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .rpttable tr:last-child td{border-bottom:none;}
-.expbtn{width:100%;padding:12px;background:var(--t50);color:var(--t600);border:0.5px solid var(--t200);border-radius:11px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:8px;min-height:44px;-webkit-appearance:none;}
-.bnav{display:flex;padding-top:8px;padding-bottom:calc(var(--safe-bottom) + 6px);padding-left:max(0px,var(--safe-left));padding-right:max(0px,var(--safe-right));border-top:0.5px solid var(--border);background:var(--bg);flex-shrink:0;}
-.nitem{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:none;cursor:pointer;padding:3px 2px;-webkit-appearance:none;min-height:48px;}
-.nico{font-size:17px;line-height:1;}
+.expbtn{width:100%;padding:11px;background:var(--t50);color:var(--t600);border:.5px solid var(--t200);border-radius:10px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:7px;min-height:42px;-webkit-appearance:none;}
+
+/* ── Bottom nav ── */
+.bnav{display:flex;padding-top:7px;padding-bottom:calc(var(--safe-bottom)+5px);padding-left:max(0px,var(--safe-left));padding-right:max(0px,var(--safe-right));border-top:.5px solid var(--border);background:var(--bg);flex-shrink:0;}
+.nitem{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:none;cursor:pointer;padding:2px;-webkit-appearance:none;min-height:44px;}
+.nico{font-size:18px;line-height:1;}
 .nlbl{font-size:9px;font-family:'DM Sans',sans-serif;color:var(--text3);}
 .nitem.active .nlbl{color:var(--t600);}
 .ndot{width:4px;height:4px;border-radius:50%;background:var(--t400);margin:0 auto;display:none;}
 .nitem.active .ndot{display:block;}
-.modal-wrap{display:none;position:absolute;inset:0;background:rgba(0,0,0,0.5);z-index:100;align-items:flex-end;}
+
+/* ── Modals ── */
+.modal-wrap{display:none;position:absolute;inset:0;background:rgba(0,0,0,.5);z-index:100;align-items:flex-end;}
 .modal-wrap.open{display:flex;}
-.msheet{background:var(--bg);border-radius:20px 20px 0 0;width:100%;padding:14px 18px;padding-bottom:calc(var(--safe-bottom) + 24px);max-height:93%;overflow-y:auto;-webkit-overflow-scrolling:touch;}
-.mhandle{width:36px;height:4px;background:var(--gr100);border-radius:2px;margin:0 auto 14px;}
-.mtitle{font-family:'Playfair Display',serif;font-size:17px;margin-bottom:14px;color:var(--text);}
-.fg{margin-bottom:12px;}
-.flbl{font-size:10px;font-weight:500;color:var(--text2);margin-bottom:4px;display:block;text-transform:uppercase;letter-spacing:0.4px;}
-.finp{width:100%;padding:11px 12px;border:0.5px solid var(--border);border-radius:10px;font-size:14px;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);outline:none;-webkit-appearance:none;min-height:44px;}
+.msheet{background:var(--bg);border-radius:20px 20px 0 0;width:100%;padding:13px 17px;padding-bottom:calc(var(--safe-bottom)+22px);max-height:93%;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+.mhandle{width:34px;height:4px;background:var(--gr100);border-radius:2px;margin:0 auto 13px;}
+.mtitle{font-family:'Playfair Display',serif;font-size:17px;margin-bottom:13px;color:var(--text);}
+.fg{margin-bottom:11px;}
+.flbl{font-size:10px;font-weight:500;color:var(--text2);margin-bottom:4px;display:block;text-transform:uppercase;letter-spacing:.4px;}
+.finp{width:100%;padding:10px 12px;border:.5px solid var(--border);border-radius:9px;font-size:14px;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);outline:none;-webkit-appearance:none;min-height:42px;}
 .finp:focus{border-color:var(--t400);}
-.ftarea{width:100%;padding:10px 12px;border:0.5px solid var(--border);border-radius:10px;font-size:13px;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);outline:none;-webkit-appearance:none;resize:none;min-height:68px;line-height:1.5;}
+.ftarea{width:100%;padding:9px 12px;border:.5px solid var(--border);border-radius:9px;font-size:13px;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);outline:none;-webkit-appearance:none;resize:none;min-height:65px;line-height:1.5;}
 .ftarea:focus{border-color:var(--t400);}
-.frow2{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
-.fsel{width:100%;padding:11px 12px;border:0.5px solid var(--border);border-radius:10px;font-size:13px;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);outline:none;-webkit-appearance:none;min-height:44px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;}
-.pentry{background:var(--bg2);border-radius:12px;padding:13px;margin-bottom:10px;border:0.5px solid var(--border);}
-.pentry-head{display:flex;align-items:center;gap:8px;margin-bottom:11px;padding-bottom:10px;border-bottom:0.5px solid var(--border);}
-.pentry-num{width:22px;height:22px;border-radius:50%;background:var(--t400);color:#fff;font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.frow2{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.fsel{width:100%;padding:10px 12px;border:.5px solid var(--border);border-radius:9px;font-size:13px;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);outline:none;-webkit-appearance:none;min-height:42px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 11px center;padding-right:30px;}
+.pentry{background:var(--bg2);border-radius:11px;padding:12px;margin-bottom:9px;border:.5px solid var(--border);}
+.pentry-head{display:flex;align-items:center;gap:7px;margin-bottom:10px;padding-bottom:9px;border-bottom:.5px solid var(--border);}
+.pentry-num{width:20px;height:20px;border-radius:50%;background:var(--t400);color:#fff;font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .pentry-label{font-size:12px;font-weight:500;color:var(--text);flex:1;}
-.rmbtn{background:none;border:none;color:var(--r400);font-size:18px;cursor:pointer;min-width:32px;min-height:32px;display:flex;align-items:center;justify-content:center;-webkit-appearance:none;}
-.proc-entry{display:grid;grid-template-columns:1fr 76px 80px 28px;gap:5px;align-items:center;margin-bottom:6px;}
-.proc-entry .finp{min-height:38px;font-size:12px;padding:8px 9px;}
-.proc-entry .fsel{min-height:38px;font-size:12px;padding:8px 8px;padding-right:22px;background-position:right 6px center;}
-.rm-proc-btn{background:none;border:none;color:var(--r400);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;min-width:26px;min-height:26px;-webkit-appearance:none;}
-.add-proc-btn{width:100%;padding:8px;border:0.5px dashed var(--t200);border-radius:8px;background:var(--t50);color:var(--t600);font-size:11px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:4px;margin-bottom:10px;min-height:36px;-webkit-appearance:none;}
-.addpbtn{width:100%;padding:11px;border:0.5px dashed var(--t200);border-radius:10px;background:var(--t50);color:var(--t600);font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;min-height:44px;-webkit-appearance:none;}
-.subbtn{width:100%;padding:14px;background:var(--t400);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:500;cursor:pointer;margin-top:14px;font-family:'DM Sans',sans-serif;min-height:50px;-webkit-appearance:none;}
-.cncl{width:100%;padding:11px;background:none;border:none;color:var(--text2);font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:6px;min-height:44px;}
-.seg-label{font-size:10px;font-weight:500;color:var(--text2);text-transform:uppercase;letter-spacing:0.5px;margin:12px 0 8px;}
-.confirm-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.5);z-index:200;display:none;align-items:center;justify-content:center;padding:20px;}
+.rmbtn{background:none;border:none;color:var(--r400);font-size:17px;cursor:pointer;min-width:30px;min-height:30px;display:flex;align-items:center;justify-content:center;-webkit-appearance:none;}
+.proc-entry{display:grid;grid-template-columns:1fr 72px 72px 28px;gap:5px;align-items:center;margin-bottom:6px;}
+.proc-entry .finp,.proc-entry .fsel{min-height:36px;font-size:12px;padding:7px 9px;}
+.proc-entry .fsel{padding-right:22px;background-position:right 7px center;}
+.rm-proc-btn{background:none;border:none;color:var(--r400);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;min-width:24px;min-height:24px;-webkit-appearance:none;}
+.add-proc-btn{width:100%;padding:7px;border:.5px dashed var(--t200);border-radius:7px;background:var(--t50);color:var(--t600);font-size:11px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:4px;margin-bottom:9px;min-height:33px;-webkit-appearance:none;}
+.addpbtn{width:100%;padding:10px;border:.5px dashed var(--t200);border-radius:9px;background:var(--t50);color:var(--t600);font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;min-height:42px;-webkit-appearance:none;}
+.subbtn{width:100%;padding:13px;background:var(--t400);color:#fff;border:none;border-radius:11px;font-size:15px;font-weight:500;cursor:pointer;margin-top:13px;font-family:'DM Sans',sans-serif;min-height:48px;-webkit-appearance:none;}
+.cncl{width:100%;padding:10px;background:none;border:none;color:var(--text2);font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:5px;min-height:42px;}
+.seg-label{font-size:10px;font-weight:500;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin:10px 0 7px;}
+.confirm-overlay{display:none;position:absolute;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center;padding:20px;}
 .confirm-overlay.open{display:flex;}
-.confirm-box{background:var(--bg);border-radius:16px;padding:22px;width:100%;max-width:320px;}
-.confirm-title{font-size:15px;font-weight:500;color:var(--text);margin-bottom:6px;}
-.confirm-sub{font-size:12px;color:var(--text2);margin-bottom:18px;line-height:1.5;}
-.confirm-btns{display:flex;gap:10px;}
-.confirm-btns button{flex:1;padding:11px;border-radius:10px;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;border:0.5px solid var(--border);-webkit-appearance:none;}
-.confirm-cancel-btn{background:var(--bg);color:var(--text);}
-.confirm-ok-btn-el{background:var(--r400);color:#fff;border-color:var(--r400);}
-.toast{position:absolute;bottom:calc(var(--safe-bottom) + 80px);left:50%;transform:translateX(-50%) translateY(8px);background:#1a1a1a;color:#fff;border-radius:20px;padding:10px 20px;font-size:13px;font-weight:500;z-index:300;white-space:nowrap;opacity:0;transition:opacity 0.25s,transform 0.25s;pointer-events:none;}
+.confirm-box{background:var(--bg);border-radius:16px;padding:22px 20px;width:100%;max-width:320px;}
+.confirm-title{font-size:15px;font-weight:500;color:var(--text);margin-bottom:8px;}
+.confirm-body{font-size:13px;color:var(--text2);margin-bottom:18px;line-height:1.5;}
+.confirm-btns{display:flex;gap:9px;}
+.confirm-cancel{flex:1;padding:11px;border:.5px solid var(--border);border-radius:10px;background:none;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--text);cursor:pointer;}
+.confirm-ok{flex:1;padding:11px;border:none;border-radius:10px;background:var(--r400);font-size:13px;font-family:'DM Sans',sans-serif;color:#fff;cursor:pointer;font-weight:500;}
+.toast{position:absolute;bottom:calc(var(--safe-bottom)+76px);left:50%;transform:translateX(-50%) translateY(8px);background:#1a1a1a;color:#fff;border-radius:18px;padding:9px 18px;font-size:13px;font-weight:500;z-index:400;white-space:nowrap;opacity:0;transition:opacity .25s,transform .25s;pointer-events:none;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 </style>
 </head>
 <body>
 <div class="app">
+
+  <!-- ══ SETUP SCREEN ══ -->
+  <div class="setup-screen" id="setup-screen">
+    <div class="setup-logo">🦷</div>
+    <div class="setup-title">DentTrack Pro</div>
+    <div class="setup-sub">Connect your GitHub account to save all your data securely to your private repository — accessible from any device, forever.</div>
+
+    <div class="setup-warn">
+      ⚠️ Make sure your GitHub repo <strong>kirthankotian1993/denttrack</strong> is set to <strong>Private</strong> before pasting your token. Your token is stored only on this device and never sent anywhere except GitHub's API.
+    </div>
+
+    <div class="setup-card">
+      <div class="setup-card-title">How to get your GitHub token</div>
+      <div class="setup-step"><div class="setup-step-num">1</div><div class="setup-step-txt">Go to <strong>github.com</strong> → click your profile photo → <strong>Settings</strong></div></div>
+      <div class="setup-step"><div class="setup-step-num">2</div><div class="setup-step-txt">Scroll down → <strong>Developer settings</strong> → <strong>Personal access tokens</strong> → <strong>Tokens (classic)</strong></div></div>
+      <div class="setup-step"><div class="setup-step-num">3</div><div class="setup-step-txt">Click <strong>Generate new token (classic)</strong> → give it any name</div></div>
+      <div class="setup-step"><div class="setup-step-num">4</div><div class="setup-step-txt">Set expiration to <strong>No expiration</strong></div></div>
+      <div class="setup-step"><div class="setup-step-num">5</div><div class="setup-step-txt">Under Scopes tick only <strong>repo</strong> → click <strong>Generate token</strong></div></div>
+      <div class="setup-step"><div class="setup-step-num">6</div><div class="setup-step-txt">Copy the token and paste it below — GitHub only shows it <strong>once</strong></div></div>
+    </div>
+
+    <input class="setup-inp" type="password" id="token-inp" placeholder="Paste your GitHub token here (ghp_…)" autocomplete="off" autocorrect="off" spellcheck="false"/>
+    <button class="setup-btn" onclick="connectGitHub()">Connect & Start</button>
+  </div>
+
+  <!-- ══ MAIN APP ══ -->
+  <!-- Sync bar -->
+  <div class="sync-bar">
+    <div class="sync-status">
+      <div class="sync-dot" id="sync-dot"></div>
+      <span id="sync-label">Not connected</span>
+    </div>
+    <div style="display:flex;gap:6px;align-items:center">
+      <button class="sync-btn" onclick="syncNow()">↻ Sync</button>
+      <button class="sync-settings-btn" title="GitHub settings" onclick="openSyncSettings()">⚙️</button>
+    </div>
+  </div>
+
+  <!-- Top bar -->
   <div class="topbar"><div class="topbar-inner">
     <div class="greet">Good morning,</div>
     <div class="brand">Dr. Niharika Kotian</div>
     <div class="dbadge" id="todaylbl">—</div>
   </div></div>
+
   <div class="sumstrip">
     <div class="scard"><div class="sl">Visits</div><div class="sv" id="sv">0</div><div class="ss">this month</div></div>
     <div class="scard"><div class="sl">Patients</div><div class="sv" id="sp">0</div><div class="ss">treated</div></div>
     <div class="scard"><div class="sl">Earned</div><div class="sv" id="se">₹0</div><div class="ss">collected</div></div>
   </div>
+
   <div class="tabbar">
     <button class="tbtn active" onclick="sw('visits',this)">Visits</button>
     <button class="tbtn" onclick="sw('patients',this)">Patients</button>
@@ -229,6 +311,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'DM Sans',-apple-sy
     <button class="tbtn" onclick="sw('report',this)">Report</button>
     <button class="tbtn" onclick="sw('analytics',this)">Stats</button>
   </div>
+
   <div class="content" id="tab-visits">
     <div class="sh"><h3>Consultation visits</h3><button class="addbtn" onclick="openVisitModal()">+ Add visit</button></div>
     <div class="frow">
@@ -239,37 +322,43 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'DM Sans',-apple-sy
     </div>
     <div id="vlist"></div>
   </div>
+
   <div class="content" id="tab-patients" style="display:none">
     <div class="sh"><h3>Patient history</h3></div>
     <input class="searchbox" type="search" placeholder="Search patient name…" id="psearch" oninput="renderPatients()" autocorrect="off" autocapitalize="words"/>
     <div id="patlist"></div>
   </div>
+
   <div class="content" id="tab-clinics" style="display:none">
-    <div class="sh"><h3>Clinics & hospitals</h3><button class="addbtn" onclick="openClinicModal()">+ Add clinic</button></div>
-    <div id="cliniclist"></div>
+    <div class="sh"><h3>Clinics & Hospitals</h3><button class="addbtn" onclick="openClinicModal()">+ Add</button></div>
+    <div id="clinics-list"></div>
   </div>
+
   <div class="content" id="tab-reminders" style="display:none">
     <div class="sh"><h3>Reminders & follow-ups</h3><button class="addbtn" onclick="openRemModal()">+ Add</button></div>
     <div id="remlist"></div>
   </div>
+
   <div class="content" id="tab-report" style="display:none">
     <div class="sh"><h3>Monthly report</h3></div>
     <div class="msel" id="month-sel"></div>
     <div id="report-content"></div>
   </div>
+
   <div class="content" id="tab-analytics" style="display:none">
     <div class="sh"><h3>Overview</h3></div>
     <div class="sgrid">
       <div class="sblk"><div class="sbl">Collected</div><div class="sbv" id="ae">₹0</div><div class="sbs">paid</div></div>
       <div class="sblk"><div class="sbl">Outstanding</div><div class="sbv" id="ap">₹0</div><div class="sbs">pending</div></div>
-      <div class="sblk"><div class="sbl">Visits</div><div class="sbv" id="av">0</div><div class="sbs">total</div></div>
+      <div class="sblk"><div class="sbl">Clinics</div><div class="sbv" id="acl">0</div><div class="sbs">registered</div></div>
       <div class="sblk"><div class="sbl">Patients</div><div class="sbv" id="apa">0</div><div class="sbs">treated</div></div>
     </div>
     <div class="sh" style="margin-top:4px"><h3>Payment breakdown</h3></div>
     <div id="pbars"></div>
-    <div class="sh" style="margin-top:14px"><h3>By clinic</h3></div>
-    <div id="clist-stats"></div>
+    <div class="sh" style="margin-top:13px"><h3>Top clinics</h3></div>
+    <div id="aclist"></div>
   </div>
+
   <div class="bnav">
     <button class="nitem active" onclick="sw('visits',null,this)"><span class="nico">🦷</span><span class="nlbl">Visits</span><div class="ndot"></div></button>
     <button class="nitem" onclick="sw('patients',null,this)"><span class="nico">👤</span><span class="nlbl">Patients</span><div class="ndot"></div></button>
@@ -278,6 +367,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'DM Sans',-apple-sy
     <button class="nitem" onclick="sw('report',null,this)"><span class="nico">📄</span><span class="nlbl">Report</span><div class="ndot"></div></button>
     <button class="nitem" onclick="sw('analytics',null,this)"><span class="nico">📊</span><span class="nlbl">Stats</span><div class="ndot"></div></button>
   </div>
+
   <!-- VISIT MODAL -->
   <div class="modal-wrap" id="visit-modal">
     <div class="msheet">
@@ -286,13 +376,14 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'DM Sans',-apple-sy
       <div class="fg"><label class="flbl">Clinic / Hospital</label><select class="fsel" id="fc" style="width:100%"></select></div>
       <div class="frow2">
         <div class="fg"><label class="flbl">Date</label><input class="finp" type="date" id="fd"/></div>
-        <div class="fg"><label class="flbl">Shift</label><select class="fsel" id="fs"><option>Morning</option><option>Afternoon</option><option>Evening</option><option>Full day</option></select></div>
+        <div class="fg"><label class="flbl">Shift</label><select class="fsel" id="fs"><option>Morning</option><option>Afternoon</option><option>Evening</option></select></div>
       </div>
       <div class="fg"><label class="flbl">Patients treated</label><div id="pentries"></div><button class="addpbtn" onclick="addPatientEntry()">+ Add another patient</button></div>
       <button class="subbtn" id="visit-save-btn" onclick="saveVisit()">Save visit</button>
       <button class="cncl" onclick="closeModal('visit-modal')">Cancel</button>
     </div>
   </div>
+
   <!-- CLINIC MODAL -->
   <div class="modal-wrap" id="clinic-modal">
     <div class="msheet">
@@ -301,12 +392,13 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'DM Sans',-apple-sy
       <div class="fg"><label class="flbl">Name</label><input class="finp" id="cln" placeholder="e.g. Apollo Dental Centre"/></div>
       <div class="fg"><label class="flbl">Type</label><select class="fsel" id="cltype"><option>Dental Clinic</option><option>Hospital</option><option>Polyclinic</option><option>Dental College</option><option>Other</option></select></div>
       <div class="fg"><label class="flbl">Location</label><input class="finp" id="clloc" placeholder="e.g. Koramangala, Bengaluru"/></div>
-      <div class="fg"><label class="flbl">Phone (optional)</label><input class="finp" id="clphone" placeholder="e.g. 9876543210" inputmode="tel"/></div>
-      <div class="fg"><label class="flbl">Notes (optional)</label><textarea class="ftarea" id="clnotes" placeholder="Working hours, contact person, special notes…"></textarea></div>
+      <div class="fg"><label class="flbl">Phone (optional)</label><input class="finp" id="clphone" placeholder="9876543210" inputmode="tel"/></div>
+      <div class="fg"><label class="flbl">Notes (optional)</label><textarea class="ftarea" id="clnotes" placeholder="Working hours, contact person…"></textarea></div>
       <button class="subbtn" id="clinic-save-btn" onclick="saveClinic()">Save clinic</button>
       <button class="cncl" onclick="closeModal('clinic-modal')">Cancel</button>
     </div>
   </div>
+
   <!-- REMINDER MODAL -->
   <div class="modal-wrap" id="rem-modal">
     <div class="msheet">
@@ -322,663 +414,265 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'DM Sans',-apple-sy
       <button class="cncl" onclick="closeModal('rem-modal')">Cancel</button>
     </div>
   </div>
+
   <!-- PATIENT MODAL -->
   <div class="modal-wrap" id="patient-modal">
     <div class="msheet"><div class="mhandle"></div><div id="pat-modal-content"></div><button class="cncl" onclick="closeModal('patient-modal')">Close</button></div>
   </div>
-  <!-- CONFIRM MODAL -->
-  <div class="confirm-overlay" id="confirm-overlay">
-    <div class="confirm-box">
-      <div class="confirm-title" id="confirm-title">Delete?</div>
-      <div class="confirm-sub" id="confirm-sub">This cannot be undone.</div>
-      <div class="confirm-btns">
-        <button class="confirm-cancel-btn" onclick="closeConfirm()">Cancel</button>
-        <button class="confirm-ok-btn-el" id="confirm-ok">Delete</button>
+
+  <!-- SYNC SETTINGS MODAL -->
+  <div class="modal-wrap" id="sync-modal">
+    <div class="msheet">
+      <div class="mhandle"></div>
+      <div class="mtitle">GitHub sync settings</div>
+      <div style="font-size:12px;color:var(--text2);margin-bottom:14px;line-height:1.6">
+        Your data saves to <strong style="color:var(--text)">kirthankotian1993/denttrack/data.json</strong> on GitHub.<br>
+        Your token is stored only on this device.
+      </div>
+      <div class="fg"><label class="flbl">GitHub token</label><input class="finp" type="password" id="token-update-inp" placeholder="Paste new token to update…" autocomplete="off"/></div>
+      <button class="subbtn" onclick="updateToken()" style="background:var(--b400)">Update token</button>
+      <button class="cncl" onclick="closeModal('sync-modal')" style="color:var(--text2)">Close</button>
+      <div style="margin-top:16px;padding-top:14px;border-top:.5px solid var(--border)">
+        <button onclick="confirmDisconnect()" style="width:100%;padding:11px;border:.5px solid var(--r100);border-radius:10px;background:var(--r50);color:var(--r800);font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer">Disconnect & reset token</button>
       </div>
     </div>
   </div>
+
+  <!-- CONFIRM -->
+  <div class="confirm-overlay" id="confirm-overlay">
+    <div class="confirm-box">
+      <div class="confirm-title" id="confirm-title">Delete?</div>
+      <div class="confirm-body" id="confirm-body">This cannot be undone.</div>
+      <div class="confirm-btns">
+        <button class="confirm-cancel" onclick="closeConfirm()">Cancel</button>
+        <button class="confirm-ok" id="confirm-ok-btn">Delete</button>
+      </div>
+    </div>
+  </div>
+
   <div class="toast" id="toast"></div>
 </div>
+
 <script>
-const PROCS=['Composite Filling','Consultation','Crown','Extraction','Flouride','GIC-Filling','Habbit Breaking Appliance','Pulpectomy','Pulpotomy','Restoration','Scaling','Sealent','Space Maintainer','Other'];
+// ── Config ────────────────────────────────────────────────
+const GH_OWNER = 'kirthankotian1993';
+const GH_REPO  = 'denttrack';
+const GH_FILE  = 'data.json';
+const GH_BRANCH= 'main';
+const TOKEN_KEY= 'denttrack_gh_token';
+const DATA_KEY = 'denttrack_v3_data';
+
+const PROCS['Composite Filling','Consultation','Crown','Extraction','Flouride','GIC-Filling','Habbit Breaking Appliance','Pulpectomy','Pulpotomy','Restoration','Scaling','Sealent','Space Maintainer','Other'];
 const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
 const MS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-const SK='denttrack_v3';
+
+// ── State ─────────────────────────────────────────────────
 let visits=[],reminders=[],clinics=[],curFilter='all',selMonth,selYear;
 let pEId=0,prEId=0,editVId=null,editCId=null;
+let ghToken='', ghFileSha='', syncPending=false, lastSynced=null;
 const today=new Date();
-selMonth=today.getMonth();selYear=today.getFullYear();
+selMonth=today.getMonth(); selYear=today.getFullYear();
 document.getElementById('todaylbl').textContent=today.getDate()+' '+MS[today.getMonth()]+' '+today.getFullYear();
 
-function save(){try{localStorage.setItem(SK,JSON.stringify({visits,reminders,clinics}));}catch(e){}}
-function load(){
+// ── GitHub API ────────────────────────────────────────────
+const GH_API = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_FILE}`;
+
+async function ghGet(){
+  const r=await fetch(GH_API+'?ref='+GH_BRANCH+'&t='+Date.now(),{headers:{Authorization:'token '+ghToken,'Accept':'application/vnd.github.v3+json'}});
+  if(r.status===404) return null; // file doesn't exist yet
+  if(!r.ok) throw new Error('GitHub read failed: '+r.status);
+  const j=await r.json();
+  ghFileSha=j.sha;
+  return JSON.parse(atob(j.content.replace(/\n/g,'')));
+}
+
+async function ghPut(data){
+  const content=btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2))));
+  const body={message:'DentTrack sync '+new Date().toISOString(),content,branch:GH_BRANCH};
+  if(ghFileSha) body.sha=ghFileSha;
+  const r=await fetch(GH_API,{method:'PUT',headers:{Authorization:'token '+ghToken,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},body:JSON.stringify(body)});
+  if(!r.ok){const e=await r.json();throw new Error(e.message||'GitHub write failed: '+r.status);}
+  const j=await r.json();
+  ghFileSha=j.content.sha;
+}
+
+// ── Sync state display ────────────────────────────────────
+function setSyncStatus(state,msg){
+  const dot=document.getElementById('sync-dot');
+  const lbl=document.getElementById('sync-label');
+  dot.className='sync-dot '+state;
+  lbl.textContent=msg;
+}
+
+// ── Save + sync ───────────────────────────────────────────
+let syncTimer=null;
+function saveLocal(){
+  try{localStorage.setItem(DATA_KEY,JSON.stringify({visits,reminders,clinics,ghFileSha}));}catch(e){}
+}
+function scheduleSync(){
+  saveLocal();
+  setSyncStatus('syncing','Saving…');
+  clearTimeout(syncTimer);
+  syncTimer=setTimeout(()=>doSync(),1500);
+}
+async function doSync(){
+  if(!ghToken){setSyncStatus('error','No token');return;}
+  setSyncStatus('syncing','Syncing…');
   try{
-    const d=JSON.parse(localStorage.getItem(SK));
-    if(d&&d.visits){
-      visits=d.visits.map(v=>({...v,patients:v.patients.map(p=>{
-        if(p.procedures)return p;
-        return{name:p.name,notes:p.notes||'',procedures:[{procedure:p.procedure||'Consultation',fee:p.fee||0,paid:p.paid||false}]};
-      })}));
-      reminders=d.reminders||[];clinics=d.clinics||[];return true;
+    await ghPut({visits,reminders,clinics,savedAt:new Date().toISOString()});
+    lastSynced=new Date();
+    saveLocal();
+    setSyncStatus('synced','Saved to GitHub · '+lastSynced.toLocaleTimeString());
+    toast('✓ Synced to GitHub');
+  }catch(e){
+    setSyncStatus('error','Sync failed — '+e.message);
+    toast('⚠ Sync failed: '+e.message);
+  }
+}
+async function syncNow(){
+  if(!ghToken){toast('⚠ Connect GitHub first');return;}
+  setSyncStatus('syncing','Pulling latest…');
+  try{
+    const remote=await ghGet();
+    if(remote){
+      visits=remote.visits||[];reminders=remote.reminders||[];clinics=remote.clinics||[];
+      migrateData();saveLocal();renderAll();renderReminders();
+      setSyncStatus('synced','Synced · '+new Date().toLocaleTimeString());
+      toast('✓ Latest data loaded');
+    } else {
+      await doSync();
     }
-  }catch(e){}return false;
+  }catch(e){setSyncStatus('error','Pull failed');toast('⚠ '+e.message);}
 }
 
-function seed(){
-  clinics=[
-  ];
-  visits=[
-  ];
-  reminders=[
-  ];
-  save();
-}
-
-const fmtDate=d=>{const dt=new Date(d);return dt.getDate()+' '+MS[dt.getMonth()]+' '+dt.getFullYear();};
-const initials=n=>n.trim().split(' ').slice(0,2).map(w=>w[0]||'').join('').toUpperCase()||'?';
-const fmtRs=n=>n>=1000?'Rs '+(n/1000).toFixed(1)+'k':'Rs '+n;
-const esc=s=>(s||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'");
-function vstatus(v){let t=0,p=0;v.patients.forEach(pt=>pt.procedures.forEach(pr=>{t++;if(pr.paid)p++;}));return p===t?'paid':p===0?'pending':'partial';}
-const pillC=s=>({paid:'ppaid',pending:'ppend',partial:'ppart'})[s];
-const pillL=s=>({paid:'Paid',pending:'Pending',partial:'Partial'})[s];
-const patTotal=p=>p.procedures.reduce((a,pr)=>a+pr.fee,0);
-const patPaid=p=>p.procedures.filter(pr=>pr.paid).reduce((a,pr)=>a+pr.fee,0);
-function vtotals(v){let t=0,p=0;v.patients.forEach(pt=>{t+=patTotal(pt);p+=patPaid(pt);});return{total:t,paid:p,pending:t-p};}
-
-let toastTimer;
-function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2400);}
-
-function getStats(){let pd=0,pn=0,pts=0;visits.forEach(v=>{pts+=v.patients.length;const t=vtotals(v);pd+=t.paid;pn+=t.pending;});return{paid:pd,pending:pn,pats:pts,visits:visits.length};}
-function updateSummary(){
-  const s=getStats();
-  document.getElementById('sv').textContent=s.visits;document.getElementById('sp').textContent=s.pats;document.getElementById('se').textContent=fmtRs(s.paid);
-  document.getElementById('ae').textContent='Rs '+s.paid.toLocaleString();document.getElementById('ap').textContent='Rs '+s.pending.toLocaleString();
-  document.getElementById('av').textContent=s.visits;document.getElementById('apa').textContent=s.pats;
-}
-
-function renderVisits(){
-  const el=document.getElementById('vlist');
-  let vs=curFilter==='all'?visits:visits.filter(v=>vstatus(v)===curFilter);
-  if(!vs.length){el.innerHTML='<div class="empty"><div class="ei">🦷</div><p>No visits found.<br>Tap "+ Add visit" to begin.</p></div>';return;}
-  el.innerHTML=vs.map(v=>{
-    const st=vstatus(v),tt=vtotals(v);
-    const pc=v.patients.reduce((a,p)=>a+p.procedures.length,0);
-    return`<div class="vcard${v._exp?' expanded':''}" id="vc-${v.id}">
-      <div class="vch" onclick="toggleVC(${v.id})">
-        <div style="flex:1;min-width:0"><div class="vct" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${v.clinic}</div><div class="vcd">${fmtDate(v.date)} &middot; ${v.shift}</div></div>
-        <span class="spill ${pillC(st)}" style="margin-left:8px">${pillL(st)}</span>
-      </div>
-      <div class="vcmeta" onclick="toggleVC(${v.id})">
-        <span class="mchip">👥 ${v.patients.length} patient${v.patients.length>1?'s':''}</span>
-        <span class="mchip">🔧 ${pc} procedure${pc>1?'s':''}</span>
-        <span class="mchip">Rs ${tt.total.toLocaleString()} total</span>
-      </div>
-      <div class="vcard-actions">
-        <button class="vact-btn edit" onclick="openVisitModal(${v.id})">✏ Edit</button>
-        <button class="vact-btn del" onclick="confirmDelete('visit',${v.id},'${esc(v.clinic)} &middot; ${fmtDate(v.date)}')">🗑 Delete</button>
-      </div>
-      <div class="vcpats">
-        ${v.patients.map(p=>{
-          const pt=patTotal(p),pp=patPaid(p);
-          return`<div class="pat-block">
-            <div class="pat-block-header">
-              <div class="pav" onclick="viewPat('${esc(p.name)}')">${initials(p.name)}</div>
-              <div class="pat-name-col"><div class="pname">${p.name}</div><div class="pat-subtotal">Rs ${pp.toLocaleString()} / Rs ${pt.toLocaleString()}</div></div>
-            </div>
-            ${p.procedures.map((pr,pi)=>`
-              <div class="proc-row">
-                <span class="proc-name">${pr.procedure}</span>
-                <span class="proc-fee ${pr.paid?'fpaid':'fpend'}">Rs ${pr.fee.toLocaleString()}</span>
-                <button class="paybtn" style="background:${pr.paid?'var(--g50)':'var(--a50)'};color:${pr.paid?'var(--g800)':'var(--a800)'}" onclick="togglePP(${v.id},'${esc(p.name)}',${pi})">${pr.paid?'✓ Paid':'Collect'}</button>
-              </div>`).join('')}
-            ${p.notes?`<div class="pat-note-display">📝 ${p.notes}</div>`:''}
-          </div>`;
-        }).join('')}
-      </div>
-      <div class="vcfoot">
-        <span class="ftot">Collected: <span>Rs ${tt.paid.toLocaleString()}</span></span>
-        <span class="ftot" style="color:var(--a400)">Due: <span style="color:var(--a400)">Rs ${tt.pending.toLocaleString()}</span></span>
-      </div>
-    </div>`;
-  }).join('');
-}
-function toggleVC(id){const v=visits.find(x=>x.id===id);if(v){v._exp=!v._exp;renderVisits();}}
-function togglePP(vid,pn,pi){
-  const v=visits.find(x=>x.id===vid);const p=v&&v.patients.find(x=>x.name===pn);
-  if(p&&p.procedures[pi]){p.procedures[pi].paid=!p.procedures[pi].paid;save();toast(p.procedures[pi].paid?'✓ Payment received':'Marked as pending');renderAll();}
-}
-function setF(f,btn){curFilter=f;document.querySelectorAll('.fchip').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderVisits();}
-
-function openVisitModal(vId=null){
-  editVId=vId;
-  document.getElementById('visit-modal-title').textContent=vId?'Edit consultation visit':'New consultation visit';
-  document.getElementById('visit-save-btn').textContent=vId?'Update visit':'Save visit';
-  document.getElementById('pentries').innerHTML='';
-  pEId=0;prEId=0;
-  // populate clinic dropdown
-  const fc=document.getElementById('fc');
-  fc.innerHTML=clinics.length?clinics.map(c=>`<option value="${c.id}">${c.name}</option>`).join(''):'<option value="">No clinics — add one first</option>';
-  if(vId){
-    const v=visits.find(x=>x.id===vId);
-    document.getElementById('fd').value=v.date;
-    document.getElementById('fs').value=v.shift;
-    for(let i=0;i<fc.options.length;i++){if(parseInt(fc.options[i].value)===v.clinicId){fc.selectedIndex=i;break;}}
-    v.patients.forEach(p=>addPatientEntry(p));
-  } else {
-    document.getElementById('fd').value=today.toISOString().split('T')[0];
-    addPatientEntry();
+// ── Setup / token ─────────────────────────────────────────
+async function connectGitHub(){
+  const tok=document.getElementById('token-inp').value.trim();
+  if(!tok){toast('⚠ Paste your GitHub token');return;}
+  if(!tok.startsWith('ghp_')&&!tok.startsWith('github_pat_')){toast('⚠ Token should start with ghp_ or github_pat_');return;}
+  ghToken=tok;
+  localStorage.setItem(TOKEN_KEY,tok);
+  setSyncStatus('syncing','Connecting…');
+  try{
+    const remote=await ghGet();
+    if(remote){
+      visits=remote.visits||[];reminders=remote.reminders||[];clinics=remote.clinics||[];
+      migrateData();saveLocal();
+      toast('✓ Connected! Data loaded from GitHub');
+    } else {
+      toast('✓ Connected! Fresh start — no existing data found');
+    }
+    document.getElementById('setup-screen').classList.add('hidden');
+    renderAll();renderReminders();
+    setSyncStatus('synced','Connected to GitHub');
+  }catch(e){
+    ghToken='';localStorage.removeItem(TOKEN_KEY);
+    setSyncStatus('error','Connection failed');
+    toast('⚠ Failed: '+e.message+'. Check token and repo visibility.');
   }
-  document.getElementById('visit-modal').classList.add('open');
 }
-
-function saveVisit(){
-  const fc=document.getElementById('fc');
-  const clinicId=parseInt(fc.value)||null;
-  const clinicName=clinicId?(clinics.find(c=>c.id===clinicId)||{name:''}).name:'';
-  const date=document.getElementById('fd').value;
-  const shift=document.getElementById('fs').value;
-  if(!clinicName){toast('⚠ Add a clinic first');return;}
-  if(!date){toast('⚠ Select a date');return;}
-  const patients=[];
-  document.querySelectorAll('.pentry').forEach(pe=>{
-    const name=(pe.querySelector('[data-field="name"]')||{}).value?.trim()||'';
-    const notes=(pe.querySelector('[data-field="notes"]')||{}).value?.trim()||'';
-    if(!name)return;
-    const procedures=[];
-    pe.querySelectorAll('.proc-entry').forEach(pr=>{
-      procedures.push({
-        procedure:pr.querySelector('[data-field="proc"]').value,
-        fee:parseFloat(pr.querySelector('[data-field="fee"]').value)||0,
-        paid:pr.querySelector('[data-field="paid"]').value==='true'
-      });
-    });
-    if(procedures.length)patients.push({name,notes,procedures});
-  });
-  if(!patients.length){toast('⚠ Add at least one patient');return;}
-  if(editVId){
-    const idx=visits.findIndex(x=>x.id===editVId);
-    if(idx>-1){const exp=visits[idx]._exp;visits[idx]={...visits[idx],clinicId,clinic:clinicName,date,shift,patients,_exp:exp};}
-    toast('✓ Visit updated!');
-  } else {
-    visits.unshift({id:Date.now(),clinicId,clinic:clinicName,date,shift,patients});
-    toast('✓ Visit saved!');
-  }
-  save();closeModal('visit-modal');renderAll();
+function updateToken(){
+  const tok=document.getElementById('token-update-inp').value.trim();
+  if(!tok){toast('⚠ Enter a token');return;}
+  ghToken=tok;localStorage.setItem(TOKEN_KEY,tok);
+  closeModal('sync-modal');toast('✓ Token updated');setSyncStatus('synced','Token updated');
 }
-
-function openClinicModal(cId=null){
-  editCId=cId;
-  document.getElementById('clinic-modal-title').textContent=cId?'Edit clinic':'Add clinic / hospital';
-  document.getElementById('clinic-save-btn').textContent=cId?'Update clinic':'Save clinic';
-  if(cId){
-    const c=clinics.find(x=>x.id===cId);
-    document.getElementById('cln').value=c.name;document.getElementById('cltype').value=c.type;
-    document.getElementById('clloc').value=c.location||'';document.getElementById('clphone').value=c.phone||'';document.getElementById('clnotes').value=c.notes||'';
-  } else {
-    ['cln','clloc','clphone','clnotes'].forEach(id=>document.getElementById(id).value='');
-  }
-  document.getElementById('clinic-modal').classList.add('open');
-}
-
-function saveClinic(){
-  const name=document.getElementById('cln').value.trim();
-  if(!name){toast('⚠ Enter clinic name');return;}
-  const obj={type:document.getElementById('cltype').value,location:document.getElementById('clloc').value.trim(),phone:document.getElementById('clphone').value.trim(),notes:document.getElementById('clnotes').value.trim()};
-  if(editCId){
-    const c=clinics.find(x=>x.id===editCId);
-    if(c){Object.assign(c,{name,...obj});visits.forEach(v=>{if(v.clinicId===editCId)v.clinic=name;});}
-    toast('✓ Clinic updated!');
-  } else {
-    clinics.push({id:Date.now(),name,...obj});toast('✓ Clinic added!');
-  }
-  save();closeModal('clinic-modal');renderClinics();renderAll();
-}
-
-function renderClinics(){
-  const el=document.getElementById('cliniclist');
-  if(!clinics.length){el.innerHTML='<div class="empty"><div class="ei">🏥</div><p>No clinics added yet.<br>Tap "+ Add clinic" to begin.</p></div>';return;}
-  el.innerHTML=clinics.map(c=>{
-    const cvs=visits.filter(v=>v.clinicId===c.id);
-    let ep=0,en=0,pts=0;cvs.forEach(v=>{pts+=v.patients.length;const t=vtotals(v);ep+=t.paid;en+=t.pending;});
-    // All patient rows across visits for this clinic
-    const rows=[];
-    cvs.sort((a,b)=>new Date(b.date)-new Date(a.date)).forEach(v=>v.patients.forEach(p=>{
-      const pp=patPaid(p),pt=patTotal(p);
-      rows.push({date:v.date,name:p.name,procs:p.procedures.map(pr=>pr.procedure).join(', '),paid:pp,total:pt,pending:pt-pp});
-    }));
-    return`<div class="clinic-card" id="cc-${c.id}">
-      <div class="clinic-card-hdr" onclick="toggleClinic(${c.id})">
-        <div class="clinic-ico">🏥</div>
-        <div style="flex:1;min-width:0">
-          <div class="clinic-nm" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${c.name}</div>
-          <div class="clinic-tp">${c.type}${c.location?' &middot; '+c.location:''}</div>
-        </div>
-        <div class="clinic-earn">Rs ${ep.toLocaleString()}</div>
-      </div>
-      <div class="clinic-stats-row">
-        <div class="cstat"><div class="csl">Visits</div><div class="csv">${cvs.length}</div></div>
-        <div class="cstat"><div class="csl">Patients</div><div class="csv">${pts}</div></div>
-        <div class="cstat"><div class="csl">Collected</div><div class="csv" style="color:var(--g400)">Rs ${ep.toLocaleString()}</div></div>
-        <div class="cstat"><div class="csl">Pending</div><div class="csv" style="color:var(--a400)">Rs ${en.toLocaleString()}</div></div>
-      </div>
-      <div class="clinic-breakdown">
-        ${c.phone||c.notes?`<div style="font-size:11px;color:var(--text2);margin-bottom:8px">${c.phone?'📞 '+c.phone:''}${c.phone&&c.notes?' &middot; ':''}${c.notes?c.notes:''}</div>`:''}
-        ${rows.length?`
-          <div class="seg-label" style="margin-top:0">Patient breakdown</div>
-          ${rows.map(r=>`<div class="brow">
-            <div style="flex:1;min-width:0">
-              <div style="font-size:11px;font-weight:500;color:var(--text)">${r.name}</div>
-              <div style="font-size:10px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${r.procs}</div>
-              <div style="font-size:10px;color:var(--text3)">${fmtDate(r.date)}</div>
-            </div>
-            <div style="text-align:right;flex-shrink:0;margin-left:8px">
-              <div style="font-size:12px;font-weight:500;color:var(--g400)">Rs ${r.paid.toLocaleString()}</div>
-              ${r.pending>0?`<div style="font-size:10px;color:var(--a400)">Rs ${r.pending.toLocaleString()} due</div>`:''}
-            </div>
-          </div>`).join('')}
-        `:'<div style="font-size:12px;color:var(--text3);padding:8px 0">No visits recorded yet</div>'}
-      </div>
-      <div class="clinic-actions">
-        <button class="cact ce" onclick="openClinicModal(${c.id})">✏ Edit</button>
-        <button class="cact cd" onclick="confirmDelete('clinic',${c.id},'${esc(c.name)}')">🗑 Delete</button>
-      </div>
-    </div>`;
-  }).join('');
-}
-function toggleClinic(id){const el=document.getElementById('cc-'+id);if(el)el.classList.toggle('expanded');}
-
-function getPatientMap(){
-  const map={};
-  visits.forEach(v=>v.patients.forEach(p=>{
-    if(!map[p.name])map[p.name]={name:p.name,entries:[],paid:0,pending:0,procs:new Set(),latestNote:''};
-    const pp=patPaid(p),pt=patTotal(p);
-    map[p.name].entries.push({date:v.date,clinic:v.clinic,procedures:p.procedures,notes:p.notes,paid:pp,total:pt});
-    map[p.name].paid+=pp;map[p.name].pending+=(pt-pp);
-    p.procedures.forEach(pr=>map[p.name].procs.add(pr.procedure));
-    if(p.notes)map[p.name].latestNote=p.notes;
-  }));
-  return map;
-}
-function renderPatients(){
-  const q=(document.getElementById('psearch').value||'').toLowerCase();
-  const map=getPatientMap();const el=document.getElementById('patlist');
-  let entries=Object.values(map).filter(p=>p.name.toLowerCase().includes(q));
-  if(!entries.length){el.innerHTML='<div class="empty"><div class="ei">👤</div><p>No patients found.</p></div>';return;}
-  el.innerHTML=entries.map(p=>`
-    <div class="phcard" onclick="this.classList.toggle('expanded')">
-      <div class="phheader">
-        <div class="phav">${initials(p.name)}</div>
-        <div style="flex:1;min-width:0"><div class="phname">${p.name}</div><div class="phsub" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${[...p.procs].join(', ')}</div></div>
-      </div>
-      <div class="phstats">
-        <div class="phstat"><div class="psl">Visits</div><div class="psv">${p.entries.length}</div></div>
-        <div class="phstat"><div class="psl">Collected</div><div class="psv" style="color:var(--g400)">Rs ${p.paid.toLocaleString()}</div></div>
-        <div class="phstat"><div class="psl">Pending</div><div class="psv" style="color:var(--a400)">Rs ${p.pending.toLocaleString()}</div></div>
-      </div>
-      <div class="phhist">
-        ${p.latestNote?`<div style="margin-bottom:9px;padding:8px;background:var(--b50);border-radius:8px;font-size:11px;color:var(--b800)">📋 ${p.latestNote}</div>`:''}
-        ${p.entries.sort((a,b)=>new Date(b.date)-new Date(a.date)).map(h=>`
-          <div class="histrow">
-            <div style="flex:1;min-width:0">
-              ${h.procedures.map(pr=>`<div class="hrproc">${pr.procedure} <span style="font-size:10px;color:${pr.paid?'var(--g400)':'var(--a400)'}">Rs ${pr.fee.toLocaleString()} ${pr.paid?'✓':''}</span></div>`).join('')}
-              <div class="hrdate">${fmtDate(h.date)} &middot; ${h.clinic}</div>
-              ${h.notes?`<div class="hrnote">${h.notes}</div>`:''}
-            </div>
-            <div style="text-align:right;flex-shrink:0;margin-left:8px">
-              <div style="font-size:12px;font-weight:500;color:var(--g400)">Rs ${h.paid.toLocaleString()}</div>
-              ${h.paid<h.total?`<div style="font-size:10px;color:var(--a400)">Rs ${(h.total-h.paid).toLocaleString()} due</div>`:''}
-            </div>
-          </div>`).join('')}
-        <button onclick="event.stopPropagation();viewPat('${esc(p.name)}')" style="width:100%;margin-top:8px;padding:9px;border:0.5px solid var(--border);border-radius:9px;background:none;color:var(--t600);font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;min-height:38px">Full profile →</button>
-      </div>
-    </div>`).join('');
-}
-function viewPat(name){
-  const map=getPatientMap();const p=map[name];if(!p)return;
-  document.getElementById('pat-modal-content').innerHTML=`
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
-      <div class="phav" style="width:46px;height:46px;font-size:15px">${initials(p.name)}</div>
-      <div><div style="font-size:15px;font-weight:500;color:var(--text)">${p.name}</div><div style="font-size:11px;color:var(--text2)">${[...p.procs].join(' &middot; ')}</div></div>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px">
-      <div class="phstat"><div class="psl">Visits</div><div class="psv">${p.entries.length}</div></div>
-      <div class="phstat"><div class="psl">Collected</div><div class="psv" style="color:var(--g400)">Rs ${p.paid.toLocaleString()}</div></div>
-      <div class="phstat"><div class="psl">Due</div><div class="psv" style="color:var(--a400)">Rs ${p.pending.toLocaleString()}</div></div>
-    </div>
-    ${p.latestNote?`<div style="margin-bottom:12px;padding:10px;background:var(--b50);border-radius:10px;font-size:12px;color:var(--b800)">📋 <b>Notes:</b> ${p.latestNote}</div>`:''}
-    <div class="seg-label">Treatment history</div>
-    ${p.entries.sort((a,b)=>new Date(b.date)-new Date(a.date)).map(h=>`
-      <div class="histrow">
-        <div style="flex:1;min-width:0">
-          ${h.procedures.map(pr=>`<div class="hrproc">${pr.procedure} <span style="font-size:10px;color:${pr.paid?'var(--g400)':'var(--a400)'}">Rs ${pr.fee.toLocaleString()} ${pr.paid?'Paid':'Pending'}</span></div>`).join('')}
-          <div class="hrdate">${fmtDate(h.date)} &middot; ${h.clinic}</div>
-          ${h.notes?`<div class="hrnote">${h.notes}</div>`:''}
-        </div>
-        <div style="text-align:right;flex-shrink:0;margin-left:8px">
-          <div style="font-size:12px;font-weight:500;color:var(--g400)">Rs ${h.paid.toLocaleString()}</div>
-          ${h.paid<h.total?`<div style="font-size:10px;color:var(--a400)">Rs ${(h.total-h.paid).toLocaleString()} due</div>`:''}
-        </div>
-      </div>`).join('')}`;
-  document.getElementById('patient-modal').classList.add('open');
-}
-
-function renderReminders(){
-  const now=new Date();now.setHours(0,0,0,0);
-  const el=document.getElementById('remlist');
-  const sorted=[...reminders].sort((a,b)=>new Date(a.date)-new Date(b.date));
-  const pending=sorted.filter(r=>!r.done),done=sorted.filter(r=>r.done);
-  const be=document.getElementById('rem-badge');be.textContent=pending.length;be.style.display=pending.length?'inline-flex':'none';
-  if(!sorted.length){el.innerHTML='<div class="empty"><div class="ei">🔔</div><p>No reminders yet.</p></div>';return;}
-  const ico={'Follow-up':'🔁','Payment due':'💰','Appointment':'📅','Medication':'💊','Other':'📌'};
-  const rr=r=>{
-    const d=new Date(r.date);d.setHours(0,0,0,0);
-    const diff=Math.round((d-now)/86400000);
-    const urg=diff<0?'urgent':diff<=3?'soon':'';
-    const ts=diff<0?Math.abs(diff)+'d overdue':diff===0?'Today':diff===1?'Tomorrow':'In '+diff+' days';
-    const tc=diff<0?'var(--r400)':diff<=3?'var(--a400)':'var(--text3)';
-    return`<div class="remcard ${urg} ${r.done?'done':''}">
-      <div class="remico" style="background:${diff<0?'var(--r50)':diff<=3?'var(--a50)':'var(--t50)'}">${ico[r.type]||'📌'}</div>
-      <div style="flex:1;min-width:0"><div class="remtitle">${r.title}</div><div class="remsub">${r.type}${r.note?' &middot; '+r.note:''}</div><div class="remtime" style="color:${tc}">${ts} &middot; ${fmtDate(r.date)}</div></div>
-      <div class="remact">
-        ${!r.done?`<button class="ratbtn" onclick="markRemDone(${r.id})" style="color:var(--g800);border-color:var(--g100)">✓ Done</button>`:''}
-        <button class="ratbtn" onclick="delRem(${r.id})" style="color:var(--r800);border-color:var(--r100)">Delete</button>
-      </div>
-    </div>`;
-  };
-  el.innerHTML=(pending.length?`<div class="seg-label">Upcoming (${pending.length})</div>`:'')+pending.map(rr).join('')+(done.length?`<div class="seg-label" style="margin-top:14px">Completed</div>`+done.map(rr).join(''):'');
-}
-function markRemDone(id){const r=reminders.find(x=>x.id===id);if(r){r.done=true;save();toast('✓ Done');renderReminders();}}
-function delRem(id){reminders=reminders.filter(x=>x.id!==id);save();toast('Deleted');renderReminders();}
-
-function buildMonthSel(){
-  const el=document.getElementById('month-sel');const seen=new Set();const mons=[];
-  visits.forEach(v=>{const d=new Date(v.date);const k=d.getFullYear()+'-'+d.getMonth();if(!seen.has(k)){seen.add(k);mons.push({y:d.getFullYear(),m:d.getMonth()});}});
-  mons.sort((a,b)=>b.y-a.y||b.m-a.m);
-  if(!mons.length)mons.push({y:today.getFullYear(),m:today.getMonth()});
-  el.innerHTML=mons.map(({y,m})=>`<button class="mselchip ${m===selMonth&&y===selYear?'active':''}" onclick="selMon(${m},${y},this)">${MS[m]} ${y}</button>`).join('');
-}
-function selMon(m,y,btn){selMonth=m;selYear=y;document.querySelectorAll('.mselchip').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderReport();}
-function renderReport(){
-  const vs=visits.filter(v=>{const d=new Date(v.date);return d.getMonth()===selMonth&&d.getFullYear()===selYear;});
-  const el=document.getElementById('report-content');
-  if(!vs.length){el.innerHTML=`<div class="empty"><div class="ei">📄</div><p>No visits in ${MONTHS[selMonth]} ${selYear}</p></div>`;return;}
-  let tP=0,tPn=0,tPts=0,tPr=0;
-  vs.forEach(v=>{tPts+=v.patients.length;const t=vtotals(v);tP+=t.paid;tPn+=t.pending;v.patients.forEach(p=>tPr+=p.procedures.length);});
-  const pct=tP+tPn?Math.round(tP/(tP+tPn)*100):0;
-  const rows=[];
-  vs.forEach(v=>v.patients.forEach(p=>p.procedures.forEach(pr=>rows.push({date:v.date,clinic:v.clinic,patient:p.name,procedure:pr.procedure,fee:pr.fee,paid:pr.paid,notes:p.notes}))));
-  el.innerHTML=`
-    <div class="rptcard">
-      <div class="rpthead">${MONTHS[selMonth]} ${selYear} — Summary</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
-        <div class="phstat"><div class="psl">Visits</div><div class="psv">${vs.length}</div></div>
-        <div class="phstat"><div class="psl">Patients</div><div class="psv">${tPts}</div></div>
-        <div class="phstat"><div class="psl">Procedures</div><div class="psv">${tPr}</div></div>
-        <div class="phstat"><div class="psl">Collected</div><div class="psv" style="color:var(--g400)">Rs ${tP.toLocaleString()}</div></div>
-      </div>
-      <div class="pbar-track" style="margin-bottom:4px"><div class="pbar-fill" style="width:${pct}%;background:var(--t400)"></div></div>
-      <div style="font-size:10px;color:var(--text2)">Collection rate: ${pct}% &middot; Rs ${tPn.toLocaleString()} outstanding</div>
-    </div>
-    <div class="rptcard">
-      <div class="rpthead">Procedure ledger</div>
-      <table class="rpttable">
-        <colgroup><col style="width:24%"><col style="width:22%"><col style="width:22%"><col style="width:16%"><col style="width:16%"></colgroup>
-        <tr><th>Patient</th><th>Procedure</th><th>Clinic</th><th>Fee</th><th>Status</th></tr>
-        ${rows.map(r=>`<tr><td title="${r.patient}">${r.patient.split(' ')[0]}</td><td>${r.procedure}</td><td title="${r.clinic}">${r.clinic.split(' ')[0]}</td><td>Rs ${r.fee.toLocaleString()}</td><td><span class="spill ${r.paid?'ppaid':'ppend'}" style="font-size:9px;padding:2px 5px">${r.paid?'Paid':'Due'}</span></td></tr>`).join('')}
-      </table>
-    </div>
-    <button class="expbtn" onclick="exportCSV(${selMonth},${selYear})">⬇ Export CSV — ${MS[selMonth]} ${selYear}</button>`;
-}
-function exportCSV(m,y){
-  const vs=visits.filter(v=>{const d=new Date(v.date);return d.getMonth()===m&&d.getFullYear()===y;});
-  let csv='Date,Clinic,Shift,Patient,Procedure,Fee (INR),Status,Notes\n';
-  vs.forEach(v=>v.patients.forEach(p=>p.procedures.forEach(pr=>{
-    csv+=`${v.date},"${v.clinic}",${v.shift},"${p.name}","${pr.procedure}",${pr.fee},${pr.paid?'Paid':'Pending'},"${(p.notes||'').replace(/"/g,'""')}"\n`;
-  })));
-  const blob=new Blob([csv],{type:'text/csv'});
-  const url=URL.createObjectURL(blob);const a=document.createElement('a');
-  a.href=url;a.download=`DentTrack_${MONTHS[m]}_${y}.csv`;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
-  toast('✓ CSV exported!');
-}
-
-function renderPBars(){
-  const s=getStats();const total=s.paid+s.pending;const el=document.getElementById('pbars');
-  if(!total){el.innerHTML='<p style="color:var(--text3);font-size:12px">No data yet</p>';return;}
-  const pct=Math.round(s.paid/total*100);
-  el.innerHTML=`
-    <div class="pbar-wrap"><div class="pbar-top"><span style="color:var(--g800)">Collected</span><span style="color:var(--g400);font-weight:500">Rs ${s.paid.toLocaleString()} (${pct}%)</span></div><div class="pbar-track"><div class="pbar-fill" style="width:${pct}%;background:var(--t400)"></div></div></div>
-    <div class="pbar-wrap"><div class="pbar-top"><span style="color:var(--a800)">Outstanding</span><span style="color:var(--a400);font-weight:500">Rs ${s.pending.toLocaleString()} (${100-pct}%)</span></div><div class="pbar-track"><div class="pbar-fill" style="width:${100-pct}%;background:var(--a100)"></div></div></div>`;
-}
-function renderStatsClinicList(){
-  const el=document.getElementById('clist-stats');
-  if(!clinics.length){el.innerHTML='<p style="color:var(--text3);font-size:12px">No clinics added yet.</p>';return;}
-  el.innerHTML=clinics.map(c=>{
-    const cvs=visits.filter(v=>v.clinicId===c.id);
-    let ep=0,en=0,pts=0;cvs.forEach(v=>{pts+=v.patients.length;const t=vtotals(v);ep+=t.paid;en+=t.pending;});
-    return`<div style="display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:0.5px solid var(--border)">
-      <div style="width:34px;height:34px;background:var(--t50);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0">🏥</div>
-      <div style="flex:1;min-width:0">
-        <div style="font-size:12px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${c.name}</div>
-        <div style="font-size:10px;color:var(--text2)">${cvs.length} visit${cvs.length!==1?'s':''} &middot; ${pts} patients${en?` &middot; <span style="color:var(--a400)">Rs ${en.toLocaleString()} due</span>`:''}</div>
-      </div>
-      <div style="font-size:12px;font-weight:500;color:var(--t600);flex-shrink:0">Rs ${ep.toLocaleString()}</div>
-    </div>`;
-  }).join('');
-}
-
-const TABS=['visits','patients','clinics','reminders','report','analytics'];
-function sw(tab,tbtn){
-  TABS.forEach(t=>{const el=document.getElementById('tab-'+t);if(el)el.style.display=t===tab?'block':'none';});
-  document.querySelectorAll('.tbtn').forEach((b,i)=>b.classList.toggle('active',TABS[i]===tab));
-  document.querySelectorAll('.nitem').forEach((b,i)=>{b.classList.toggle('active',TABS[i]===tab);const dot=b.querySelector('.ndot');if(dot)dot.style.display=TABS[i]===tab?'block':'none';});
-  if(tab==='patients')renderPatients();
-  if(tab==='clinics')renderClinics();
-  if(tab==='reminders')renderReminders();
-  if(tab==='report'){buildMonthSel();renderReport();}
-  if(tab==='analytics'){renderPBars();renderStatsClinicList();}
-}
-
-function addPatientEntry(existing=null){
-  pEId++;const pid='pe'+pEId;
-  const num=document.querySelectorAll('.pentry').length+1;
-  const div=document.createElement('div');div.className='pentry';div.id=pid;
-  div.innerHTML=`
-    <div class="pentry-head">
-      <div class="pentry-num">${num}</div><div class="pentry-label">Patient ${num}</div>
-      <button class="rmbtn" onclick="document.getElementById('${pid}').remove();renumberPats()">×</button>
-    </div>
-    <div class="fg" style="margin-bottom:9px"><label class="flbl">Patient name</label><input class="finp" placeholder="Full name" data-field="name" autocapitalize="words" value="${existing?esc(existing.name):''}"/></div>
-    <label class="flbl" style="margin-bottom:4px;display:block">Procedures & fees</label>
-    <div class="proc-entries" id="procs-${pid}"></div>
-    <button class="add-proc-btn" onclick="addProcEntry('${pid}')">+ Add procedure</button>
-    <div class="fg" style="margin-top:2px;margin-bottom:0"><label class="flbl">Patient notes</label><textarea class="ftarea" data-field="notes" placeholder="Allergies, follow-up, payment notes…">${existing&&existing.notes?existing.notes:''}</textarea></div>`;
-  document.getElementById('pentries').appendChild(div);
-  if(existing&&existing.procedures&&existing.procedures.length){existing.procedures.forEach(pr=>addProcEntry(pid,pr));}
-  else{addProcEntry(pid);}
-}
-
-function addProcEntry(pid,ex=null){
-  prEId++;const prid='pr'+prEId;
-  const div=document.createElement('div');div.className='proc-entry';div.id=prid;
-  const opts=PROCS.map(p=>`<option${ex&&ex.procedure===p?' selected':''}>${p}</option>`).join('');
-  div.innerHTML=`
-    <select class="fsel" data-field="proc">${opts}</select>
-    <input class="finp" type="number" inputmode="numeric" placeholder="Fee" data-field="fee" min="0" value="${ex?ex.fee:''}"/>
-    <select class="fsel" data-field="paid">
-      <option value="false"${!ex||!ex.paid?' selected':''}>Pending</option>
-      <option value="true"${ex&&ex.paid?' selected':''}>Received</option>
-    </select>
-    <button class="rm-proc-btn" onclick="document.getElementById('${prid}').remove()">×</button>`;
-  document.getElementById('procs-'+pid).appendChild(div);
-}
-
-function renumberPats(){
-  document.querySelectorAll('.pentry').forEach((el,i)=>{
-    const n=el.querySelector('.pentry-num'),l=el.querySelector('.pentry-label');
-    if(n)n.textContent=i+1;if(l)l.textContent='Patient '+(i+1);
+function openSyncSettings(){document.getElementById('sync-modal').classList.add('open');}
+function confirmDisconnect(){
+  showConfirm('Disconnect GitHub?','Your local data stays on this device but GitHub sync will stop until you reconnect.',()=>{
+    ghToken='';localStorage.removeItem(TOKEN_KEY);
+    setSyncStatus('','Not connected');
+    closeModal('sync-modal');
+    document.getElementById('setup-screen').classList.remove('hidden');
+    toast('Disconnected');
   });
 }
 
-function saveReminder(){
-  const title=document.getElementById('rt').value.trim();const date=document.getElementById('rd').value;
-  const type=document.getElementById('rtype').value;const note=document.getElementById('rnote').value.trim();
-  if(!title||!date){toast('⚠ Fill title and date');return;}
-  reminders.push({id:Date.now(),title,date,type,note,done:false});
-  save();closeModal('rem-modal');toast('✓ Reminder set!');renderReminders();
-}
-function openRemModal(){
-  document.getElementById('rem-modal').classList.add('open');
-  document.getElementById('rd').value=today.toISOString().split('T')[0];
-  document.getElementById('rt').value='';document.getElementById('rnote').value='';
+// ── Data migration ────────────────────────────────────────
+function migrateData(){
+  visits=visits.map(v=>({...v,patients:v.patients.map(p=>{
+    if(p.procedures) return p;
+    return{name:p.name,notes:p.notes||'',procedures:[{procedure:p.procedure||'Consultation',fee:p.fee||0,paid:p.paid||false}]};
+  })}));
 }
 
-function confirmDelete(type,id,label){
-  document.getElementById('confirm-title').textContent=type==='visit'?'Delete this visit?':'Delete this clinic?';
-  document.getElementById('confirm-sub').textContent=`"${label}" — this cannot be undone.`;
-  document.getElementById('confirm-ok').onclick=()=>{
-    if(type==='visit'){visits=visits.filter(x=>x.id!==id);save();closeConfirm();toast('Visit deleted');renderAll();}
-    else{clinics=clinics.filter(x=>x.id!==id);save();closeConfirm();toast('Clinic deleted');renderClinics();renderAll();}
-  };
-  document.getElementById('confirm-overlay').classList.add('open');
-}
-function closeConfirm(){document.getElementById('confirm-overlay').classList.remove('open');}
-function closeModal(id){document.getElementById(id).classList.remove('open');}
-document.querySelectorAll('.modal-wrap').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open');}));
-
-function renderAll(){updateSummary();renderVisits();}
-
-if(!load())seed();
-renderAll();renderReminders();
-
-let lastTap=0;
-document.addEventListener('touchend',e=>{const n=Date.now();if(n-lastTap<300)e.preventDefault();lastTap=n;},{passive:false});
-</script>
-</body>
-</html>
-<script>
-const PROCS=['Scaling','Extraction','RCT','Crown','Filling','Whitening','Braces','Consultation','Implant','X-Ray','Denture','Root Canal','Other'];
-const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
-const MSHORT=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-const SK='denttrack_v3';
-
-let visits=[],reminders=[],clinics=[],curFilter='all',selMonth,selYear,pEntryId=0,procEntryId=0,editingVisitId=null,editingClinicId=null;
-const today=new Date();
-selMonth=today.getMonth();selYear=today.getFullYear();
-document.getElementById('todaylbl').textContent=today.getDate()+' '+MSHORT[today.getMonth()]+' '+today.getFullYear();
-
-function save(){try{localStorage.setItem(SK,JSON.stringify({visits,reminders,clinics}));}catch(e){}}
-function load(){
+// ── Load from local storage ───────────────────────────────
+function loadLocal(){
   try{
-    const d=JSON.parse(localStorage.getItem(SK));
-    if(d&&d.visits){
-      visits=d.visits.map(v=>({...v,patients:v.patients.map(p=>{
-        if(p.procedures)return p;
-        return{name:p.name,notes:p.notes||'',procedures:[{procedure:p.procedure||'Consultation',fee:p.fee||0,paid:p.paid||false}]};
-      })}));
-      reminders=d.reminders||[];
-      clinics=d.clinics||[];
-      return true;
-    }
+    const d=JSON.parse(localStorage.getItem(DATA_KEY));
+    if(d&&d.visits){visits=d.visits;reminders=d.reminders||[];clinics=d.clinics||[];ghFileSha=d.ghFileSha||'';migrateData();return true;}
   }catch(e){}
   return false;
 }
 
-function seed(){
-  clinics=[
-    {id:'c1',name:'Apollo Dental Centre',location:'Bengaluru, Koramangala',phone:'+91 80 1234 5678',notes:'Visit every Tuesday and Thursday'},
-    {id:'c2',name:'Smile Care Hospital',location:'Bengaluru, Indiranagar',phone:'+91 80 8765 4321',notes:''},
-    {id:'c3',name:'DentMax Clinic',location:'Bengaluru, HSR Layout',phone:'',notes:'New clinic — 3rd Saturday of each month'}
-  ];
-  visits=[
-    {id:1,clinic:'Apollo Dental Centre',date:'2026-03-18',shift:'Morning',patients:[
-      {name:'Ravi Kumar',notes:'Allergic to penicillin.',procedures:[{procedure:'RCT',fee:3500,paid:true},{procedure:'Crown',fee:6000,paid:false}]},
-      {name:'Sunitha Rao',notes:'',procedures:[{procedure:'Scaling',fee:800,paid:true}]},
-      {name:'Mehul Shah',notes:'Follow up in 2 weeks.',procedures:[{procedure:'Extraction',fee:1200,paid:false},{procedure:'X-Ray',fee:300,paid:false}]}
-    ]},
-    {id:2,clinic:'Smile Care Hospital',date:'2026-03-17',shift:'Afternoon',patients:[
-      {name:'Priya Nair',notes:'Prefers morning slots.',procedures:[{procedure:'Crown',fee:6000,paid:true}]},
-      {name:'Kiran Joshi',notes:'',procedures:[{procedure:'Filling',fee:1500,paid:true},{procedure:'Scaling',fee:800,paid:true}]}
-    ]},
-    {id:3,clinic:'DentMax Clinic',date:'2026-03-15',shift:'Morning',patients:[
-      {name:'Aditya Verma',notes:'Implant phase 2 pending.',procedures:[{procedure:'Implant',fee:25000,paid:false}]},
-      {name:'Latha Iyer',notes:'',procedures:[{procedure:'Whitening',fee:4000,paid:true},{procedure:'Consultation',fee:500,paid:true}]}
-    ]},
-    {id:4,clinic:'Apollo Dental Centre',date:'2026-02-28',shift:'Full day',patients:[
-      {name:'Deepthi Reddy',notes:'Braces — next visit April 5.',procedures:[{procedure:'Braces',fee:35000,paid:false}]},
-      {name:'Suresh Babu',notes:'',procedures:[{procedure:'Extraction',fee:1200,paid:true}]}
-    ]}
-  ];
-  reminders=[
-    {id:1,title:'Follow up — Ravi Kumar (Crown)',date:'2026-03-25',type:'Follow-up',note:'Crown fitting post-RCT',done:false},
-    {id:2,title:'Collect payment — Mehul Shah',date:'2026-03-20',type:'Payment due',note:'₹1,500 outstanding',done:false},
-    {id:3,title:'Apollo Dental monthly invoice',date:'2026-03-31',type:'Appointment',note:'Submit before month end',done:false},
-    {id:4,title:'Deepthi Reddy braces adjustment',date:'2026-04-05',type:'Appointment',note:'Next tightening session',done:false}
-  ];
-  save();
-}
-
-const fmtDate=d=>{const dt=new Date(d);return dt.getDate()+' '+MSHORT[dt.getMonth()]+' '+dt.getFullYear();};
+// ── Helpers ───────────────────────────────────────────────
+const fmtDate=d=>{const dt=new Date(d);return dt.getDate()+' '+MS[dt.getMonth()]+' '+dt.getFullYear();};
 const initials=n=>n.trim().split(' ').slice(0,2).map(w=>w[0]||'').join('').toUpperCase()||'?';
 const fmtRs=n=>n>=1000?'₹'+(n/1000).toFixed(1)+'k':'₹'+n;
 const esc=s=>(s||'').replace(/'/g,"\\'");
-function visitStatus(v){let t=0,p=0;v.patients.forEach(pt=>pt.procedures.forEach(pr=>{t++;if(pr.paid)p++;}));return p===t?'paid':p===0?'pending':'partial';}
+const visitStatus=v=>{let t=0,p=0;v.patients.forEach(pt=>pt.procedures.forEach(pr=>{t++;if(pr.paid)p++;}));return p===t?'paid':p===0?'pending':'partial';};
 const pillC=s=>({paid:'ppaid',pending:'ppend',partial:'ppart'})[s];
 const pillL=s=>({paid:'Paid',pending:'Pending',partial:'Partial'})[s];
 const patTotal=p=>p.procedures.reduce((a,pr)=>a+pr.fee,0);
 const patPaid=p=>p.procedures.filter(pr=>pr.paid).reduce((a,pr)=>a+pr.fee,0);
-function visitTotals(v){let t=0,p=0;v.patients.forEach(pt=>{t+=patTotal(pt);p+=patPaid(pt);});return{total:t,paid:p,pending:t-p};}
+const vTotals=v=>{let t=0,p=0;v.patients.forEach(pt=>{t+=patTotal(pt);p+=patPaid(pt);});return{total:t,paid:p,pending:t-p};};
 
 let toastTimer;
-function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2400);}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2600);}
 
-function getStats(){let pd=0,pn=0,pts=0;visits.forEach(v=>{pts+=v.patients.length;const t=visitTotals(v);pd+=t.paid;pn+=t.pending;});return{paid:pd,pending:pn,pats:pts,visits:visits.length};}
+function getStats(){let pd=0,pn=0,pts=0;visits.forEach(v=>{pts+=v.patients.length;const t=vTotals(v);pd+=t.paid;pn+=t.pending;});return{paid:pd,pending:pn,pats:pts,visits:visits.length};}
 function updateSummary(){
   const s=getStats();
   document.getElementById('sv').textContent=s.visits;
   document.getElementById('sp').textContent=s.pats;
   document.getElementById('se').textContent=fmtRs(s.paid);
-  document.getElementById('ae').textContent='₹'+s.paid.toLocaleString();
-  document.getElementById('ap').textContent='₹'+s.pending.toLocaleString();
-  document.getElementById('av').textContent=s.visits;
-  document.getElementById('apa').textContent=s.pats;
+  const ae=document.getElementById('ae');if(ae)ae.textContent='₹'+s.paid.toLocaleString();
+  const ap=document.getElementById('ap');if(ap)ap.textContent='₹'+s.pending.toLocaleString();
+  const apa=document.getElementById('apa');if(apa)apa.textContent=s.pats;
+  const acl=document.getElementById('acl');if(acl)acl.textContent=clinics.length;
 }
 
-// ── Visits ──────────────────────────────────────────────────
+// ── Visits ────────────────────────────────────────────────
 function renderVisits(){
   const el=document.getElementById('vlist');
   let vs=visits;
-  if(curFilter!=='all')vs=visits.filter(v=>visitStatus(v)===curFilter);
+  if(curFilter!=='all') vs=visits.filter(v=>visitStatus(v)===curFilter);
   if(!vs.length){el.innerHTML='<div class="empty"><div class="ei">🦷</div><p>No visits found.<br>Tap "+ Add visit" to get started.</p></div>';return;}
   el.innerHTML=vs.map(v=>{
-    const st=visitStatus(v),tt=visitTotals(v);
+    const st=visitStatus(v),tt=vTotals(v);
     const pc=v.patients.reduce((a,p)=>a+p.procedures.length,0);
     return`<div class="vcard" id="vc-${v.id}">
-      <div class="vch" onclick="toggleVC(${v.id})">
+      <div class="vcard-top" onclick="toggleVC(${v.id})">
         <div style="flex:1;min-width:0"><div class="vct" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${v.clinic}</div><div class="vcd">${fmtDate(v.date)} · ${v.shift}</div></div>
-        <span class="spill ${pillC(st)}" style="margin-left:8px">${pillL(st)}</span>
+        <div class="vcard-right" onclick="event.stopPropagation()">
+          <span class="spill ${pillC(st)}">${pillL(st)}</span>
+          <button class="icon-btn" onclick="openEditVisit(${v.id})">✏️</button>
+          <button class="icon-btn del" onclick="confirmDeleteVisit(${v.id})">🗑</button>
+        </div>
       </div>
       <div class="vcmeta" onclick="toggleVC(${v.id})">
         <span class="mchip">👥 ${v.patients.length} patient${v.patients.length>1?'s':''}</span>
         <span class="mchip">🔧 ${pc} procedure${pc>1?'s':''}</span>
-        <span class="mchip">₹${tt.total.toLocaleString()}</span>
-      </div>
-      <div class="vcard-actions">
-        <button class="vact-btn edit-btn" onclick="openEditVisit(${v.id})">✏ Edit</button>
-        <button class="vact-btn del-btn" onclick="confirmDeleteVisit(${v.id})">🗑 Delete</button>
+        <span class="mchip">₹${tt.total.toLocaleString()} total</span>
       </div>
       <div class="vcpats">
-        ${v.patients.map(p=>{const pt=patTotal(p),pp=patPaid(p);return`<div class="pat-block">
-          <div class="pat-block-header">
-            <div class="pav" onclick="viewPat('${esc(p.name)}')">${initials(p.name)}</div>
-            <div class="pat-name-col"><div class="pname">${p.name}</div><div class="pat-subtotal">₹${pp.toLocaleString()} / ₹${pt.toLocaleString()}</div></div>
-          </div>
-          ${p.procedures.map((pr,pi)=>`<div class="proc-row">
-            <span class="proc-name">${pr.procedure}</span>
-            <span class="proc-fee ${pr.paid?'fpaid':'fpend'}">₹${pr.fee.toLocaleString()}</span>
-            <button class="paybtn" style="background:${pr.paid?'var(--g50)':'var(--a50)'};color:${pr.paid?'var(--g800)':'var(--a800)'}" onclick="toggleProcPay(${v.id},'${esc(p.name)}',${pi})">${pr.paid?'✓ Paid':'Collect'}</button>
-          </div>`).join('')}
-          ${p.notes?`<div class="pat-note-display">📝 ${p.notes}</div>`:''}
-        </div>`;}).join('')}
+        ${v.patients.map(p=>{
+          const pt=patTotal(p),pp=patPaid(p);
+          return`<div class="pat-block">
+            <div class="pat-block-hdr">
+              <div class="pav" onclick="viewPat('${esc(p.name)}')">${initials(p.name)}</div>
+              <div class="pat-name-col"><div class="pname">${p.name}</div><div class="pat-sub">₹${pp.toLocaleString()} / ₹${pt.toLocaleString()}</div></div>
+            </div>
+            ${p.procedures.map((pr,pi)=>`
+              <div class="proc-row">
+                <span class="proc-nm">${pr.procedure}</span>
+                <span class="proc-fee ${pr.paid?'fpaid':'fpend'}">₹${pr.fee.toLocaleString()}</span>
+                <button class="paybtn" style="background:${pr.paid?'var(--g50)':'var(--a50)'};color:${pr.paid?'var(--g800)':'var(--a800)'}"
+                  onclick="toggleProcPay(${v.id},'${esc(p.name)}',${pi})">${pr.paid?'✓ Paid':'Collect'}</button>
+              </div>`).join('')}
+            ${p.notes?`<div class="pat-note-d">📝 ${p.notes}</div>`:''}
+          </div>`;
+        }).join('')}
       </div>
       <div class="vcfoot">
         <span class="ftot">Collected: <span>₹${tt.paid.toLocaleString()}</span></span>
@@ -987,152 +681,224 @@ function renderVisits(){
     </div>`;
   }).join('');
 }
+
 function toggleVC(id){const el=document.getElementById('vc-'+id);if(el)el.classList.toggle('expanded');}
 function toggleProcPay(vid,pname,pi){
   const v=visits.find(x=>x.id===vid);const p=v&&v.patients.find(x=>x.name===pname);
-  if(p&&p.procedures[pi]){p.procedures[pi].paid=!p.procedures[pi].paid;save();toast(p.procedures[pi].paid?'✓ Payment received':'Marked as pending');renderAll();const el=document.getElementById('vc-'+vid);if(el)el.classList.add('expanded');}
+  if(p&&p.procedures[pi]){p.procedures[pi].paid=!p.procedures[pi].paid;scheduleSync();toast(p.procedures[pi].paid?'✓ Payment received':'Marked as pending');renderAll();const el=document.getElementById('vc-'+vid);if(el)el.classList.add('expanded');}
 }
 function setF(f,btn){curFilter=f;document.querySelectorAll('.fchip').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderVisits();}
 
-// Delete visit with confirmation
-function confirmDeleteVisit(id){
-  const v=visits.find(x=>x.id===id);if(!v)return;
-  showConfirm('Delete this visit?',`${v.clinic} — ${fmtDate(v.date)}`,()=>{
-    visits=visits.filter(x=>x.id!==id);save();toast('Visit deleted');renderAll();renderClinicsTab();
-  });
-}
-
-// Edit visit
-function openEditVisit(id){
-  const v=visits.find(x=>x.id===id);if(!v)return;
-  editingVisitId=id;
-  document.getElementById('visit-modal-title').textContent='Edit visit';
-  document.getElementById('visit-save-btn').textContent='Update visit';
-  populateClinicDropdown(v.clinic);
-  document.getElementById('fd').value=v.date;
-  document.getElementById('fs').value=v.shift;
-  document.getElementById('pentries').innerHTML='';
-  pEntryId=0;procEntryId=0;
-  v.patients.forEach(p=>{
-    pEntryId++;
-    const pid='pe'+pEntryId;
-    const num=document.querySelectorAll('.pentry').length+1;
-    const div=document.createElement('div');
-    div.className='pentry';div.id=pid;
-    div.innerHTML=buildPatientEntryHTML(pid,num,p.name,p.notes);
-    document.getElementById('pentries').appendChild(div);
-    p.procedures.forEach(pr=>{addProcEntry(pid,pr.procedure,pr.fee,pr.paid);});
-  });
-  document.getElementById('visit-modal').classList.add('open');
-}
-
-// ── Clinics ──────────────────────────────────────────────────
+// ── Clinics tab ───────────────────────────────────────────
 function renderClinicsTab(){
-  const el=document.getElementById('cliniclist');
-  if(!clinics.length){el.innerHTML='<div class="empty"><div class="ei">🏥</div><p>No clinics added yet.<br>Tap "+ Add clinic" to get started.</p></div>';return;}
+  const el=document.getElementById('clinics-list');
+  if(!clinics.length){el.innerHTML='<div class="empty"><div class="ei">🏥</div><p>No clinics added yet.<br>Tap "+ Add" to register a clinic.</p></div>';return;}
   el.innerHTML=clinics.map(c=>{
-    const cVisits=visits.filter(v=>v.clinic===c.name);
-    let cPaid=0,cPending=0,cPats=0;
-    cVisits.forEach(v=>{cPats+=v.patients.length;const t=visitTotals(v);cPaid+=t.paid;cPending+=t.pending;});
+    const cvs=visits.filter(v=>v.clinic===c.name);
+    let earned=0,pending=0,pats=0,procs=0;
+    cvs.forEach(v=>{pats+=v.patients.length;const t=vTotals(v);earned+=t.paid;pending+=t.pending;v.patients.forEach(p=>procs+=p.procedures.length);});
     return`<div class="clinic-card" id="cc-${c.id}">
-      <div class="clinic-header" onclick="toggleCC('${c.id}')">
-        <div class="clinic-icon">🏥</div>
+      <div class="clinic-card-hdr" onclick="toggleCC(${c.id})">
+        <div class="clinic-ico">🏥</div>
         <div style="flex:1;min-width:0">
-          <div class="clinic-name" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${c.name}</div>
-          <div class="clinic-sub">${c.location}${c.phone?' · '+c.phone:''}</div>
+          <div class="clinic-nm">${c.name}</div>
+          <div class="clinic-tp">${c.type||''}${c.location?' · '+c.location:''}${c.phone?' · '+c.phone:''}</div>
         </div>
-        <div style="text-align:right;flex-shrink:0;margin-left:8px">
-          <div style="font-size:13px;font-weight:500;color:var(--t600)">₹${cPaid.toLocaleString()}</div>
-          ${cPending?`<div style="font-size:10px;color:var(--a400)">₹${cPending.toLocaleString()} due</div>`:''}
+        <div class="clinic-earn">₹${earned.toLocaleString()}</div>
+        <div class="clinic-actions" onclick="event.stopPropagation()">
+          <button class="icon-btn" onclick="openEditClinic(${c.id})">✏️</button>
+          <button class="icon-btn del" onclick="confirmDeleteClinic(${c.id})">🗑</button>
         </div>
-      </div>
-      <div class="clinic-stats">
-        <div class="cstat-box"><div class="csl">Visits</div><div class="csv">${cVisits.length}</div></div>
-        <div class="cstat-box"><div class="csl">Patients</div><div class="csv">${cPats}</div></div>
-        <div class="cstat-box"><div class="csl">Collected</div><div class="csv" style="color:var(--g400)">₹${cPaid.toLocaleString()}</div></div>
-        <div class="cstat-box"><div class="csl">Pending</div><div class="csv" style="color:var(--a400)">₹${cPending.toLocaleString()}</div></div>
-      </div>
-      <div class="clinic-actions">
-        <button class="vact-btn edit-btn" onclick="openEditClinic('${c.id}')">✏ Edit</button>
-        <button class="vact-btn del-btn" onclick="confirmDeleteClinic('${c.id}')">🗑 Delete</button>
       </div>
       <div class="clinic-breakdown">
-        <div class="seg-label">Visit breakdown</div>
-        ${cVisits.length?cVisits.sort((a,b)=>new Date(b.date)-new Date(a.date)).map(v=>{
-          const t=visitTotals(v);
-          return`<div class="cbd-row">
-            <div>
-              <div class="cbd-pats">${v.patients.map(p=>p.name.split(' ')[0]).join(', ')}</div>
-              <div class="cbd-date">${fmtDate(v.date)} · ${v.shift} · ${v.patients.reduce((a,p)=>a+p.procedures.length,0)} procedure${v.patients.reduce((a,p)=>a+p.procedures.length,0)>1?'s':''}</div>
-            </div>
-            <div class="cbd-amt">
-              <div class="cbd-paid">₹${t.paid.toLocaleString()}</div>
-              ${t.pending?`<div class="cbd-pending">₹${t.pending.toLocaleString()} due</div>`:''}
-            </div>
-          </div>`;
-        }).join(''):'<p style="font-size:12px;color:var(--text3);padding:8px 0">No visits recorded yet</p>'}
-        ${c.notes?`<div style="margin-top:9px;padding:8px;background:var(--b50);border-radius:8px;font-size:11px;color:var(--b800)">📋 ${c.notes}</div>`:''}
+        <div class="bstats">
+          <div class="bstat"><div class="bsl">Visits</div><div class="bsv">${cvs.length}</div></div>
+          <div class="bstat"><div class="bsl">Patients</div><div class="bsv">${pats}</div></div>
+          <div class="bstat"><div class="bsl">Procedures</div><div class="bsv">${procs}</div></div>
+          <div class="bstat"><div class="bsl">Collected</div><div class="bsv" style="color:var(--g400)">₹${earned.toLocaleString()}</div></div>
+          <div class="bstat"><div class="bsl">Pending</div><div class="bsv" style="color:var(--a400)">₹${pending.toLocaleString()}</div></div>
+          <div class="bstat"><div class="bsl">Collection %</div><div class="bsv">${earned+pending?Math.round(earned/(earned+pending)*100):0}%</div></div>
+        </div>
+        ${c.notes?`<div style="margin-bottom:9px;padding:8px;background:var(--b50);border-radius:7px;font-size:11px;color:var(--b800)">📋 ${c.notes}</div>`:''}
+        ${cvs.length?`<div class="seg-label">Visit history</div>`+
+          cvs.sort((a,b)=>new Date(b.date)-new Date(a.date)).map(v=>{
+            const vt=vTotals(v);
+            return`<div class="visit-row">
+              <div style="flex:1;min-width:0">
+                <div class="vr-date">${fmtDate(v.date)} · ${v.shift}</div>
+                <div class="vr-info">${v.patients.length} patient${v.patients.length>1?'s':''} · ${v.patients.reduce((a,p)=>a+p.procedures.length,0)} procedures</div>
+                <div style="font-size:10px;color:var(--text3);margin-top:1px">${v.patients.map(p=>p.name.split(' ')[0]+': '+p.procedures.map(pr=>pr.procedure).join(', ')).join(' | ')}</div>
+              </div>
+              <div style="text-align:right;flex-shrink:0;margin-left:8px">
+                <div style="font-size:12px;font-weight:500;color:var(--g400)">₹${vt.paid.toLocaleString()}</div>
+                ${vt.pending?`<div style="font-size:10px;color:var(--a400)">₹${vt.pending.toLocaleString()} due</div>`:''}
+              </div>
+            </div>`;
+          }).join('')
+          :'<div style="font-size:12px;color:var(--text3);padding:8px 0">No visits recorded yet.</div>'}
       </div>
     </div>`;
   }).join('');
 }
 function toggleCC(id){const el=document.getElementById('cc-'+id);if(el)el.classList.toggle('expanded');}
 
+// ── Clinic CRUD ───────────────────────────────────────────
 function openClinicModal(){
-  editingClinicId=null;
+  editCId=null;
   document.getElementById('clinic-modal-title').textContent='Add clinic / hospital';
   document.getElementById('clinic-save-btn').textContent='Save clinic';
-  document.getElementById('cm-name').value='';
-  document.getElementById('cm-loc').value='';
-  document.getElementById('cm-phone').value='';
-  document.getElementById('cm-notes').value='';
+  ['cln','clloc','clphone','clnotes'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('cltype').value='Dental Clinic';
   document.getElementById('clinic-modal').classList.add('open');
 }
 function openEditClinic(id){
   const c=clinics.find(x=>x.id===id);if(!c)return;
-  editingClinicId=id;
+  editCId=id;
   document.getElementById('clinic-modal-title').textContent='Edit clinic';
   document.getElementById('clinic-save-btn').textContent='Update clinic';
-  document.getElementById('cm-name').value=c.name;
-  document.getElementById('cm-loc').value=c.location;
-  document.getElementById('cm-phone').value=c.phone||'';
-  document.getElementById('cm-notes').value=c.notes||'';
+  document.getElementById('cln').value=c.name||'';
+  document.getElementById('cltype').value=c.type||'Dental Clinic';
+  document.getElementById('clloc').value=c.location||'';
+  document.getElementById('clphone').value=c.phone||'';
+  document.getElementById('clnotes').value=c.notes||'';
   document.getElementById('clinic-modal').classList.add('open');
 }
 function saveClinic(){
-  const name=document.getElementById('cm-name').value.trim();
-  const loc=document.getElementById('cm-loc').value.trim();
-  const phone=document.getElementById('cm-phone').value.trim();
-  const notes=document.getElementById('cm-notes').value.trim();
+  const name=document.getElementById('cln').value.trim();
+  const type=document.getElementById('cltype').value;
+  const location=document.getElementById('clloc').value.trim();
+  const phone=document.getElementById('clphone').value.trim();
+  const notes=document.getElementById('clnotes').value.trim();
   if(!name){toast('⚠ Enter clinic name');return;}
-  if(editingClinicId){
-    const c=clinics.find(x=>x.id===editingClinicId);
-    if(c){const oldName=c.name;c.name=name;c.location=loc;c.phone=phone;c.notes=notes;
-      visits.forEach(v=>{if(v.clinic===oldName)v.clinic=name;});}
-    toast('✓ Clinic updated');
+  if(editCId){
+    const c=clinics.find(x=>x.id===editCId);
+    if(c){const old=c.name;Object.assign(c,{name,type,location,phone,notes});visits.forEach(v=>{if(v.clinic===old)v.clinic=name;});toast('✓ Clinic updated');}
   } else {
     if(clinics.find(c=>c.name.toLowerCase()===name.toLowerCase())){toast('⚠ Clinic already exists');return;}
-    clinics.push({id:'c'+Date.now(),name,location:loc,phone,notes});
+    clinics.push({id:Date.now(),name,type,location,phone,notes});
     toast('✓ Clinic added');
   }
-  save();closeModal('clinic-modal');renderClinicsTab();renderAll();
+  scheduleSync();closeModal('clinic-modal');buildClinicDropdown();renderAll();renderClinicsTab();
 }
 function confirmDeleteClinic(id){
   const c=clinics.find(x=>x.id===id);if(!c)return;
-  const usedIn=visits.filter(v=>v.clinic===c.name).length;
-  showConfirm('Delete this clinic?',`${c.name}${usedIn?` — used in ${usedIn} visit${usedIn>1?'s':''}`:''}`+'. This will not delete existing visits.',()=>{
-    clinics=clinics.filter(x=>x.id!==id);save();toast('Clinic deleted');renderClinicsTab();
+  showConfirm('Delete clinic?',`"${c.name}" will be removed. Visits linked to it will remain.`,()=>{
+    clinics=clinics.filter(x=>x.id!==id);scheduleSync();renderClinicsTab();buildClinicDropdown();updateSummary();
+    toast('✓ Clinic deleted');
   });
 }
 
-// ── Clinic dropdown in visit modal ──────────────────────────
-function populateClinicDropdown(selected){
-  const sel=document.getElementById('fc');
-  if(!clinics.length){sel.innerHTML='<option value="">— Add a clinic first —</option>';return;}
-  sel.innerHTML=clinics.map(c=>`<option value="${c.name}" ${selected===c.name?'selected':''}>${c.name}</option>`).join('');
+// ── Visit form helpers ────────────────────────────────────
+function buildClinicDropdown(sel){
+  const el=document.getElementById('fc');if(!el)return;
+  el.innerHTML='';
+  if(!clinics.length){el.innerHTML='<option value="">— Add a clinic first —</option>';return;}
+  clinics.forEach(c=>{const o=document.createElement('option');o.value=c.name;o.textContent=c.name;if(sel&&c.name===sel)o.selected=true;el.appendChild(o);});
 }
 
-// ── Patient history ──────────────────────────────────────────
+function buildPatientEntryHTML(pid,num){
+  return`<div class="pentry-head">
+    <div class="pentry-num">${num}</div>
+    <div class="pentry-label">Patient ${num}</div>
+    <button class="rmbtn" onclick="document.getElementById('${pid}').remove();renumberPats()">×</button>
+  </div>
+  <div class="fg" style="margin-bottom:8px"><label class="flbl">Patient name</label><input class="finp" placeholder="Full name" data-field="name" autocapitalize="words"/></div>
+  <label class="flbl" style="margin-bottom:4px;display:block">Procedures & fees</label>
+  <div class="proc-entries" id="procs-${pid}"></div>
+  <button class="add-proc-btn" onclick="addProcEntry('${pid}')">+ Add another procedure</button>
+  <div class="fg" style="margin-top:1px;margin-bottom:0"><label class="flbl">Patient notes</label><textarea class="ftarea" data-field="notes" placeholder="e.g. allergic to penicillin, follow-up needed…"></textarea></div>`;
+}
+function buildProcEntryHTML(prid){
+  return`<select class="fsel" data-field="proc">${PROCS.map(p=>`<option>${p}</option>`).join('')}</select>
+    <input class="finp" type="number" inputmode="numeric" placeholder="Fee ₹" data-field="fee" min="0"/>
+    <select class="fsel" data-field="paid"><option value="false">Pending</option><option value="true">Received</option></select>
+    <button class="rm-proc-btn" onclick="document.getElementById('${prid}').remove()">×</button>`;
+}
+function addPatientEntry(){
+  pEId++;const pid='pe'+pEId;const num=document.querySelectorAll('.pentry').length+1;
+  const div=document.createElement('div');div.className='pentry';div.id=pid;
+  div.innerHTML=buildPatientEntryHTML(pid,num);
+  document.getElementById('pentries').appendChild(div);addProcEntry(pid);
+}
+function addProcEntry(pid){
+  prEId++;const prid='pr'+prEId;
+  const div=document.createElement('div');div.className='proc-entry';div.id=prid;
+  div.innerHTML=buildProcEntryHTML(prid);
+  document.getElementById('procs-'+pid).appendChild(div);
+}
+function renumberPats(){
+  document.querySelectorAll('.pentry').forEach((el,i)=>{
+    const n=el.querySelector('.pentry-num'),l=el.querySelector('.pentry-label');
+    if(n)n.textContent=i+1;if(l)l.textContent='Patient '+(i+1);
+  });
+}
+
+// ── Visit CRUD ────────────────────────────────────────────
+function openVisitModal(){
+  if(!clinics.length){toast('⚠ Add a clinic first');sw('clinics');return;}
+  editVId=null;
+  document.getElementById('visit-modal-title').textContent='New consultation visit';
+  document.getElementById('visit-save-btn').textContent='Save visit';
+  buildClinicDropdown();
+  document.getElementById('fd').value=today.toISOString().split('T')[0];
+  document.getElementById('fs').value='Morning';
+  document.getElementById('pentries').innerHTML='';
+  pEId=0;prEId=0;addPatientEntry();
+  document.getElementById('visit-modal').classList.add('open');
+}
+function openEditVisit(id){
+  const v=visits.find(x=>x.id===id);if(!v)return;
+  editVId=id;
+  document.getElementById('visit-modal-title').textContent='Edit visit';
+  document.getElementById('visit-save-btn').textContent='Update visit';
+  buildClinicDropdown(v.clinic);
+  document.getElementById('fd').value=v.date;
+  document.getElementById('fs').value=v.shift;
+  const pe=document.getElementById('pentries');pe.innerHTML='';pEId=0;prEId=0;
+  v.patients.forEach(p=>{
+    pEId++;const pid='pe'+pEId;const num=document.querySelectorAll('.pentry').length+1;
+    const div=document.createElement('div');div.className='pentry';div.id=pid;
+    div.innerHTML=buildPatientEntryHTML(pid,num);pe.appendChild(div);
+    div.querySelector('[data-field="name"]').value=p.name;
+    div.querySelector('[data-field="notes"]').value=p.notes||'';
+    const pc=div.querySelector('.proc-entries');
+    p.procedures.forEach(pr=>{
+      prEId++;const prid='pr'+prEId;const pdiv=document.createElement('div');pdiv.className='proc-entry';pdiv.id=prid;
+      pdiv.innerHTML=buildProcEntryHTML(prid);pc.appendChild(pdiv);
+      pdiv.querySelector('[data-field="proc"]').value=pr.procedure;
+      pdiv.querySelector('[data-field="fee"]').value=pr.fee;
+      pdiv.querySelector('[data-field="paid"]').value=pr.paid?'true':'false';
+    });
+  });
+  document.getElementById('visit-modal').classList.add('open');
+}
+function saveVisit(){
+  const clinic=document.getElementById('fc').value;const date=document.getElementById('fd').value;const shift=document.getElementById('fs').value;
+  if(!clinic||!date){toast('⚠ Fill clinic and date');return;}
+  const patients=[];
+  document.querySelectorAll('.pentry').forEach(pe=>{
+    const name=(pe.querySelector('[data-field="name"]').value||'').trim();
+    const notes=(pe.querySelector('[data-field="notes"]').value||'').trim();
+    if(!name)return;
+    const procedures=[];
+    pe.querySelectorAll('.proc-entry').forEach(pr=>{
+      procedures.push({procedure:pr.querySelector('[data-field="proc"]').value,fee:parseFloat(pr.querySelector('[data-field="fee"]').value)||0,paid:pr.querySelector('[data-field="paid"]').value==='true'});
+    });
+    if(procedures.length)patients.push({name,notes,procedures});
+  });
+  if(!patients.length){toast('⚠ Add at least one patient');return;}
+  if(editVId){const idx=visits.findIndex(x=>x.id===editVId);if(idx>=0){visits[idx]={...visits[idx],clinic,date,shift,patients};toast('✓ Visit updated');}}
+  else{visits.unshift({id:Date.now(),clinic,date,shift,patients});toast('✓ Visit saved!');}
+  scheduleSync();closeModal('visit-modal');renderAll();
+}
+function confirmDeleteVisit(id){
+  const v=visits.find(x=>x.id===id);if(!v)return;
+  showConfirm('Delete visit?',`Visit to "${v.clinic}" on ${fmtDate(v.date)} will be permanently deleted.`,()=>{
+    visits=visits.filter(x=>x.id!==id);scheduleSync();toast('✓ Visit deleted');renderAll();
+  });
+}
+
+// ── Patient history ───────────────────────────────────────
 function getPatientMap(){
   const map={};
   visits.forEach(v=>v.patients.forEach(p=>{
@@ -1162,7 +928,7 @@ function renderPatients(){
         <div class="phstat"><div class="psl">Pending</div><div class="psv" style="color:var(--a400)">₹${p.pending.toLocaleString()}</div></div>
       </div>
       <div class="phhist">
-        ${p.latestNote?`<div style="margin-bottom:9px;padding:8px;background:var(--b50);border-radius:8px;font-size:11px;color:var(--b800)">📋 ${p.latestNote}</div>`:''}
+        ${p.latestNote?`<div style="margin-bottom:8px;padding:7px;background:var(--b50);border-radius:7px;font-size:11px;color:var(--b800)">📋 ${p.latestNote}</div>`:''}
         ${p.entries.sort((a,b)=>new Date(b.date)-new Date(a.date)).map(h=>`
           <div class="histrow">
             <div style="flex:1;min-width:0">
@@ -1175,23 +941,23 @@ function renderPatients(){
               ${h.paid<h.total?`<div style="font-size:10px;color:var(--a400)">₹${(h.total-h.paid).toLocaleString()} due</div>`:''}
             </div>
           </div>`).join('')}
-        <button onclick="event.stopPropagation();viewPat('${esc(p.name)}')" style="width:100%;margin-top:8px;padding:9px;border:.5px solid var(--border);border-radius:9px;background:none;color:var(--t600);font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;min-height:38px">Full profile →</button>
+        <button onclick="event.stopPropagation();viewPat('${esc(p.name)}')" style="width:100%;margin-top:7px;padding:8px;border:.5px solid var(--border);border-radius:8px;background:none;color:var(--t600);font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif">Full profile →</button>
       </div>
     </div>`).join('');
 }
 function viewPat(name){
   const map=getPatientMap();const p=map[name];if(!p)return;
   document.getElementById('pat-modal-content').innerHTML=`
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
-      <div class="phav" style="width:46px;height:46px;font-size:15px">${initials(p.name)}</div>
+    <div style="display:flex;align-items:center;gap:11px;margin-bottom:13px">
+      <div class="phav" style="width:44px;height:44px;font-size:14px">${initials(p.name)}</div>
       <div><div style="font-size:15px;font-weight:500;color:var(--text)">${p.name}</div><div style="font-size:11px;color:var(--text2)">${[...p.procs].join(' · ')}</div></div>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-bottom:13px">
       <div class="phstat"><div class="psl">Visits</div><div class="psv">${p.entries.length}</div></div>
       <div class="phstat"><div class="psl">Collected</div><div class="psv" style="color:var(--g400)">₹${p.paid.toLocaleString()}</div></div>
       <div class="phstat"><div class="psl">Due</div><div class="psv" style="color:var(--a400)">₹${p.pending.toLocaleString()}</div></div>
     </div>
-    ${p.latestNote?`<div style="margin-bottom:12px;padding:10px;background:var(--b50);border-radius:10px;font-size:12px;color:var(--b800)">📋 <strong>Notes:</strong> ${p.latestNote}</div>`:''}
+    ${p.latestNote?`<div style="margin-bottom:11px;padding:9px;background:var(--b50);border-radius:9px;font-size:12px;color:var(--b800)">📋 ${p.latestNote}</div>`:''}
     <div class="seg-label">Treatment history</div>
     ${p.entries.sort((a,b)=>new Date(b.date)-new Date(a.date)).map(h=>`
       <div class="histrow">
@@ -1208,7 +974,7 @@ function viewPat(name){
   document.getElementById('patient-modal').classList.add('open');
 }
 
-// ── Reminders ────────────────────────────────────────────────
+// ── Reminders ─────────────────────────────────────────────
 function renderReminders(){
   const now=new Date();now.setHours(0,0,0,0);
   const el=document.getElementById('remlist');
@@ -1217,53 +983,65 @@ function renderReminders(){
   const be=document.getElementById('rem-badge');be.textContent=pending.length;be.style.display=pending.length?'inline-flex':'none';
   if(!sorted.length){el.innerHTML='<div class="empty"><div class="ei">🔔</div><p>No reminders yet.</p></div>';return;}
   const ico={'Follow-up':'🔁','Payment due':'💰','Appointment':'📅','Medication':'💊','Other':'📌'};
-  const renderRem=r=>{
+  const rr=r=>{
     const d=new Date(r.date);d.setHours(0,0,0,0);const diff=Math.round((d-now)/86400000);
-    const urgency=diff<0?'urgent':diff<=3?'soon':'';
-    const timeStr=diff<0?Math.abs(diff)+'d overdue':diff===0?'Today':diff===1?'Tomorrow':'In '+diff+' days';
-    const timeColor=diff<0?'var(--r400)':diff<=3?'var(--a400)':'var(--text3)';
-    return`<div class="remcard ${urgency} ${r.done?'done':''}">
+    const urg=diff<0?'urgent':diff<=3?'soon':'';
+    const ts=diff<0?Math.abs(diff)+'d overdue':diff===0?'Today':diff===1?'Tomorrow':'In '+diff+' days';
+    const tc=diff<0?'var(--r400)':diff<=3?'var(--a400)':'var(--text3)';
+    return`<div class="remcard ${urg} ${r.done?'done':''}">
       <div class="remico" style="background:${diff<0?'var(--r50)':diff<=3?'var(--a50)':'var(--t50)'}">${ico[r.type]||'📌'}</div>
-      <div style="flex:1;min-width:0"><div class="remtitle">${r.title}</div><div class="remsub">${r.type}${r.note?' · '+r.note:''}</div><div class="remtime" style="color:${timeColor}">${timeStr} · ${fmtDate(r.date)}</div></div>
+      <div style="flex:1;min-width:0"><div class="remtitle">${r.title}</div><div class="remsub">${r.type}${r.note?' · '+r.note:''}</div><div class="remtime" style="color:${tc}">${ts} · ${fmtDate(r.date)}</div></div>
       <div class="remact">
         ${!r.done?`<button class="ratbtn" onclick="markRemDone(${r.id})" style="color:var(--g800);border-color:var(--g100)">✓ Done</button>`:''}
         <button class="ratbtn" onclick="delRem(${r.id})" style="color:var(--r800);border-color:var(--r100)">Delete</button>
       </div>
     </div>`;
   };
-  el.innerHTML=(pending.length?`<div class="seg-label">Upcoming (${pending.length})</div>`:'')+pending.map(renderRem).join('')+(done.length?`<div class="seg-label" style="margin-top:14px">Completed</div>`+done.map(renderRem).join(''):'');
+  el.innerHTML=(pending.length?`<div class="seg-label">Upcoming (${pending.length})</div>`:'')+pending.map(rr).join('')+(done.length?`<div class="seg-label" style="margin-top:12px">Completed</div>`+done.map(rr).join(''):'');
 }
-function markRemDone(id){const r=reminders.find(x=>x.id===id);if(r){r.done=true;save();toast('✓ Done');renderReminders();}}
-function delRem(id){reminders=reminders.filter(x=>x.id!==id);save();toast('Deleted');renderReminders();}
+function markRemDone(id){const r=reminders.find(x=>x.id===id);if(r){r.done=true;scheduleSync();toast('✓ Done');renderReminders();}}
+function delRem(id){reminders=reminders.filter(x=>x.id!==id);scheduleSync();toast('Deleted');renderReminders();}
+function saveReminder(){
+  const title=document.getElementById('rt').value.trim();const date=document.getElementById('rd').value;
+  const type=document.getElementById('rtype').value;const note=document.getElementById('rnote').value.trim();
+  if(!title||!date){toast('⚠ Fill title and date');return;}
+  reminders.push({id:Date.now(),title,date,type,note,done:false});
+  scheduleSync();closeModal('rem-modal');toast('✓ Reminder set!');renderReminders();
+}
+function openRemModal(){
+  document.getElementById('rem-modal').classList.add('open');
+  document.getElementById('rd').value=today.toISOString().split('T')[0];
+  document.getElementById('rt').value='';document.getElementById('rnote').value='';
+}
 
-// ── Report ───────────────────────────────────────────────────
+// ── Report ────────────────────────────────────────────────
 function buildMonthSel(){
   const el=document.getElementById('month-sel');const seen=new Set();const mons=[];
   visits.forEach(v=>{const d=new Date(v.date);const k=d.getFullYear()+'-'+d.getMonth();if(!seen.has(k)){seen.add(k);mons.push({y:d.getFullYear(),m:d.getMonth()});}});
   mons.sort((a,b)=>b.y-a.y||b.m-a.m);
   if(!mons.length)mons.push({y:today.getFullYear(),m:today.getMonth()});
-  el.innerHTML=mons.map(({y,m})=>`<button class="mselchip ${m===selMonth&&y===selYear?'active':''}" onclick="selMon(${m},${y},this)">${MSHORT[m]} ${y}</button>`).join('');
+  el.innerHTML=mons.map(({y,m})=>`<button class="mselchip ${m===selMonth&&y===selYear?'active':''}" onclick="selMon(${m},${y},this)">${MS[m]} ${y}</button>`).join('');
 }
 function selMon(m,y,btn){selMonth=m;selYear=y;document.querySelectorAll('.mselchip').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderReport();}
 function renderReport(){
   const vs=visits.filter(v=>{const d=new Date(v.date);return d.getMonth()===selMonth&&d.getFullYear()===selYear;});
   const el=document.getElementById('report-content');
   if(!vs.length){el.innerHTML=`<div class="empty"><div class="ei">📄</div><p>No visits in ${MONTHS[selMonth]} ${selYear}</p></div>`;return;}
-  let tPaid=0,tPending=0,tPats=0,tProcs=0;
-  vs.forEach(v=>{tPats+=v.patients.length;const t=visitTotals(v);tPaid+=t.paid;tPending+=t.pending;v.patients.forEach(p=>tProcs+=p.procedures.length);});
-  const pct=tPaid+tPending?Math.round(tPaid/(tPaid+tPending)*100):0;
+  let tP=0,tN=0,tPts=0,tPrc=0;
+  vs.forEach(v=>{tPts+=v.patients.length;const t=vTotals(v);tP+=t.paid;tN+=t.pending;v.patients.forEach(p=>tPrc+=p.procedures.length);});
+  const pct=tP+tN?Math.round(tP/(tP+tN)*100):0;
   const rows=[];vs.forEach(v=>v.patients.forEach(p=>p.procedures.forEach(pr=>rows.push({date:v.date,clinic:v.clinic,patient:p.name,procedure:pr.procedure,fee:pr.fee,paid:pr.paid,notes:p.notes}))));
   el.innerHTML=`
     <div class="rptcard">
       <div class="rpthead">${MONTHS[selMonth]} ${selYear} — Summary</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:10px">
         <div class="phstat"><div class="psl">Visits</div><div class="psv">${vs.length}</div></div>
-        <div class="phstat"><div class="psl">Patients</div><div class="psv">${tPats}</div></div>
-        <div class="phstat"><div class="psl">Procedures</div><div class="psv">${tProcs}</div></div>
-        <div class="phstat"><div class="psl">Collected</div><div class="psv" style="color:var(--g400)">₹${tPaid.toLocaleString()}</div></div>
+        <div class="phstat"><div class="psl">Patients</div><div class="psv">${tPts}</div></div>
+        <div class="phstat"><div class="psl">Procedures</div><div class="psv">${tPrc}</div></div>
+        <div class="phstat"><div class="psl">Collected</div><div class="psv" style="color:var(--g400)">₹${tP.toLocaleString()}</div></div>
       </div>
-      <div class="pbar-track" style="margin-bottom:4px"><div class="pbar-fill" style="width:${pct}%;background:var(--t400)"></div></div>
-      <div style="font-size:10px;color:var(--text2)">Collection rate: ${pct}% · ₹${tPending.toLocaleString()} outstanding</div>
+      <div class="pbar-track" style="margin-bottom:3px"><div class="pbar-fill" style="width:${pct}%;background:var(--t400)"></div></div>
+      <div style="font-size:10px;color:var(--text2)">Collection rate: ${pct}% · ₹${tN.toLocaleString()} outstanding</div>
     </div>
     <div class="rptcard">
       <div class="rpthead">Procedure ledger</div>
@@ -1275,22 +1053,22 @@ function renderReport(){
           <td>${r.procedure}</td>
           <td title="${r.clinic}">${r.clinic.split(' ')[0]}</td>
           <td>₹${r.fee.toLocaleString()}</td>
-          <td><span class="spill ${r.paid?'ppaid':'ppend'}" style="font-size:9px;padding:2px 5px">${r.paid?'Paid':'Due'}</span></td>
+          <td><span class="spill ${r.paid?'ppaid':'ppend'}" style="font-size:9px;padding:2px 4px">${r.paid?'Paid':'Due'}</span></td>
         </tr>`).join('')}
       </table>
     </div>
-    <button class="expbtn" onclick="exportCSV(${selMonth},${selYear})">⬇ Export CSV — ${MSHORT[selMonth]} ${selYear}</button>`;
+    <button class="expbtn" onclick="exportCSV(${selMonth},${selYear})">⬇ Export CSV — ${MS[selMonth]} ${selYear}</button>`;
 }
 function exportCSV(m,y){
   const vs=visits.filter(v=>{const d=new Date(v.date);return d.getMonth()===m&&d.getFullYear()===y;});
   let csv='Date,Clinic,Shift,Patient,Procedure,Fee (INR),Status,Notes\n';
   vs.forEach(v=>v.patients.forEach(p=>p.procedures.forEach(pr=>{csv+=`${v.date},"${v.clinic}",${v.shift},"${p.name}","${pr.procedure}",${pr.fee},${pr.paid?'Paid':'Pending'},"${(p.notes||'').replace(/"/g,'""')}"\n`;})));
-  const blob=new Blob([csv],{type:'text/csv'});const url=URL.createObjectURL(blob);const a=document.createElement('a');
-  a.href=url;a.download=`DentTrack_${MONTHS[m]}_${y}.csv`;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+  const blob=new Blob([csv],{type:'text/csv'});const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download=`DentTrack_${MONTHS[m]}_${y}.csv`;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
   toast('✓ CSV exported!');
 }
 
-// ── Analytics ────────────────────────────────────────────────
+// ── Analytics ─────────────────────────────────────────────
 function renderPBars(){
   const s=getStats();const total=s.paid+s.pending;const el=document.getElementById('pbars');
   if(!total){el.innerHTML='<p style="color:var(--text3);font-size:12px">No data yet</p>';return;}
@@ -1299,20 +1077,23 @@ function renderPBars(){
     <div class="pbar-wrap"><div class="pbar-top"><span style="color:var(--g800)">Collected</span><span style="color:var(--g400);font-weight:500">₹${s.paid.toLocaleString()} (${pct}%)</span></div><div class="pbar-track"><div class="pbar-fill" style="width:${pct}%;background:var(--t400)"></div></div></div>
     <div class="pbar-wrap"><div class="pbar-top"><span style="color:var(--a800)">Outstanding</span><span style="color:var(--a400);font-weight:500">₹${s.pending.toLocaleString()} (${100-pct}%)</span></div><div class="pbar-track"><div class="pbar-fill" style="width:${100-pct}%;background:var(--a100)"></div></div></div>`;
 }
-function renderStatsClinics(){
-  const el=document.getElementById('stats-clist');
+function renderAnalyticsClinics(){
   const map={};
-  visits.forEach(v=>{if(!map[v.clinic])map[v.clinic]={visits:0,patients:0,earned:0,pending:0};map[v.clinic].visits++;map[v.clinic].patients+=v.patients.length;const t=visitTotals(v);map[v.clinic].earned+=t.paid;map[v.clinic].pending+=t.pending;});
-  const entries=Object.entries(map);
-  if(!entries.length){el.innerHTML='<p style="color:var(--text3);font-size:12px">No clinics yet</p>';return;}
+  visits.forEach(v=>{if(!map[v.clinic])map[v.clinic]={visits:0,patients:0,earned:0,pending:0};map[v.clinic].visits++;map[v.clinic].patients+=v.patients.length;const t=vTotals(v);map[v.clinic].earned+=t.paid;map[v.clinic].pending+=t.pending;});
+  const el=document.getElementById('aclist');const entries=Object.entries(map);
+  if(!entries.length){el.innerHTML='<p style="color:var(--text3);font-size:12px">No data yet</p>';return;}
   el.innerHTML=entries.sort((a,b)=>b[1].earned-a[1].earned).map(([name,d])=>`
-    <div class="crow"><div class="cico">🏥</div>
-      <div style="flex:1;min-width:0"><div class="cname-s" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${name}</div><div class="cstat-s">${d.visits} visit${d.visits>1?'s':''} · ${d.patients} patients${d.pending?` · <span style="color:var(--a400)">₹${d.pending.toLocaleString()} due</span>`:''}</div></div>
-      <div class="cearn">₹${d.earned.toLocaleString()}</div>
+    <div style="display:flex;align-items:center;gap:9px;padding:10px 0;border-bottom:.5px solid var(--border)">
+      <div class="clinic-ico" style="width:34px;height:34px;font-size:15px">🏥</div>
+      <div style="flex:1;min-width:0">
+        <div class="clinic-nm" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${name}</div>
+        <div class="clinic-tp">${d.visits} visit${d.visits>1?'s':''} · ${d.patients} patients${d.pending?` · <span style="color:var(--a400)">₹${d.pending.toLocaleString()} due</span>`:''}</div>
+      </div>
+      <div class="clinic-earn">₹${d.earned.toLocaleString()}</div>
     </div>`).join('');
 }
 
-// ── Tab switching ─────────────────────────────────────────────
+// ── Tab switching ─────────────────────────────────────────
 const TABS=['visits','patients','clinics','reminders','report','analytics'];
 function sw(tab,tbtn){
   TABS.forEach(t=>{const el=document.getElementById('tab-'+t);if(el)el.style.display=t===tab?'block':'none';});
@@ -1322,126 +1103,38 @@ function sw(tab,tbtn){
   if(tab==='clinics')renderClinicsTab();
   if(tab==='reminders')renderReminders();
   if(tab==='report'){buildMonthSel();renderReport();}
-  if(tab==='analytics'){renderPBars();renderStatsClinics();}
+  if(tab==='analytics'){renderPBars();renderAnalyticsClinics();updateSummary();}
 }
 
-// ── Visit form ────────────────────────────────────────────────
-function buildPatientEntryHTML(pid,num,nameVal,notesVal){
-  return`<div class="pentry-head">
-      <div class="pentry-num">${num}</div>
-      <div class="pentry-label">Patient ${num}</div>
-      <button class="rmbtn" onclick="document.getElementById('${pid}').remove();renumberPatients()">×</button>
-    </div>
-    <div class="fg" style="margin-bottom:9px">
-      <label class="flbl">Patient name</label>
-      <input class="finp" placeholder="Full name" data-field="name" autocapitalize="words" value="${(nameVal||'').replace(/"/g,'&quot;')}"/>
-    </div>
-    <label class="flbl" style="margin-bottom:5px;display:block">Procedures & fees</label>
-    <div class="proc-entries" id="procs-${pid}"></div>
-    <button class="add-proc-btn" onclick="addProcEntry('${pid}')">+ Add procedure</button>
-    <div class="fg" style="margin-top:2px;margin-bottom:0">
-      <label class="flbl">Patient notes</label>
-      <textarea class="ftarea" data-field="notes" placeholder="e.g. allergic to penicillin, follow-up needed…">${notesVal||''}</textarea>
-    </div>`;
-}
-
-function addPatientEntry(){
-  pEntryId++;const pid='pe'+pEntryId;const num=document.querySelectorAll('.pentry').length+1;
-  const div=document.createElement('div');div.className='pentry';div.id=pid;
-  div.innerHTML=buildPatientEntryHTML(pid,num,'','');
-  document.getElementById('pentries').appendChild(div);
-  addProcEntry(pid,'','',false);
-}
-function addProcEntry(pid,procVal,feeVal,paidVal){
-  procEntryId++;const prid='pr'+procEntryId;
-  const div=document.createElement('div');div.className='proc-entry';div.id=prid;
-  div.innerHTML=`
-    <select class="fsel" data-field="proc">${PROCS.map(p=>`<option${p===(procVal||'Scaling')?' selected':''}>${p}</option>`).join('')}</select>
-    <input class="finp" type="number" inputmode="numeric" placeholder="Fee ₹" data-field="fee" min="0" value="${feeVal||''}"/>
-    <select class="fsel" data-field="paid"><option value="false"${!paidVal?' selected':''}>Pending</option><option value="true"${paidVal?' selected':''}>Received</option></select>
-    <button class="rm-proc-btn" onclick="document.getElementById('${prid}').remove()">×</button>`;
-  document.getElementById('procs-'+pid).appendChild(div);
-}
-function renumberPatients(){
-  document.querySelectorAll('.pentry').forEach((el,i)=>{
-    const n=el.querySelector('.pentry-num'),l=el.querySelector('.pentry-label');
-    if(n)n.textContent=i+1;if(l)l.textContent='Patient '+(i+1);
-  });
-}
-function saveVisit(){
-  const clinicVal=document.getElementById('fc').value;
-  const date=document.getElementById('fd').value;
-  const shift=document.getElementById('fs').value;
-  if(!clinicVal||clinicVal===''){toast('⚠ Select a clinic');return;}
-  if(!date){toast('⚠ Select a date');return;}
-  const patients=[];
-  document.querySelectorAll('.pentry').forEach(pe=>{
-    const name=(pe.querySelector('[data-field="name"]').value||'').trim();
-    const notes=(pe.querySelector('[data-field="notes"]').value||'').trim();
-    if(!name)return;
-    const procedures=[];
-    pe.querySelectorAll('.proc-entry').forEach(pr=>{
-      const procedure=pr.querySelector('[data-field="proc"]').value;
-      const fee=parseFloat(pr.querySelector('[data-field="fee"]').value)||0;
-      const paid=pr.querySelector('[data-field="paid"]').value==='true';
-      procedures.push({procedure,fee,paid});
-    });
-    if(procedures.length)patients.push({name,notes,procedures});
-  });
-  if(!patients.length){toast('⚠ Add at least one patient');return;}
-  if(editingVisitId){
-    const idx=visits.findIndex(x=>x.id===editingVisitId);
-    if(idx>-1)visits[idx]={id:editingVisitId,clinic:clinicVal,date,shift,patients};
-    toast('✓ Visit updated');
-  } else {
-    visits.unshift({id:Date.now(),clinic:clinicVal,date,shift,patients});
-    toast('✓ Visit saved!');
-  }
-  save();closeModal('visit-modal');renderAll();renderClinicsTab();
-}
-function openVisitModal(){
-  editingVisitId=null;
-  document.getElementById('visit-modal-title').textContent='New consultation visit';
-  document.getElementById('visit-save-btn').textContent='Save visit';
-  populateClinicDropdown(null);
-  document.getElementById('fd').value=today.toISOString().split('T')[0];
-  document.getElementById('pentries').innerHTML='';
-  pEntryId=0;procEntryId=0;addPatientEntry();
-  document.getElementById('visit-modal').classList.add('open');
-}
-
-// ── Reminder form ─────────────────────────────────────────────
-function saveReminder(){
-  const title=document.getElementById('rt').value.trim();const date=document.getElementById('rd').value;
-  const type=document.getElementById('rtype').value;const note=document.getElementById('rnote').value.trim();
-  if(!title||!date){toast('⚠ Fill title and date');return;}
-  reminders.push({id:Date.now(),title,date,type,note,done:false});
-  save();closeModal('rem-modal');toast('✓ Reminder set!');renderReminders();
-}
-function openRemModal(){
-  document.getElementById('rem-modal').classList.add('open');
-  document.getElementById('rd').value=today.toISOString().split('T')[0];
-  document.getElementById('rt').value='';document.getElementById('rnote').value='';
-}
-
-// ── Confirm dialog ────────────────────────────────────────────
-let confirmCallback=null;
-function showConfirm(title,msg,cb){
-  confirmCallback=cb;
-  document.getElementById('confirm-title').textContent=title;
-  document.getElementById('confirm-msg').textContent=msg;
-  document.getElementById('confirm-overlay').classList.add('open');
-}
-function closeConfirm(){document.getElementById('confirm-overlay').classList.remove('open');confirmCallback=null;}
-document.getElementById('confirm-ok-btn').onclick=function(){if(confirmCallback)confirmCallback();closeConfirm();};
-
+// ── Modals ────────────────────────────────────────────────
 function closeModal(id){document.getElementById(id).classList.remove('open');}
 document.querySelectorAll('.modal-wrap').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open');}));
 
+function showConfirm(title,body,onOk){
+  document.getElementById('confirm-title').textContent=title;
+  document.getElementById('confirm-body').textContent=body;
+  document.getElementById('confirm-ok-btn').onclick=()=>{closeConfirm();onOk();};
+  document.getElementById('confirm-overlay').classList.add('open');
+}
+function closeConfirm(){document.getElementById('confirm-overlay').classList.remove('open');}
+
 function renderAll(){updateSummary();renderVisits();}
 
-if(!load())seed();
-renderAll();renderReminders();
+// ── Boot ──────────────────────────────────────────────────
+ghToken=localStorage.getItem(TOKEN_KEY)||'';
+loadLocal();
+renderAll();
+renderReminders();
+buildClinicDropdown();
+
+if(ghToken){
+  document.getElementById('setup-screen').classList.add('hidden');
+  setSyncStatus('synced','Connected to GitHub');
+  // pull latest data on load
+  setTimeout(()=>syncNow(),800);
+} else {
+  setSyncStatus('','Not connected');
+}
 
 let lastTap=0;
 document.addEventListener('touchend',e=>{const n=Date.now();if(n-lastTap<300)e.preventDefault();lastTap=n;},{passive:false});
