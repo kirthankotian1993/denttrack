@@ -25,7 +25,15 @@
       "location": "Kirloskar layout",
       "phone": "",
       "notes": "Dr.Santhosh"
+    },
+    {
+      "id": 1773938250902,
+      "name": "Dyuthi Dental Clinic",
+      "type": "Dental Clinic",
+      "location": "MEI Layout",
+      "phone": "",
+      "notes": "Dr.Prathiba"
     }
   ],
-  "savedAt": "2026-03-19T16:37:00.057Z"
+  "savedAt": "2026-03-19T16:37:32.404Z"
 }
