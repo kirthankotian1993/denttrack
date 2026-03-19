@@ -73,7 +73,15 @@
       "location": "Kempapura",
       "phone": "",
       "notes": "Dr.Srinivas"
+    },
+    {
+      "id": 1773938421221,
+      "name": "Dento Health",
+      "type": "Dental Clinic",
+      "location": "Sahakarnagar",
+      "phone": "",
+      "notes": "Dr.Aparna"
     }
   ],
-  "savedAt": "2026-03-19T16:39:43.592Z"
+  "savedAt": "2026-03-19T16:40:22.723Z"
 }
