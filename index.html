@@ -645,35 +645,8 @@ function load() {
 // ── Seed data ──────────────────────────────────────────────
 function seed() {
   visits = [
-    { id:1, clinic:'Apollo Dental Centre', date:'2026-03-18', shift:'Morning', patients:[
-      { name:'Ravi Kumar',    procedure:'RCT',          fee:3500,  paid:true  },
-      { name:'Sunitha Rao',   procedure:'Scaling',      fee:800,   paid:true  },
-      { name:'Mehul Shah',    procedure:'Extraction',   fee:1200,  paid:false }
-    ]},
-    { id:2, clinic:'Smile Care Hospital',  date:'2026-03-17', shift:'Afternoon', patients:[
-      { name:'Priya Nair',    procedure:'Crown',        fee:6000,  paid:true  },
-      { name:'Kiran Joshi',   procedure:'Filling',      fee:1500,  paid:true  }
-    ]},
-    { id:3, clinic:'DentMax Clinic',       date:'2026-03-15', shift:'Morning', patients:[
-      { name:'Aditya Verma',  procedure:'Implant',      fee:25000, paid:false },
-      { name:'Latha Iyer',    procedure:'Whitening',    fee:4000,  paid:true  },
-      { name:'Farhan Qureshi',procedure:'Consultation', fee:500,   paid:true  }
-    ]},
-    { id:4, clinic:'Apollo Dental Centre', date:'2026-02-28', shift:'Full day', patients:[
-      { name:'Deepthi Reddy', procedure:'Braces',       fee:35000, paid:false },
-      { name:'Suresh Babu',   procedure:'Extraction',   fee:1200,  paid:true  }
-    ]},
-    { id:5, clinic:'Smile Care Hospital',  date:'2026-02-20', shift:'Morning', patients:[
-      { name:'Ravi Kumar',    procedure:'RCT',          fee:1500,  paid:true  },
-      { name:'Meena Krishnan',procedure:'Scaling',      fee:900,   paid:true  }
-    ]}
   ];
   reminders = [
-    { id:1, title:'Follow up — Ravi Kumar (RCT)',      date:'2026-03-22', type:'Follow-up',    note:'Check healing, possible cap',    done:false },
-    { id:2, title:'Collect payment — Mehul Shah',      date:'2026-03-20', type:'Payment due',  note:'₹1,200 outstanding',             done:false },
-    { id:3, title:'Apollo Dental monthly invoice',     date:'2026-03-31', type:'Appointment',  note:'Submit before month end',        done:false },
-    { id:4, title:'Aditya Verma implant review',       date:'2026-04-10', type:'Follow-up',    note:'₹25,000 pending',                done:false },
-    { id:5, title:'Deepthi Reddy braces adjustment',   date:'2026-04-05', type:'Appointment',  note:'Next tightening session',        done:false }
   ];
   save();
 }
