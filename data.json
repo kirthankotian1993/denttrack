@@ -65,7 +65,15 @@
       "location": "Sahakarnagar",
       "phone": "",
       "notes": ""
+    },
+    {
+      "id": 1773938382090,
+      "name": "Smile Forum",
+      "type": "Dental Clinic",
+      "location": "Kempapura",
+      "phone": "",
+      "notes": "Dr.Srinivas"
     }
   ],
-  "savedAt": "2026-03-19T16:39:16.572Z"
+  "savedAt": "2026-03-19T16:39:43.592Z"
 }
