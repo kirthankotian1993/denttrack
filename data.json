@@ -89,7 +89,15 @@
       "location": "Sahakarnagar",
       "phone": "",
       "notes": "Dr.Shivakumar"
+    },
+    {
+      "id": 1773938462839,
+      "name": "Apollo Dental jakkur",
+      "type": "Dental Clinic",
+      "location": "Jakkur",
+      "phone": "",
+      "notes": ""
     }
   ],
-  "savedAt": "2026-03-19T16:40:43.136Z"
+  "savedAt": "2026-03-19T16:41:04.341Z"
 }
