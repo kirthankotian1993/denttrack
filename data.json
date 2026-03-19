@@ -39,7 +39,7 @@
             {
               "procedure": "Pulpectomy",
               "fee": 3000,
-              "payStatus": "received",
+              "payStatus": "pending",
               "partialAmt": 0
             }
           ]
@@ -84,5 +84,5 @@
       "notes": "Dr.Ashwini"
     }
   ],
-  "savedAt": "2026-03-19T14:07:07.428Z"
+  "savedAt": "2026-03-19T14:07:10.821Z"
 }
