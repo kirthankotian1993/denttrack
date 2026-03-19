@@ -1,23 +1,6 @@
 {
   "visits": [],
   "reminders": [],
-  "clinics": [
-    {
-      "id": 1773928909582,
-      "name": "Bangalore Smiles",
-      "type": "Dental Clinic",
-      "location": "Jakkur",
-      "phone": "8879787839",
-      "notes": "Dr.Neha"
-    },
-    {
-      "id": 1773928943590,
-      "name": "Mira Dental",
-      "type": "Dental Clinic",
-      "location": "MEI Layout",
-      "phone": "8879787849",
-      "notes": "Dr.Ashwini"
-    }
-  ],
-  "savedAt": "2026-03-19T16:33:49.582Z"
+  "clinics": [],
+  "savedAt": "2026-03-19T16:33:58.849Z"
 }
