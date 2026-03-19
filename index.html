@@ -8,457 +8,202 @@
 <meta name="apple-mobile-web-app-title" content="DentTrack"/>
 <meta name="theme-color" content="#0F6E56"/>
 <title>DentTrack Pro</title>
-
-<!-- PWA Icons (inline SVG as data URI so no external files needed) -->
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%230F6E56'/%3E%3Ctext x='90' y='115' font-size='80' text-anchor='middle' fill='white'%3E🦷%3C/text%3E%3C/svg%3E"/>
-
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap');
-
 :root {
-  --t50:#E1F5EE; --t100:#9FE1CB; --t200:#5DCAA5; --t400:#1D9E75; --t600:#0F6E56; --t800:#085041;
-  --b50:#E6F1FB; --b100:#B5D4F4; --b400:#378ADD; --b800:#0C447C;
-  --a50:#FAEEDA; --a100:#FAC775; --a200:#EF9F27; --a400:#BA7517; --a800:#633806;
-  --r50:#FCEBEB; --r100:#F7C1C1; --r400:#E24B4A; --r800:#791F1F;
-  --g50:#EAF3DE; --g100:#C0DD97; --g400:#639922; --g800:#27500A;
-  --p50:#EEEDFE; --p100:#CECBF6; --p400:#7F77DD; --p800:#3C3489;
-  --gr50:#F1EFE8; --gr100:#D3D1C7; --gr200:#B4B2A9; --gr400:#888780; --gr800:#444441;
-  --co50:#FAECE7; --co400:#D85A30; --co800:#712B13;
-
-  --safe-top: env(safe-area-inset-top, 0px);
-  --safe-bottom: env(safe-area-inset-bottom, 0px);
-  --safe-left: env(safe-area-inset-left, 0px);
-  --safe-right: env(safe-area-inset-right, 0px);
-
-  --bg: #ffffff;
-  --bg2: #f4f6f4;
-  --bg3: #eef2ee;
-  --text: #1a1a1a;
-  --text2: #666;
-  --text3: #999;
-  --border: rgba(0,0,0,0.1);
-  --border2: rgba(0,0,0,0.18);
+  --t50:#E1F5EE;--t100:#9FE1CB;--t200:#5DCAA5;--t400:#1D9E75;--t600:#0F6E56;--t800:#085041;
+  --b50:#E6F1FB;--b100:#B5D4F4;--b400:#378ADD;--b800:#0C447C;
+  --a50:#FAEEDA;--a100:#FAC775;--a400:#BA7517;--a800:#633806;
+  --r50:#FCEBEB;--r100:#F7C1C1;--r400:#E24B4A;--r800:#791F1F;
+  --g50:#EAF3DE;--g100:#C0DD97;--g400:#639922;--g800:#27500A;
+  --gr50:#F1EFE8;--gr100:#D3D1C7;--gr400:#888780;--gr800:#444441;
+  --safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px);
+  --safe-left:env(safe-area-inset-left,0px);--safe-right:env(safe-area-inset-right,0px);
+  --bg:#fff;--bg2:#f4f6f4;--bg3:#eef2ee;
+  --text:#1a1a1a;--text2:#666;--text3:#999;
+  --border:rgba(0,0,0,0.1);--border2:rgba(0,0,0,0.18);
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #111;
-    --bg2: #1c1c1e;
-    --bg3: #2c2c2e;
-    --text: #f2f2f7;
-    --text2: #aeaeb2;
-    --text3: #636366;
-    --border: rgba(255,255,255,0.1);
-    --border2: rgba(255,255,255,0.2);
-    --t50: #0a2e22;
-    --t100: #0d4a32;
-    --t200: #0f5e40;
-    --g50: #0e2408;
-    --g100: #1a4010;
-    --a50: #2e1e00;
-    --a100: #4a3200;
-    --r50: #2e0a0a;
-    --r100: #4a1010;
-    --b50: #081830;
-    --b100: #102440;
-    --gr50: #1c1c1e;
-    --gr100: #2c2c2e;
-  }
-}
-
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-
-html, body {
-  width: 100%; height: 100%; overflow: hidden;
-  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: var(--t600);
-  color: var(--text);
-  -webkit-font-smoothing: antialiased;
-}
-
-.app {
-  width: 100%; height: 100%;
-  display: flex; flex-direction: column;
-  background: var(--bg);
-  overflow: hidden;
-  max-width: 430px;
-  margin: 0 auto;
-  position: relative;
-}
-
-/* ── Top bar ── */
-.topbar {
-  background: var(--t600);
-  padding-top: calc(var(--safe-top) + 12px);
-  padding-left: max(20px, var(--safe-left));
-  padding-right: max(20px, var(--safe-right));
-  padding-bottom: 0;
-  flex-shrink: 0;
-}
-
-.topbar-inner {
-  padding-bottom: 14px;
-}
-
-.greet { font-size: 12px; color: rgba(255,255,255,0.72); }
-.brand { font-family: 'Playfair Display', serif; font-size: 22px; color: #fff; font-weight: 600; line-height: 1.2; }
-.dbadge {
-  display: inline-block; margin-top: 6px;
-  background: rgba(255,255,255,0.18); border-radius: 20px;
-  padding: 3px 12px; font-size: 11px; color: rgba(255,255,255,0.9);
-}
-
-/* ── Summary strip ── */
-.sumstrip {
-  background: var(--t600);
-  padding: 0 14px 16px;
-  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 9px;
-  flex-shrink: 0;
-}
-.scard {
-  background: rgba(255,255,255,0.15);
-  border-radius: 12px; padding: 9px 11px;
-  border: 0.5px solid rgba(255,255,255,0.2);
-}
-.scard .sl { font-size: 10px; color: rgba(255,255,255,0.72); margin-bottom: 2px; }
-.scard .sv { font-size: 19px; font-weight: 600; color: #fff; }
-.scard .ss { font-size: 10px; color: rgba(255,255,255,0.6); }
-
-/* ── Tab bar ── */
-.tabbar {
-  display: flex; background: var(--bg);
-  border-bottom: 0.5px solid var(--border);
-  padding: 0 4px; overflow-x: auto;
-  flex-shrink: 0;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-.tabbar::-webkit-scrollbar { display: none; }
-.tbtn {
-  flex: 0 0 auto; padding: 11px 13px;
-  background: none; border: none; border-bottom: 2px solid transparent;
-  font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500;
-  color: var(--text2); cursor: pointer; white-space: nowrap;
-  -webkit-appearance: none;
-}
-.tbtn.active { color: var(--t600); border-bottom-color: var(--t400); }
-
-/* ── Content ── */
-.content {
-  flex: 1; overflow-y: auto; padding: 14px;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior: contain;
-}
-
-/* ── Section header ── */
-.sh { display: flex; justify-content: space-between; align-items: center; margin-bottom: 11px; }
-.sh h3 { font-size: 13px; font-weight: 500; color: var(--text); }
-.addbtn {
-  background: var(--t400); color: #fff; border: none;
-  border-radius: 20px; padding: 6px 14px; font-size: 11px; font-weight: 500;
-  cursor: pointer; font-family: 'DM Sans', sans-serif;
-  -webkit-appearance: none; min-height: 32px;
-}
-
-/* ── Filter chips ── */
-.frow {
-  display: flex; gap: 7px; margin-bottom: 12px;
-  overflow-x: auto; padding-bottom: 2px;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-.frow::-webkit-scrollbar { display: none; }
-.fchip {
-  white-space: nowrap; padding: 5px 13px; border-radius: 20px;
-  border: 0.5px solid var(--border); background: none;
-  font-size: 11px; font-family: 'DM Sans', sans-serif; cursor: pointer;
-  color: var(--text); -webkit-appearance: none; min-height: 30px;
-}
-.fchip.active { background: var(--t50); color: var(--t600); border-color: var(--t200); }
-
-/* ── Visit cards ── */
-.vcard {
-  background: var(--bg);
-  border: 0.5px solid var(--border);
-  border-radius: 14px; padding: 13px; margin-bottom: 11px;
-  cursor: pointer; transition: border-color 0.15s;
-}
-.vcard.expanded { border-color: var(--t400); }
-.vch { display: flex; justify-content: space-between; align-items: flex-start; }
-.vct { font-size: 13px; font-weight: 500; color: var(--text); }
-.vcd { font-size: 10px; color: var(--text2); margin-top: 2px; }
-.spill { font-size: 10px; font-weight: 500; padding: 3px 8px; border-radius: 20px; flex-shrink: 0; }
-.ppaid { background: var(--g50); color: var(--g800); }
-.ppend { background: var(--a50); color: var(--a800); }
-.ppart { background: var(--b50); color: var(--b800); }
-.vcmeta { display: flex; gap: 7px; margin-top: 7px; flex-wrap: wrap; }
-.mchip { font-size: 10px; padding: 2px 7px; border-radius: 7px; background: var(--t50); color: var(--t600); }
-.vcpats { margin-top: 9px; border-top: 0.5px solid var(--border); padding-top: 9px; display: none; }
-.vcard.expanded .vcpats { display: block; }
-.prow { display: flex; align-items: center; gap: 9px; padding: 7px 0; border-bottom: 0.5px solid var(--border); }
-.prow:last-child { border-bottom: none; }
-.pav {
-  width: 32px; height: 32px; border-radius: 50%;
-  background: var(--t100); display: flex; align-items: center;
-  justify-content: center; font-size: 11px; font-weight: 500;
-  color: var(--t800); flex-shrink: 0; cursor: pointer;
-}
-.pinf { flex: 1; min-width: 0; }
-.pname { font-size: 12px; font-weight: 500; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.pproc { font-size: 10px; color: var(--text2); }
-.pfee { font-size: 12px; font-weight: 500; flex-shrink: 0; }
-.fpaid { color: var(--g400); }
-.fpend { color: var(--a400); }
-.paybtn {
-  flex-shrink: 0; border: none; border-radius: 6px;
-  font-size: 10px; padding: 4px 8px; cursor: pointer;
-  font-family: 'DM Sans', sans-serif; min-height: 28px;
-  -webkit-appearance: none;
-}
-.vcfoot { display: none; justify-content: space-between; margin-top: 8px; padding-top: 7px; border-top: 0.5px solid var(--border); }
-.vcard.expanded .vcfoot { display: flex; }
-.ftot { font-size: 11px; color: var(--text2); }
-.ftot span { font-weight: 500; color: var(--text); }
-
-/* ── Empty state ── */
-.empty { text-align: center; padding: 40px 16px; color: var(--text3); }
-.empty .ei { font-size: 36px; margin-bottom: 8px; }
-.empty p { font-size: 12px; line-height: 1.6; }
-
-/* ── Analytics ── */
-.sgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-bottom: 14px; }
-.sblk { background: var(--bg2); border-radius: 11px; padding: 13px; }
-.sblk .sbl { font-size: 10px; color: var(--text2); margin-bottom: 3px; }
-.sblk .sbv { font-size: 20px; font-weight: 600; color: var(--text); }
-.sblk .sbs { font-size: 10px; color: var(--text3); margin-top: 2px; }
-.crow { display: flex; align-items: center; gap: 10px; padding: 11px 0; border-bottom: 0.5px solid var(--border); }
-.cico { width: 36px; height: 36px; background: var(--t50); border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
-.cname { font-size: 12px; font-weight: 500; color: var(--text); }
-.cstat { font-size: 10px; color: var(--text2); }
-.cearn { font-size: 12px; font-weight: 500; color: var(--t600); margin-left: auto; flex-shrink: 0; }
-
-/* ── Patient history ── */
-.searchbox {
-  width: 100%; padding: 10px 12px;
-  border: 0.5px solid var(--border); border-radius: 10px;
-  font-size: 13px; font-family: 'DM Sans', sans-serif;
-  background: var(--bg2); color: var(--text); outline: none;
-  margin-bottom: 12px; -webkit-appearance: none;
-}
-.searchbox:focus { border-color: var(--t400); background: var(--bg); }
-.phcard { background: var(--bg); border: 0.5px solid var(--border); border-radius: 13px; padding: 12px; margin-bottom: 10px; cursor: pointer; }
-.phcard.expanded { border-color: var(--t200); }
-.phheader { display: flex; align-items: center; gap: 10px; }
-.phav { width: 38px; height: 38px; border-radius: 50%; background: var(--t100); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 500; color: var(--t800); flex-shrink: 0; }
-.phname { font-size: 13px; font-weight: 500; color: var(--text); }
-.phsub { font-size: 10px; color: var(--text2); }
-.phstats { display: flex; gap: 8px; margin-top: 9px; }
-.phstat { flex: 1; background: var(--bg2); border-radius: 8px; padding: 7px; text-align: center; }
-.phstat .psl { font-size: 9px; color: var(--text2); }
-.phstat .psv { font-size: 14px; font-weight: 500; color: var(--text); }
-.phhist { margin-top: 10px; border-top: 0.5px solid var(--border); padding-top: 9px; display: none; }
-.phcard.expanded .phhist { display: block; }
-.histrow { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 0.5px solid var(--border); }
-.histrow:last-child { border-bottom: none; }
-.hrdate { font-size: 10px; color: var(--text2); margin-top: 1px; }
-.hrproc { font-size: 11px; color: var(--text); }
-.hrfee { font-size: 11px; font-weight: 500; }
-
-/* ── Reminders ── */
-.rembadge {
-  background: var(--r50); color: var(--r800);
-  border-radius: 50%; width: 16px; height: 16px; font-size: 9px; font-weight: 500;
-  display: inline-flex; align-items: center; justify-content: center;
-  position: relative; top: -2px; left: 2px;
-}
-.remcard {
-  background: var(--bg); border: 0.5px solid var(--border);
-  border-radius: 13px; padding: 12px; margin-bottom: 10px;
-  display: flex; gap: 10px; align-items: flex-start;
-}
-.remcard.urgent { border-left: 3px solid var(--r400); border-radius: 0 13px 13px 0; }
-.remcard.soon { border-left: 3px solid var(--a400); border-radius: 0 13px 13px 0; }
-.remcard.done { opacity: 0.5; }
-.remico { width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
-.remtitle { font-size: 12px; font-weight: 500; color: var(--text); }
-.remsub { font-size: 10px; color: var(--text2); margin-top: 2px; }
-.remtime { font-size: 10px; margin-top: 4px; }
-.remact { margin-left: auto; display: flex; flex-direction: column; gap: 5px; align-items: flex-end; flex-shrink: 0; }
-.ratbtn {
-  background: none; border: 0.5px solid var(--border);
-  border-radius: 7px; padding: 4px 9px; font-size: 10px;
-  cursor: pointer; font-family: 'DM Sans', sans-serif;
-  color: var(--text); min-height: 28px; -webkit-appearance: none;
-}
-
-/* ── Report ── */
-.msel { display: flex; gap: 7px; margin-bottom: 14px; flex-wrap: wrap; }
-.mselchip {
-  padding: 5px 13px; border-radius: 20px;
-  border: 0.5px solid var(--border); background: none;
-  font-size: 11px; font-family: 'DM Sans', sans-serif; cursor: pointer;
-  color: var(--text); -webkit-appearance: none; min-height: 30px;
-}
-.mselchip.active { background: var(--t50); color: var(--t600); border-color: var(--t400); }
-.rptcard { background: var(--bg); border: 0.5px solid var(--border); border-radius: 14px; padding: 14px; margin-bottom: 12px; }
-.rpthead { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 12px; }
-.rpttable { width: 100%; font-size: 11px; border-collapse: collapse; table-layout: fixed; }
-.rpttable th { text-align: left; color: var(--text2); font-weight: 500; padding: 5px 5px; border-bottom: 0.5px solid var(--border); }
-.rpttable td { padding: 6px 5px; border-bottom: 0.5px solid var(--border); color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.rpttable tr:last-child td { border-bottom: none; }
-.expbtn {
-  width: 100%; padding: 12px;
-  background: var(--t50); color: var(--t600);
-  border: 0.5px solid var(--t200); border-radius: 11px;
-  font-size: 12px; font-weight: 500; cursor: pointer;
-  font-family: 'DM Sans', sans-serif; margin-top: 8px;
-  min-height: 44px; -webkit-appearance: none;
-}
-
-/* ── Bottom nav ── */
-.bnav {
-  display: flex;
-  padding-top: 8px;
-  padding-bottom: calc(var(--safe-bottom) + 6px);
-  padding-left: max(0px, var(--safe-left));
-  padding-right: max(0px, var(--safe-right));
-  border-top: 0.5px solid var(--border);
-  background: var(--bg);
-  flex-shrink: 0;
-}
-.nitem {
-  flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px;
-  background: none; border: none; cursor: pointer; padding: 3px 4px;
-  -webkit-appearance: none; min-height: 48px;
-}
-.nico { font-size: 20px; line-height: 1; }
-.nlbl { font-size: 10px; font-family: 'DM Sans', sans-serif; color: var(--text3); }
-.nitem.active .nlbl { color: var(--t600); }
-.nitem.active .nico { filter: none; }
-.ndot { width: 4px; height: 4px; border-radius: 50%; background: var(--t400); margin: 0 auto; display: none; }
-.nitem.active .ndot { display: block; }
-
-/* ── Modal / sheet ── */
-.modal-wrap {
-  display: none; position: absolute; inset: 0;
-  background: rgba(0,0,0,0.5); z-index: 100;
-  align-items: flex-end;
-}
-.modal-wrap.open { display: flex; }
-.msheet {
-  background: var(--bg);
-  border-radius: 20px 20px 0 0;
-  width: 100%;
-  padding: 14px 18px;
-  padding-bottom: calc(var(--safe-bottom) + 24px);
-  max-height: 90%;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
-.mhandle { width: 36px; height: 4px; background: var(--gr100); border-radius: 2px; margin: 0 auto 14px; }
-.mtitle { font-family: 'Playfair Display', serif; font-size: 17px; margin-bottom: 14px; color: var(--text); }
-.fg { margin-bottom: 12px; }
-.flbl { font-size: 10px; font-weight: 500; color: var(--text2); margin-bottom: 4px; display: block; text-transform: uppercase; letter-spacing: 0.4px; }
-.finp {
-  width: 100%; padding: 11px 12px;
-  border: 0.5px solid var(--border); border-radius: 10px;
-  font-size: 14px; font-family: 'DM Sans', sans-serif;
-  background: var(--bg); color: var(--text); outline: none;
-  -webkit-appearance: none; min-height: 44px;
-}
-.finp:focus { border-color: var(--t400); }
-.frow2 { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
-.fsel {
-  width: 100%; padding: 11px 12px;
-  border: 0.5px solid var(--border); border-radius: 10px;
-  font-size: 14px; font-family: 'DM Sans', sans-serif;
-  background: var(--bg); color: var(--text); outline: none;
-  -webkit-appearance: none; min-height: 44px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  padding-right: 32px;
-}
-.pentry {
-  background: var(--bg2); border-radius: 10px; padding: 12px;
-  margin-bottom: 8px; border: 0.5px solid var(--border); position: relative;
-}
-.rmbtn {
-  position: absolute; top: 8px; right: 8px;
-  background: none; border: none; color: var(--r400);
-  font-size: 18px; cursor: pointer; line-height: 1;
-  min-width: 32px; min-height: 32px; display: flex; align-items: center; justify-content: center;
-}
-.addpbtn {
-  width: 100%; padding: 11px;
-  border: 0.5px dashed var(--t200); border-radius: 10px;
-  background: var(--t50); color: var(--t600);
-  font-size: 12px; font-weight: 500; cursor: pointer;
-  font-family: 'DM Sans', sans-serif; min-height: 44px;
-  -webkit-appearance: none;
-}
-.subbtn {
-  width: 100%; padding: 14px;
-  background: var(--t400); color: #fff; border: none;
-  border-radius: 12px; font-size: 15px; font-weight: 500;
-  cursor: pointer; margin-top: 14px;
-  font-family: 'DM Sans', sans-serif; min-height: 50px;
-  -webkit-appearance: none;
-}
-.cncl {
-  width: 100%; padding: 11px; background: none; border: none;
-  color: var(--text2); font-size: 13px; cursor: pointer;
-  font-family: 'DM Sans', sans-serif; margin-top: 6px; min-height: 44px;
-}
-
-/* ── Toast ── */
-.toast {
-  position: absolute; bottom: calc(var(--safe-bottom) + 80px);
-  left: 50%; transform: translateX(-50%);
-  background: #1a1a1a; color: #fff;
-  border-radius: 20px; padding: 10px 20px;
-  font-size: 13px; font-weight: 500; z-index: 300;
-  white-space: nowrap; opacity: 0;
-  transition: opacity 0.25s, transform 0.25s;
-  pointer-events: none; transform: translateX(-50%) translateY(8px);
-}
-.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-/* ── Segmented label ── */
-.seg-label {
-  font-size: 10px; font-weight: 500; color: var(--text2);
-  text-transform: uppercase; letter-spacing: 0.5px;
-  margin: 12px 0 8px;
-}
-
-/* ── Pbar ── */
-.pbar-wrap { margin-bottom: 13px; }
-.pbar-top { display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px; }
-.pbar-track { height: 7px; background: var(--bg2); border-radius: 4px; overflow: hidden; }
-.pbar-fill { height: 100%; border-radius: 4px; }
+@media(prefers-color-scheme:dark){:root{
+  --bg:#111;--bg2:#1c1c1e;--bg3:#2c2c2e;
+  --text:#f2f2f7;--text2:#aeaeb2;--text3:#636366;
+  --border:rgba(255,255,255,0.1);--border2:rgba(255,255,255,0.2);
+  --t50:#0a2e22;--t100:#0d4a32;--t200:#0f5e40;
+  --g50:#0e2408;--g100:#1a4010;--a50:#2e1e00;--a100:#4a3200;
+  --r50:#2e0a0a;--r100:#4a1010;--b50:#081830;--b100:#102440;
+  --gr50:#1c1c1e;--gr100:#2c2c2e;
+}}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{width:100%;height:100%;overflow:hidden;font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--t600);color:var(--text);-webkit-font-smoothing:antialiased;}
+.app{width:100%;height:100%;display:flex;flex-direction:column;background:var(--bg);overflow:hidden;max-width:430px;margin:0 auto;position:relative;}
+.topbar{background:var(--t600);padding-top:calc(var(--safe-top) + 12px);padding-left:max(20px,var(--safe-left));padding-right:max(20px,var(--safe-right));padding-bottom:0;flex-shrink:0;}
+.topbar-inner{padding-bottom:14px;}
+.greet{font-size:12px;color:rgba(255,255,255,0.72);}
+.brand{font-family:'Playfair Display',serif;font-size:22px;color:#fff;font-weight:600;line-height:1.2;}
+.dbadge{display:inline-block;margin-top:6px;background:rgba(255,255,255,0.18);border-radius:20px;padding:3px 12px;font-size:11px;color:rgba(255,255,255,0.9);}
+.sumstrip{background:var(--t600);padding:0 14px 16px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;flex-shrink:0;}
+.scard{background:rgba(255,255,255,0.15);border-radius:12px;padding:9px 11px;border:0.5px solid rgba(255,255,255,0.2);}
+.scard .sl{font-size:10px;color:rgba(255,255,255,0.72);margin-bottom:2px;}
+.scard .sv{font-size:19px;font-weight:600;color:#fff;}
+.scard .ss{font-size:10px;color:rgba(255,255,255,0.6);}
+.tabbar{display:flex;background:var(--bg);border-bottom:0.5px solid var(--border);padding:0 4px;overflow-x:auto;flex-shrink:0;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+.tabbar::-webkit-scrollbar{display:none;}
+.tbtn{flex:0 0 auto;padding:11px 13px;background:none;border:none;border-bottom:2px solid transparent;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;color:var(--text2);cursor:pointer;white-space:nowrap;-webkit-appearance:none;}
+.tbtn.active{color:var(--t600);border-bottom-color:var(--t400);}
+.content{flex:1;overflow-y:auto;padding:14px;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;}
+.sh{display:flex;justify-content:space-between;align-items:center;margin-bottom:11px;}
+.sh h3{font-size:13px;font-weight:500;color:var(--text);}
+.addbtn{background:var(--t400);color:#fff;border:none;border-radius:20px;padding:6px 14px;font-size:11px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;-webkit-appearance:none;min-height:32px;}
+.frow{display:flex;gap:7px;margin-bottom:12px;overflow-x:auto;padding-bottom:2px;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+.frow::-webkit-scrollbar{display:none;}
+.fchip{white-space:nowrap;padding:5px 13px;border-radius:20px;border:0.5px solid var(--border);background:none;font-size:11px;font-family:'DM Sans',sans-serif;cursor:pointer;color:var(--text);-webkit-appearance:none;min-height:30px;}
+.fchip.active{background:var(--t50);color:var(--t600);border-color:var(--t200);}
+.vcard{background:var(--bg);border:0.5px solid var(--border);border-radius:14px;padding:13px;margin-bottom:11px;cursor:pointer;transition:border-color 0.15s;}
+.vcard.expanded{border-color:var(--t400);}
+.vch{display:flex;justify-content:space-between;align-items:flex-start;}
+.vct{font-size:13px;font-weight:500;color:var(--text);}
+.vcd{font-size:10px;color:var(--text2);margin-top:2px;}
+.spill{font-size:10px;font-weight:500;padding:3px 8px;border-radius:20px;flex-shrink:0;}
+.ppaid{background:var(--g50);color:var(--g800);}
+.ppend{background:var(--a50);color:var(--a800);}
+.ppart{background:var(--b50);color:var(--b800);}
+.vcmeta{display:flex;gap:7px;margin-top:7px;flex-wrap:wrap;}
+.mchip{font-size:10px;padding:2px 7px;border-radius:7px;background:var(--t50);color:var(--t600);}
+.vcpats{margin-top:9px;border-top:0.5px solid var(--border);padding-top:9px;display:none;}
+.vcard.expanded .vcpats{display:block;}
+/* Patient block inside visit */
+.pat-block{margin-bottom:10px;padding-bottom:10px;border-bottom:0.5px solid var(--border);}
+.pat-block:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.pat-block-header{display:flex;align-items:center;gap:9px;margin-bottom:6px;}
+.pav{width:32px;height:32px;border-radius:50%;background:var(--t100);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;color:var(--t800);flex-shrink:0;cursor:pointer;}
+.pat-name-col{flex:1;min-width:0;}
+.pname{font-size:12px;font-weight:500;color:var(--text);}
+.pat-subtotal{font-size:10px;color:var(--text2);}
+/* Procedure rows */
+.proc-row{display:flex;align-items:center;gap:6px;padding:4px 0 4px 41px;}
+.proc-name{flex:1;font-size:11px;color:var(--text2);}
+.proc-fee{font-size:11px;font-weight:500;flex-shrink:0;}
+.fpaid{color:var(--g400);}
+.fpend{color:var(--a400);}
+.paybtn{flex-shrink:0;border:none;border-radius:6px;font-size:10px;padding:4px 7px;cursor:pointer;font-family:'DM Sans',sans-serif;min-height:26px;-webkit-appearance:none;}
+/* Patient notes display */
+.pat-note-display{margin:5px 0 0 41px;font-size:11px;color:var(--text3);font-style:italic;background:var(--bg2);border-radius:6px;padding:5px 8px;border-left:2px solid var(--t200);}
+.vcfoot{display:none;justify-content:space-between;margin-top:8px;padding-top:7px;border-top:0.5px solid var(--border);}
+.vcard.expanded .vcfoot{display:flex;}
+.ftot{font-size:11px;color:var(--text2);}
+.ftot span{font-weight:500;color:var(--text);}
+.empty{text-align:center;padding:40px 16px;color:var(--text3);}
+.empty .ei{font-size:36px;margin-bottom:8px;}
+.empty p{font-size:12px;line-height:1.6;}
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:14px;}
+.sblk{background:var(--bg2);border-radius:11px;padding:13px;}
+.sblk .sbl{font-size:10px;color:var(--text2);margin-bottom:3px;}
+.sblk .sbv{font-size:20px;font-weight:600;color:var(--text);}
+.sblk .sbs{font-size:10px;color:var(--text3);margin-top:2px;}
+.crow{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:0.5px solid var(--border);}
+.cico{width:36px;height:36px;background:var(--t50);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.cname{font-size:12px;font-weight:500;color:var(--text);}
+.cstat{font-size:10px;color:var(--text2);}
+.cearn{font-size:12px;font-weight:500;color:var(--t600);margin-left:auto;flex-shrink:0;}
+.searchbox{width:100%;padding:10px 12px;border:0.5px solid var(--border);border-radius:10px;font-size:13px;font-family:'DM Sans',sans-serif;background:var(--bg2);color:var(--text);outline:none;margin-bottom:12px;-webkit-appearance:none;}
+.searchbox:focus{border-color:var(--t400);background:var(--bg);}
+.phcard{background:var(--bg);border:0.5px solid var(--border);border-radius:13px;padding:12px;margin-bottom:10px;cursor:pointer;}
+.phcard.expanded{border-color:var(--t200);}
+.phheader{display:flex;align-items:center;gap:10px;}
+.phav{width:38px;height:38px;border-radius:50%;background:var(--t100);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;color:var(--t800);flex-shrink:0;}
+.phname{font-size:13px;font-weight:500;color:var(--text);}
+.phsub{font-size:10px;color:var(--text2);}
+.phstats{display:flex;gap:8px;margin-top:9px;}
+.phstat{flex:1;background:var(--bg2);border-radius:8px;padding:7px;text-align:center;}
+.phstat .psl{font-size:9px;color:var(--text2);}
+.phstat .psv{font-size:14px;font-weight:500;color:var(--text);}
+.phhist{margin-top:10px;border-top:0.5px solid var(--border);padding-top:9px;display:none;}
+.phcard.expanded .phhist{display:block;}
+.histrow{display:flex;justify-content:space-between;align-items:flex-start;padding:7px 0;border-bottom:0.5px solid var(--border);}
+.histrow:last-child{border-bottom:none;}
+.hrdate{font-size:10px;color:var(--text2);margin-top:2px;}
+.hrproc{font-size:11px;color:var(--text);}
+.hrnote{font-size:10px;color:var(--text3);font-style:italic;margin-top:3px;}
+.rembadge{background:var(--r50);color:var(--r800);border-radius:50%;width:16px;height:16px;font-size:9px;font-weight:500;display:inline-flex;align-items:center;justify-content:center;position:relative;top:-2px;left:2px;}
+.remcard{background:var(--bg);border:0.5px solid var(--border);border-radius:13px;padding:12px;margin-bottom:10px;display:flex;gap:10px;align-items:flex-start;}
+.remcard.urgent{border-left:3px solid var(--r400);border-radius:0 13px 13px 0;}
+.remcard.soon{border-left:3px solid var(--a400);border-radius:0 13px 13px 0;}
+.remcard.done{opacity:0.5;}
+.remico{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.remtitle{font-size:12px;font-weight:500;color:var(--text);}
+.remsub{font-size:10px;color:var(--text2);margin-top:2px;}
+.remtime{font-size:10px;margin-top:4px;}
+.remact{margin-left:auto;display:flex;flex-direction:column;gap:5px;align-items:flex-end;flex-shrink:0;}
+.ratbtn{background:none;border:0.5px solid var(--border);border-radius:7px;padding:4px 9px;font-size:10px;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--text);min-height:28px;-webkit-appearance:none;}
+.msel{display:flex;gap:7px;margin-bottom:14px;flex-wrap:wrap;}
+.mselchip{padding:5px 13px;border-radius:20px;border:0.5px solid var(--border);background:none;font-size:11px;font-family:'DM Sans',sans-serif;cursor:pointer;color:var(--text);-webkit-appearance:none;min-height:30px;}
+.mselchip.active{background:var(--t50);color:var(--t600);border-color:var(--t400);}
+.rptcard{background:var(--bg);border:0.5px solid var(--border);border-radius:14px;padding:14px;margin-bottom:12px;}
+.rpthead{font-size:13px;font-weight:500;color:var(--text);margin-bottom:12px;}
+.rpttable{width:100%;font-size:11px;border-collapse:collapse;table-layout:fixed;}
+.rpttable th{text-align:left;color:var(--text2);font-weight:500;padding:5px 5px;border-bottom:0.5px solid var(--border);}
+.rpttable td{padding:6px 5px;border-bottom:0.5px solid var(--border);color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.rpttable tr:last-child td{border-bottom:none;}
+.expbtn{width:100%;padding:12px;background:var(--t50);color:var(--t600);border:0.5px solid var(--t200);border-radius:11px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:8px;min-height:44px;-webkit-appearance:none;}
+.bnav{display:flex;padding-top:8px;padding-bottom:calc(var(--safe-bottom) + 6px);padding-left:max(0px,var(--safe-left));padding-right:max(0px,var(--safe-right));border-top:0.5px solid var(--border);background:var(--bg);flex-shrink:0;}
+.nitem{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:none;cursor:pointer;padding:3px 4px;-webkit-appearance:none;min-height:48px;}
+.nico{font-size:20px;line-height:1;}
+.nlbl{font-size:10px;font-family:'DM Sans',sans-serif;color:var(--text3);}
+.nitem.active .nlbl{color:var(--t600);}
+.ndot{width:4px;height:4px;border-radius:50%;background:var(--t400);margin:0 auto;display:none;}
+.nitem.active .ndot{display:block;}
+.modal-wrap{display:none;position:absolute;inset:0;background:rgba(0,0,0,0.5);z-index:100;align-items:flex-end;}
+.modal-wrap.open{display:flex;}
+.msheet{background:var(--bg);border-radius:20px 20px 0 0;width:100%;padding:14px 18px;padding-bottom:calc(var(--safe-bottom) + 24px);max-height:92%;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+.mhandle{width:36px;height:4px;background:var(--gr100);border-radius:2px;margin:0 auto 14px;}
+.mtitle{font-family:'Playfair Display',serif;font-size:17px;margin-bottom:14px;color:var(--text);}
+.fg{margin-bottom:12px;}
+.flbl{font-size:10px;font-weight:500;color:var(--text2);margin-bottom:4px;display:block;text-transform:uppercase;letter-spacing:0.4px;}
+.finp{width:100%;padding:11px 12px;border:0.5px solid var(--border);border-radius:10px;font-size:14px;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);outline:none;-webkit-appearance:none;min-height:44px;}
+.finp:focus{border-color:var(--t400);}
+.ftarea{width:100%;padding:10px 12px;border:0.5px solid var(--border);border-radius:10px;font-size:13px;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);outline:none;-webkit-appearance:none;resize:none;min-height:68px;line-height:1.5;}
+.ftarea:focus{border-color:var(--t400);}
+.frow2{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+.fsel{width:100%;padding:11px 12px;border:0.5px solid var(--border);border-radius:10px;font-size:13px;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);outline:none;-webkit-appearance:none;min-height:44px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;}
+/* Patient entry in form */
+.pentry{background:var(--bg2);border-radius:12px;padding:13px;margin-bottom:10px;border:0.5px solid var(--border);position:relative;}
+.pentry-head{display:flex;align-items:center;gap:8px;margin-bottom:11px;padding-bottom:10px;border-bottom:0.5px solid var(--border);}
+.pentry-num{width:22px;height:22px;border-radius:50%;background:var(--t400);color:#fff;font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.pentry-label{font-size:12px;font-weight:500;color:var(--text);flex:1;}
+.rmbtn{background:none;border:none;color:var(--r400);font-size:18px;cursor:pointer;line-height:1;min-width:32px;min-height:32px;display:flex;align-items:center;justify-content:center;-webkit-appearance:none;}
+/* Procedure rows in form */
+.proc-entry{display:grid;grid-template-columns:1fr 78px 78px 30px;gap:6px;align-items:center;margin-bottom:7px;}
+.proc-entry .finp{min-height:38px;font-size:12px;padding:8px 10px;}
+.proc-entry .fsel{min-height:38px;font-size:12px;padding:8px 8px;padding-right:24px;background-position:right 7px center;}
+.rm-proc-btn{background:none;border:none;color:var(--r400);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;min-width:26px;min-height:26px;-webkit-appearance:none;}
+.add-proc-btn{width:100%;padding:8px;border:0.5px dashed var(--t200);border-radius:8px;background:var(--t50);color:var(--t600);font-size:11px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:4px;margin-bottom:10px;min-height:36px;-webkit-appearance:none;}
+.addpbtn{width:100%;padding:11px;border:0.5px dashed var(--t200);border-radius:10px;background:var(--t50);color:var(--t600);font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;min-height:44px;-webkit-appearance:none;}
+.subbtn{width:100%;padding:14px;background:var(--t400);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:500;cursor:pointer;margin-top:14px;font-family:'DM Sans',sans-serif;min-height:50px;-webkit-appearance:none;}
+.cncl{width:100%;padding:11px;background:none;border:none;color:var(--text2);font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:6px;min-height:44px;}
+.seg-label{font-size:10px;font-weight:500;color:var(--text2);text-transform:uppercase;letter-spacing:0.5px;margin:12px 0 8px;}
+.pbar-wrap{margin-bottom:13px;}
+.pbar-top{display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px;}
+.pbar-track{height:7px;background:var(--bg2);border-radius:4px;overflow:hidden;}
+.pbar-fill{height:100%;border-radius:4px;}
+.toast{position:absolute;bottom:calc(var(--safe-bottom) + 80px);left:50%;transform:translateX(-50%) translateY(8px);background:#1a1a1a;color:#fff;border-radius:20px;padding:10px 20px;font-size:13px;font-weight:500;z-index:300;white-space:nowrap;opacity:0;transition:opacity 0.25s,transform 0.25s;pointer-events:none;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 </style>
 </head>
 <body>
-
 <div class="app">
 
-  <!-- Top bar -->
-  <div class="topbar">
-    <div class="topbar-inner">
-      <div class="greet">Good morning, Dr. Niharika Kotian</div>
-      <div class="brand">Dental Consulation Dairy</div>
-      <div class="dbadge" id="todaylbl">—</div>
-    </div>
-  </div>
+  <div class="topbar"><div class="topbar-inner">
+    <div class="greet">Good morning, </div>
+    <div class="brand">Dr. Niharika Kotian</div>
+    <div class="dbadge" id="todaylbl">—</div>
+  </div></div>
 
-  <!-- Summary strip -->
   <div class="sumstrip">
     <div class="scard"><div class="sl">Visits</div><div class="sv" id="sv">0</div><div class="ss">this month</div></div>
     <div class="scard"><div class="sl">Patients</div><div class="sv" id="sp">0</div><div class="ss">treated</div></div>
     <div class="scard"><div class="sl">Earned</div><div class="sv" id="se">₹0</div><div class="ss">collected</div></div>
   </div>
 
-  <!-- Tab bar -->
   <div class="tabbar">
     <button class="tbtn active" onclick="sw('visits',this)">Visits</button>
     <button class="tbtn" onclick="sw('patients',this)">Patients</button>
@@ -467,12 +212,9 @@ html, body {
     <button class="tbtn" onclick="sw('analytics',this)">Stats</button>
   </div>
 
-  <!-- ── VISITS ── -->
+  <!-- VISITS -->
   <div class="content" id="tab-visits">
-    <div class="sh">
-      <h3>Consultation visits</h3>
-      <button class="addbtn" onclick="openModal()">+ Add visit</button>
-    </div>
+    <div class="sh"><h3>Consultation visits</h3><button class="addbtn" onclick="openModal()">+ Add visit</button></div>
     <div class="frow">
       <button class="fchip active" onclick="setF('all',this)">All</button>
       <button class="fchip" onclick="setF('paid',this)">Paid</button>
@@ -482,32 +224,29 @@ html, body {
     <div id="vlist"></div>
   </div>
 
-  <!-- ── PATIENTS ── -->
+  <!-- PATIENTS -->
   <div class="content" id="tab-patients" style="display:none">
     <div class="sh"><h3>Patient history</h3></div>
     <input class="searchbox" type="search" placeholder="Search patient name…" id="psearch" oninput="renderPatients()" autocorrect="off" autocapitalize="words"/>
     <div id="patlist"></div>
   </div>
 
-  <!-- ── REMINDERS ── -->
+  <!-- REMINDERS -->
   <div class="content" id="tab-reminders" style="display:none">
-    <div class="sh">
-      <h3>Reminders & follow-ups</h3>
-      <button class="addbtn" onclick="openRemModal()">+ Add</button>
-    </div>
+    <div class="sh"><h3>Reminders & follow-ups</h3><button class="addbtn" onclick="openRemModal()">+ Add</button></div>
     <div id="remlist"></div>
   </div>
 
-  <!-- ── REPORT ── -->
+  <!-- REPORT -->
   <div class="content" id="tab-report" style="display:none">
     <div class="sh"><h3>Monthly report</h3></div>
     <div class="msel" id="month-sel"></div>
     <div id="report-content"></div>
   </div>
 
-  <!-- ── ANALYTICS ── -->
+  <!-- ANALYTICS -->
   <div class="content" id="tab-analytics" style="display:none">
-    <div class="sh"><h3>This month — overview</h3></div>
+    <div class="sh"><h3>Overview</h3></div>
     <div class="sgrid">
       <div class="sblk"><div class="sbl">Collected</div><div class="sbv" id="ae">₹0</div><div class="sbs">paid</div></div>
       <div class="sblk"><div class="sbl">Outstanding</div><div class="sbv" id="ap">₹0</div><div class="sbs">pending</div></div>
@@ -520,644 +259,491 @@ html, body {
     <div id="clist"></div>
   </div>
 
-  <!-- ── BOTTOM NAV ── -->
   <div class="bnav">
-    <button class="nitem active" onclick="sw('visits',null,this)">
-      <span class="nico">🦷</span><span class="nlbl">Visits</span><div class="ndot"></div>
-    </button>
-    <button class="nitem" onclick="sw('patients',null,this)">
-      <span class="nico">👤</span><span class="nlbl">Patients</span><div class="ndot"></div>
-    </button>
-    <button class="nitem" onclick="sw('reminders',null,this)">
-      <span class="nico">🔔</span><span class="nlbl">Reminders</span><div class="ndot"></div>
-    </button>
-    <button class="nitem" onclick="sw('report',null,this)">
-      <span class="nico">📄</span><span class="nlbl">Report</span><div class="ndot"></div>
-    </button>
-    <button class="nitem" onclick="sw('analytics',null,this)">
-      <span class="nico">📊</span><span class="nlbl">Stats</span><div class="ndot"></div>
-    </button>
+    <button class="nitem active" onclick="sw('visits',null,this)"><span class="nico">🦷</span><span class="nlbl">Visits</span><div class="ndot"></div></button>
+    <button class="nitem" onclick="sw('patients',null,this)"><span class="nico">👤</span><span class="nlbl">Patients</span><div class="ndot"></div></button>
+    <button class="nitem" onclick="sw('reminders',null,this)"><span class="nico">🔔</span><span class="nlbl">Reminders</span><div class="ndot"></div></button>
+    <button class="nitem" onclick="sw('report',null,this)"><span class="nico">📄</span><span class="nlbl">Report</span><div class="ndot"></div></button>
+    <button class="nitem" onclick="sw('analytics',null,this)"><span class="nico">📊</span><span class="nlbl">Stats</span><div class="ndot"></div></button>
   </div>
 
-  <!-- ── VISIT MODAL ── -->
+  <!-- VISIT MODAL -->
   <div class="modal-wrap" id="visit-modal">
     <div class="msheet">
       <div class="mhandle"></div>
       <div class="mtitle">New consultation visit</div>
-      <div class="fg">
-        <label class="flbl">Clinic / Hospital</label>
-        <input class="finp" id="fc" placeholder="e.g. Apollo Dental, Bengaluru" autocorrect="off"/>
-      </div>
+      <div class="fg"><label class="flbl">Clinic / Hospital</label><input class="finp" id="fc" placeholder="e.g. Apollo Dental, Bengaluru" autocorrect="off"/></div>
       <div class="frow2">
-        <div class="fg">
-          <label class="flbl">Date</label>
-          <input class="finp" type="date" id="fd"/>
-        </div>
-        <div class="fg">
-          <label class="flbl">Shift</label>
-          <select class="fsel" id="fs">
-            <option>Morning</option><option>Afternoon</option><option>Evening</option><option>Full day</option>
-          </select>
-        </div>
+        <div class="fg"><label class="flbl">Date</label><input class="finp" type="date" id="fd"/></div>
+        <div class="fg"><label class="flbl">Shift</label><select class="fsel" id="fs"><option>Morning</option><option>Afternoon</option><option>Evening</option><option>Full day</option></select></div>
       </div>
-      <div class="fg">
-        <label class="flbl">Patients treated</label>
-        <div id="pentries"></div>
-        <button class="addpbtn" onclick="addPE()">+ Add patient</button>
-      </div>
+      <div class="fg"><label class="flbl">Patients treated</label><div id="pentries"></div><button class="addpbtn" onclick="addPatientEntry()">+ Add another patient</button></div>
       <button class="subbtn" onclick="saveVisit()">Save visit</button>
       <button class="cncl" onclick="closeModal('visit-modal')">Cancel</button>
     </div>
   </div>
 
-  <!-- ── REMINDER MODAL ── -->
+  <!-- REMINDER MODAL -->
   <div class="modal-wrap" id="rem-modal">
     <div class="msheet">
       <div class="mhandle"></div>
       <div class="mtitle">New reminder</div>
-      <div class="fg">
-        <label class="flbl">Reminder title</label>
-        <input class="finp" id="rt" placeholder="e.g. Follow up with Ravi Kumar"/>
-      </div>
+      <div class="fg"><label class="flbl">Reminder title</label><input class="finp" id="rt" placeholder="e.g. Follow up with Ravi Kumar"/></div>
       <div class="frow2">
-        <div class="fg">
-          <label class="flbl">Date</label>
-          <input class="finp" type="date" id="rd"/>
-        </div>
-        <div class="fg">
-          <label class="flbl">Type</label>
-          <select class="fsel" id="rtype">
-            <option>Follow-up</option><option>Payment due</option><option>Appointment</option><option>Medication</option><option>Other</option>
-          </select>
-        </div>
+        <div class="fg"><label class="flbl">Date</label><input class="finp" type="date" id="rd"/></div>
+        <div class="fg"><label class="flbl">Type</label><select class="fsel" id="rtype"><option>Follow-up</option><option>Payment due</option><option>Appointment</option><option>Medication</option><option>Other</option></select></div>
       </div>
-      <div class="fg">
-        <label class="flbl">Note (optional)</label>
-        <input class="finp" id="rnote" placeholder="Add details…"/>
-      </div>
+      <div class="fg"><label class="flbl">Note (optional)</label><input class="finp" id="rnote" placeholder="Add details…"/></div>
       <button class="subbtn" onclick="saveReminder()">Save reminder</button>
       <button class="cncl" onclick="closeModal('rem-modal')">Cancel</button>
     </div>
   </div>
 
-  <!-- ── PATIENT DETAIL MODAL ── -->
+  <!-- PATIENT DETAIL MODAL -->
   <div class="modal-wrap" id="patient-modal">
-    <div class="msheet">
-      <div class="mhandle"></div>
-      <div id="pat-modal-content"></div>
-      <button class="cncl" onclick="closeModal('patient-modal')">Close</button>
-    </div>
+    <div class="msheet"><div class="mhandle"></div><div id="pat-modal-content"></div><button class="cncl" onclick="closeModal('patient-modal')">Close</button></div>
   </div>
 
-  <!-- Toast notification -->
   <div class="toast" id="toast"></div>
-
-</div><!-- .app -->
+</div>
 
 <script>
-// ── Constants ──────────────────────────────────────────────
 const PROCS = ['Pulpectomy','Crown','Scaling','Extraction','GIC-Filling','Composite Filling','Consultation','Pulpotomy','Restoration','Space Maintainer','Habbit Breaking Appliance','Sealent','Flouride','Other'];
 const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 const MSHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-const STORAGE_KEY = 'denttrack_data_v1';
+const SK = 'denttrack_v2';
 
-// ── State ──────────────────────────────────────────────────
-let visits = [], reminders = [], curFilter = 'all', selMonth, selYear, pEntryId = 0;
+let visits=[], reminders=[], curFilter='all', selMonth, selYear, pEntryId=0, procEntryId=0;
 const today = new Date();
-selMonth = today.getMonth();
-selYear  = today.getFullYear();
+selMonth = today.getMonth(); selYear = today.getFullYear();
+document.getElementById('todaylbl').textContent = today.getDate()+' '+MSHORT[today.getMonth()]+' '+today.getFullYear();
 
-document.getElementById('todaylbl').textContent =
-  today.getDate() + ' ' + MSHORT[today.getMonth()] + ' ' + today.getFullYear();
+// Data model: visit → patients[] → { name, notes, procedures[{procedure,fee,paid}] }
 
-// ── Persistence ────────────────────────────────────────────
-function save() {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ visits, reminders })); } catch(e) {}
-}
-function load() {
-  try {
-    const d = JSON.parse(localStorage.getItem(STORAGE_KEY));
-    if (d) { visits = d.visits || []; reminders = d.reminders || []; return true; }
-  } catch(e) {}
+function save(){ try{ localStorage.setItem(SK, JSON.stringify({visits,reminders})); }catch(e){} }
+function load(){
+  try{
+    const d = JSON.parse(localStorage.getItem(SK));
+    if(d && d.visits){
+      visits = d.visits.map(v=>({...v, patients: v.patients.map(p=>{
+        if(p.procedures) return p;
+        return {name:p.name, notes:p.notes||'', procedures:[{procedure:p.procedure||'Consultation', fee:p.fee||0, paid:p.paid||false}]};
+      })}));
+      reminders = d.reminders||[];
+      return true;
+    }
+  }catch(e){}
   return false;
 }
 
-// ── Seed data ──────────────────────────────────────────────
-function seed() {
-  visits = [
+function seed(){
+  visits=[
   ];
-  reminders = [
+  reminders=[
   ];
   save();
 }
 
-// ── Helpers ────────────────────────────────────────────────
-const fmtDate = d => { const dt = new Date(d); return dt.getDate() + ' ' + MSHORT[dt.getMonth()] + ' ' + dt.getFullYear(); };
-const initials = n => n.trim().split(' ').slice(0,2).map(w => w[0]||'').join('').toUpperCase() || '?';
-const fmtRs = n => n >= 1000 ? '₹' + (n/1000).toFixed(1) + 'k' : '₹' + n;
-const pstatus = pats => { const pd = pats.filter(p=>p.paid).length; return pd===pats.length?'paid':pd===0?'pending':'partial'; };
-const pillC  = s => ({ paid:'ppaid', pending:'ppend', partial:'ppart' })[s];
-const pillL  = s => ({ paid:'Paid',  pending:'Pending', partial:'Partial' })[s];
+const fmtDate = d => { const dt=new Date(d); return dt.getDate()+' '+MSHORT[dt.getMonth()]+' '+dt.getFullYear(); };
+const initials = n => n.trim().split(' ').slice(0,2).map(w=>w[0]||'').join('').toUpperCase()||'?';
+const fmtRs = n => n>=1000 ? '₹'+(n/1000).toFixed(1)+'k' : '₹'+n;
+const esc = s => (s||'').replace(/'/g,"\\'").replace(/"/g,'&quot;');
+
+function visitStatus(v){
+  let tot=0,pd=0;
+  v.patients.forEach(p=>p.procedures.forEach(pr=>{tot++;if(pr.paid)pd++;}));
+  return pd===tot?'paid':pd===0?'pending':'partial';
+}
+const pillC = s=>({paid:'ppaid',pending:'ppend',partial:'ppart'})[s];
+const pillL = s=>({paid:'Paid',pending:'Pending',partial:'Partial'})[s];
+const patTotal = p => p.procedures.reduce((a,pr)=>a+pr.fee,0);
+const patPaid  = p => p.procedures.filter(pr=>pr.paid).reduce((a,pr)=>a+pr.fee,0);
+function visitTotals(v){ let t=0,p=0; v.patients.forEach(pt=>{t+=patTotal(pt);p+=patPaid(pt);}); return{total:t,paid:p,pending:t-p}; }
 
 let toastTimer;
-function toast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove('show'), 2400);
+function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),2400); }
+
+function getStats(){ let pd=0,pn=0,pts=0; visits.forEach(v=>{pts+=v.patients.length;const t=visitTotals(v);pd+=t.paid;pn+=t.pending;}); return{paid:pd,pending:pn,pats:pts,visits:visits.length}; }
+function updateSummary(){
+  const s=getStats();
+  ['sv','sp','se','av','apa','ae','ap'].forEach(id=>{
+    const el=document.getElementById(id); if(!el)return;
+    if(id==='sv'||id==='av') el.textContent=s.visits;
+    else if(id==='sp'||id==='apa') el.textContent=s.pats;
+    else if(id==='se') el.textContent=fmtRs(s.paid);
+    else if(id==='ae') el.textContent='₹'+s.paid.toLocaleString();
+    else if(id==='ap') el.textContent='₹'+s.pending.toLocaleString();
+  });
 }
 
-// ── Summary ────────────────────────────────────────────────
-function getStats(vs) {
-  let paid = 0, pending = 0, pats = 0;
-  vs.forEach(v => v.patients.forEach(p => { pats++; p.paid ? paid += p.fee : pending += p.fee; }));
-  return { paid, pending, pats, visits: vs.length };
-}
-
-function updateSummary() {
-  const s = getStats(visits);
-  document.getElementById('sv').textContent  = s.visits;
-  document.getElementById('sp').textContent  = s.pats;
-  document.getElementById('se').textContent  = fmtRs(s.paid);
-  document.getElementById('ae').textContent  = '₹' + s.paid.toLocaleString();
-  document.getElementById('ap').textContent  = '₹' + s.pending.toLocaleString();
-  document.getElementById('av').textContent  = s.visits;
-  document.getElementById('apa').textContent = s.pats;
-}
-
-// ── Visits ─────────────────────────────────────────────────
-function renderVisits() {
-  const el = document.getElementById('vlist');
-  let vs = visits;
-  if (curFilter !== 'all') vs = visits.filter(v => pstatus(v.patients) === curFilter);
-  if (!vs.length) {
-    el.innerHTML = '<div class="empty"><div class="ei">🦷</div><p>No visits found.<br>Tap "+ Add visit" to get started.</p></div>';
-    return;
-  }
-  el.innerHTML = vs.map(v => {
-    const st   = pstatus(v.patients);
-    const tot  = v.patients.reduce((a,p) => a + p.fee, 0);
-    const coll = v.patients.filter(p=>p.paid).reduce((a,p) => a + p.fee, 0);
+// ── Visits render ─────────────────────────────────────────
+function renderVisits(){
+  const el=document.getElementById('vlist');
+  let vs=visits;
+  if(curFilter!=='all') vs=visits.filter(v=>visitStatus(v)===curFilter);
+  if(!vs.length){el.innerHTML='<div class="empty"><div class="ei">🦷</div><p>No visits found.<br>Tap "+ Add visit" to get started.</p></div>';return;}
+  el.innerHTML=vs.map(v=>{
+    const st=visitStatus(v), tt=visitTotals(v);
+    const procCount=v.patients.reduce((a,p)=>a+p.procedures.length,0);
     return `<div class="vcard" id="vc-${v.id}" onclick="toggleVC(${v.id})">
       <div class="vch">
-        <div style="flex:1;min-width:0">
-          <div class="vct" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${v.clinic}</div>
-          <div class="vcd">${fmtDate(v.date)} · ${v.shift}</div>
-        </div>
+        <div style="flex:1;min-width:0"><div class="vct" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${v.clinic}</div><div class="vcd">${fmtDate(v.date)} · ${v.shift}</div></div>
         <span class="spill ${pillC(st)}" style="margin-left:8px">${pillL(st)}</span>
       </div>
       <div class="vcmeta">
         <span class="mchip">👥 ${v.patients.length} patient${v.patients.length>1?'s':''}</span>
-        <span class="mchip">₹${tot.toLocaleString()} total</span>
+        <span class="mchip">🔧 ${procCount} procedure${procCount>1?'s':''}</span>
+        <span class="mchip">₹${tt.total.toLocaleString()} total</span>
       </div>
       <div class="vcpats">
-        ${v.patients.map(p => `
-          <div class="prow">
-            <div class="pav" onclick="event.stopPropagation();viewPat('${p.name.replace(/'/g,'\\\'')}')">${initials(p.name)}</div>
-            <div class="pinf">
-              <div class="pname">${p.name}</div>
-              <div class="pproc">${p.procedure}</div>
+        ${v.patients.map(p=>{
+          const pt=patTotal(p), pp=patPaid(p);
+          return `<div class="pat-block">
+            <div class="pat-block-header">
+              <div class="pav" onclick="event.stopPropagation();viewPat('${esc(p.name)}')">${initials(p.name)}</div>
+              <div class="pat-name-col"><div class="pname">${p.name}</div><div class="pat-subtotal">₹${pp.toLocaleString()} collected / ₹${pt.toLocaleString()} total</div></div>
             </div>
-            <div class="pfee ${p.paid?'fpaid':'fpend'}">₹${p.fee.toLocaleString()}</div>
-            <button class="paybtn" style="background:${p.paid?'var(--g50)':'var(--a50)'};color:${p.paid?'var(--g800)':'var(--a800)'}"
-              onclick="event.stopPropagation();togglePay(${v.id},'${p.name.replace(/'/g,'\\\'')}')">${p.paid ? '✓ Paid' : 'Collect'}</button>
-          </div>`).join('')}
+            ${p.procedures.map((pr,pi)=>`
+              <div class="proc-row">
+                <span class="proc-name">${pr.procedure}</span>
+                <span class="proc-fee ${pr.paid?'fpaid':'fpend'}">₹${pr.fee.toLocaleString()}</span>
+                <button class="paybtn" style="background:${pr.paid?'var(--g50)':'var(--a50)'};color:${pr.paid?'var(--g800)':'var(--a800)'}"
+                  onclick="event.stopPropagation();toggleProcPay(${v.id},'${esc(p.name)}',${pi})">${pr.paid?'✓ Paid':'Collect'}</button>
+              </div>`).join('')}
+            ${p.notes?`<div class="pat-note-display">📝 ${p.notes}</div>`:''}
+          </div>`;
+        }).join('')}
       </div>
       <div class="vcfoot">
-        <span class="ftot">Collected: <span>₹${coll.toLocaleString()}</span></span>
-        <span class="ftot" style="color:var(--a400)">Due: <span style="color:var(--a400)">₹${(tot-coll).toLocaleString()}</span></span>
+        <span class="ftot">Collected: <span>₹${tt.paid.toLocaleString()}</span></span>
+        <span class="ftot" style="color:var(--a400)">Due: <span style="color:var(--a400)">₹${tt.pending.toLocaleString()}</span></span>
       </div>
     </div>`;
   }).join('');
 }
 
-function toggleVC(id) {
-  const el = document.getElementById('vc-' + id);
-  if (el) el.classList.toggle('expanded');
-}
+function toggleVC(id){ const el=document.getElementById('vc-'+id); if(el) el.classList.toggle('expanded'); }
 
-function togglePay(vid, pname) {
-  const v = visits.find(x => x.id === vid);
-  const p = v && v.patients.find(x => x.name === pname);
-  if (p) {
-    p.paid = !p.paid;
-    save();
-    toast(p.paid ? '✓ Payment received' : 'Marked as pending');
-    renderAll();
-    const el = document.getElementById('vc-' + vid);
-    if (el) el.classList.add('expanded');
+function toggleProcPay(vid,pname,pi){
+  const v=visits.find(x=>x.id===vid);
+  const p=v&&v.patients.find(x=>x.name===pname);
+  if(p&&p.procedures[pi]){
+    p.procedures[pi].paid=!p.procedures[pi].paid;
+    save(); toast(p.procedures[pi].paid?'✓ Payment received':'Marked as pending');
+    renderAll(); const el=document.getElementById('vc-'+vid); if(el) el.classList.add('expanded');
   }
 }
+function setF(f,btn){ curFilter=f; document.querySelectorAll('.fchip').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); renderVisits(); }
 
-function setF(f, btn) {
-  curFilter = f;
-  document.querySelectorAll('.fchip').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  renderVisits();
-}
-
-// ── Patient history ────────────────────────────────────────
-function getPatientMap() {
-  const map = {};
-  visits.forEach(v => v.patients.forEach(p => {
-    if (!map[p.name]) map[p.name] = { name:p.name, visits:[], paid:0, pending:0, procs:[] };
-    map[p.name].visits.push({ date:v.date, clinic:v.clinic, procedure:p.procedure, fee:p.fee, paid:p.paid });
-    p.paid ? map[p.name].paid += p.fee : map[p.name].pending += p.fee;
-    if (!map[p.name].procs.includes(p.procedure)) map[p.name].procs.push(p.procedure);
+// ── Patient history ───────────────────────────────────────
+function getPatientMap(){
+  const map={};
+  visits.forEach(v=>v.patients.forEach(p=>{
+    if(!map[p.name]) map[p.name]={name:p.name,entries:[],paid:0,pending:0,procs:new Set(),latestNote:''};
+    const pp=patPaid(p),pt=patTotal(p);
+    map[p.name].entries.push({date:v.date,clinic:v.clinic,procedures:p.procedures,notes:p.notes,paid:pp,total:pt});
+    map[p.name].paid+=pp; map[p.name].pending+=(pt-pp);
+    p.procedures.forEach(pr=>map[p.name].procs.add(pr.procedure));
+    if(p.notes) map[p.name].latestNote=p.notes;
   }));
   return map;
 }
 
-function renderPatients() {
-  const q   = (document.getElementById('psearch').value || '').toLowerCase();
-  const map = getPatientMap();
-  const el  = document.getElementById('patlist');
-  let entries = Object.values(map).filter(p => p.name.toLowerCase().includes(q));
-  if (!entries.length) {
-    el.innerHTML = '<div class="empty"><div class="ei">👤</div><p>No patients found.</p></div>';
-    return;
-  }
-  el.innerHTML = entries.map(p => `
+function renderPatients(){
+  const q=(document.getElementById('psearch').value||'').toLowerCase();
+  const map=getPatientMap();
+  const el=document.getElementById('patlist');
+  let entries=Object.values(map).filter(p=>p.name.toLowerCase().includes(q));
+  if(!entries.length){el.innerHTML='<div class="empty"><div class="ei">👤</div><p>No patients found.</p></div>';return;}
+  el.innerHTML=entries.map(p=>`
     <div class="phcard" onclick="this.classList.toggle('expanded')">
       <div class="phheader">
         <div class="phav">${initials(p.name)}</div>
-        <div style="flex:1;min-width:0">
-          <div class="phname">${p.name}</div>
-          <div class="phsub" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.procs.join(', ')}</div>
-        </div>
+        <div style="flex:1;min-width:0"><div class="phname">${p.name}</div><div class="phsub" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${[...p.procs].join(', ')}</div></div>
       </div>
       <div class="phstats">
-        <div class="phstat"><div class="psl">Visits</div><div class="psv">${p.visits.length}</div></div>
+        <div class="phstat"><div class="psl">Visits</div><div class="psv">${p.entries.length}</div></div>
         <div class="phstat"><div class="psl">Collected</div><div class="psv" style="color:var(--g400)">₹${p.paid.toLocaleString()}</div></div>
         <div class="phstat"><div class="psl">Pending</div><div class="psv" style="color:var(--a400)">₹${p.pending.toLocaleString()}</div></div>
       </div>
       <div class="phhist">
-        ${p.visits.sort((a,b) => new Date(b.date)-new Date(a.date)).map(h => `
+        ${p.latestNote?`<div style="margin-bottom:9px;padding:8px;background:var(--b50);border-radius:8px;font-size:11px;color:var(--b800)">📋 ${p.latestNote}</div>`:''}
+        ${p.entries.sort((a,b)=>new Date(b.date)-new Date(a.date)).map(h=>`
           <div class="histrow">
-            <div>
-              <div class="hrproc">${h.procedure}</div>
+            <div style="flex:1;min-width:0">
+              ${h.procedures.map(pr=>`<div class="hrproc">${pr.procedure} <span style="font-size:10px;color:${pr.paid?'var(--g400)':'var(--a400)'}">₹${pr.fee.toLocaleString()} ${pr.paid?'✓':''}</span></div>`).join('')}
               <div class="hrdate">${fmtDate(h.date)} · ${h.clinic}</div>
+              ${h.notes?`<div class="hrnote">${h.notes}</div>`:''}
             </div>
-            <div style="text-align:right">
-              <div class="hrfee ${h.paid?'fpaid':'fpend'}">₹${h.fee.toLocaleString()}</div>
-              <div style="font-size:9px;color:${h.paid?'var(--g400)':'var(--a400)'}">${h.paid?'Paid':'Pending'}</div>
+            <div style="text-align:right;flex-shrink:0;margin-left:8px">
+              <div style="font-size:12px;font-weight:500;color:var(--g400)">₹${h.paid.toLocaleString()}</div>
+              ${h.paid<h.total?`<div style="font-size:10px;color:var(--a400)">₹${(h.total-h.paid).toLocaleString()} due</div>`:''}
             </div>
           </div>`).join('')}
-        <button onclick="event.stopPropagation();viewPat('${p.name.replace(/'/g,'\\\'')}')"
-          style="width:100%;margin-top:8px;padding:9px;border:0.5px solid var(--border);border-radius:9px;background:none;color:var(--t600);font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;min-height:38px">
-          Full profile →
-        </button>
+        <button onclick="event.stopPropagation();viewPat('${esc(p.name)}')" style="width:100%;margin-top:8px;padding:9px;border:0.5px solid var(--border);border-radius:9px;background:none;color:var(--t600);font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;min-height:38px">Full profile →</button>
       </div>
     </div>`).join('');
 }
 
-function viewPat(name) {
-  const map = getPatientMap();
-  const p   = map[name];
-  if (!p) return;
-  document.getElementById('pat-modal-content').innerHTML = `
+function viewPat(name){
+  const map=getPatientMap(); const p=map[name]; if(!p) return;
+  document.getElementById('pat-modal-content').innerHTML=`
     <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
       <div class="phav" style="width:46px;height:46px;font-size:15px">${initials(p.name)}</div>
-      <div>
-        <div style="font-size:15px;font-weight:500;color:var(--text)">${p.name}</div>
-        <div style="font-size:11px;color:var(--text2)">${p.procs.join(' · ')}</div>
-      </div>
+      <div><div style="font-size:15px;font-weight:500;color:var(--text)">${p.name}</div><div style="font-size:11px;color:var(--text2)">${[...p.procs].join(' · ')}</div></div>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px">
-      <div class="phstat"><div class="psl">Visits</div><div class="psv">${p.visits.length}</div></div>
+      <div class="phstat"><div class="psl">Visits</div><div class="psv">${p.entries.length}</div></div>
       <div class="phstat"><div class="psl">Collected</div><div class="psv" style="color:var(--g400)">₹${p.paid.toLocaleString()}</div></div>
       <div class="phstat"><div class="psl">Due</div><div class="psv" style="color:var(--a400)">₹${p.pending.toLocaleString()}</div></div>
     </div>
+    ${p.latestNote?`<div style="margin-bottom:12px;padding:10px;background:var(--b50);border-radius:10px;font-size:12px;color:var(--b800)">📋 <strong>Notes:</strong> ${p.latestNote}</div>`:''}
     <div class="seg-label">Treatment history</div>
-    ${p.visits.sort((a,b) => new Date(b.date)-new Date(a.date)).map(h => `
+    ${p.entries.sort((a,b)=>new Date(b.date)-new Date(a.date)).map(h=>`
       <div class="histrow">
-        <div>
-          <div class="hrproc">${h.procedure}</div>
+        <div style="flex:1;min-width:0">
+          ${h.procedures.map(pr=>`<div class="hrproc">${pr.procedure} <span style="font-size:10px;color:${pr.paid?'var(--g400)':'var(--a400)'}">₹${pr.fee.toLocaleString()} ${pr.paid?'Paid':'Pending'}</span></div>`).join('')}
           <div class="hrdate">${fmtDate(h.date)} · ${h.clinic}</div>
+          ${h.notes?`<div class="hrnote">${h.notes}</div>`:''}
         </div>
-        <div style="text-align:right">
-          <div class="hrfee ${h.paid?'fpaid':'fpend'}">₹${h.fee.toLocaleString()}</div>
-          <div style="font-size:9px;color:${h.paid?'var(--g400)':'var(--a400)'}">${h.paid?'Paid':'Pending'}</div>
+        <div style="text-align:right;flex-shrink:0;margin-left:8px">
+          <div style="font-size:12px;font-weight:500;color:var(--g400)">₹${h.paid.toLocaleString()}</div>
+          ${h.paid<h.total?`<div style="font-size:10px;color:var(--a400)">₹${(h.total-h.paid).toLocaleString()} due</div>`:''}
         </div>
       </div>`).join('')}`;
   document.getElementById('patient-modal').classList.add('open');
 }
 
-// ── Reminders ──────────────────────────────────────────────
-function renderReminders() {
-  const now = new Date(); now.setHours(0,0,0,0);
-  const el  = document.getElementById('remlist');
-  const sorted = [...reminders].sort((a,b) => new Date(a.date)-new Date(b.date));
-  const pending = sorted.filter(r => !r.done);
-  const done    = sorted.filter(r => r.done);
-  const badge = pending.length;
-  const badgeEl = document.getElementById('rem-badge');
-  badgeEl.textContent = badge;
-  badgeEl.style.display = badge ? 'inline-flex' : 'none';
-  if (!sorted.length) {
-    el.innerHTML = '<div class="empty"><div class="ei">🔔</div><p>No reminders yet.<br>Add follow-ups or payment alerts!</p></div>';
-    return;
-  }
-  const ico = { 'Follow-up':'🔁', 'Payment due':'💰', 'Appointment':'📅', 'Medication':'💊', 'Other':'📌' };
-  const renderRem = r => {
-    const d = new Date(r.date); d.setHours(0,0,0,0);
-    const diff = Math.round((d - now) / 86400000);
-    const urgency = diff < 0 ? 'urgent' : diff <= 3 ? 'soon' : '';
-    const timeStr = diff < 0 ? Math.abs(diff) + 'd overdue' : diff === 0 ? 'Today' : diff === 1 ? 'Tomorrow' : 'In ' + diff + ' days';
-    const timeColor = diff < 0 ? 'var(--r400)' : diff <= 3 ? 'var(--a400)' : 'var(--text3)';
+// ── Reminders ─────────────────────────────────────────────
+function renderReminders(){
+  const now=new Date(); now.setHours(0,0,0,0);
+  const el=document.getElementById('remlist');
+  const sorted=[...reminders].sort((a,b)=>new Date(a.date)-new Date(b.date));
+  const pending=sorted.filter(r=>!r.done), done=sorted.filter(r=>r.done);
+  const be=document.getElementById('rem-badge'); be.textContent=pending.length; be.style.display=pending.length?'inline-flex':'none';
+  if(!sorted.length){el.innerHTML='<div class="empty"><div class="ei">🔔</div><p>No reminders yet.</p></div>';return;}
+  const ico={'Follow-up':'🔁','Payment due':'💰','Appointment':'📅','Medication':'💊','Other':'📌'};
+  const renderRem=r=>{
+    const d=new Date(r.date); d.setHours(0,0,0,0);
+    const diff=Math.round((d-now)/86400000);
+    const urgency=diff<0?'urgent':diff<=3?'soon':'';
+    const timeStr=diff<0?Math.abs(diff)+'d overdue':diff===0?'Today':diff===1?'Tomorrow':'In '+diff+' days';
+    const timeColor=diff<0?'var(--r400)':diff<=3?'var(--a400)':'var(--text3)';
     return `<div class="remcard ${urgency} ${r.done?'done':''}">
       <div class="remico" style="background:${diff<0?'var(--r50)':diff<=3?'var(--a50)':'var(--t50)'}">${ico[r.type]||'📌'}</div>
-      <div style="flex:1;min-width:0">
-        <div class="remtitle">${r.title}</div>
-        <div class="remsub">${r.type}${r.note?' · '+r.note:''}</div>
-        <div class="remtime" style="color:${timeColor}">${timeStr} · ${fmtDate(r.date)}</div>
-      </div>
+      <div style="flex:1;min-width:0"><div class="remtitle">${r.title}</div><div class="remsub">${r.type}${r.note?' · '+r.note:''}</div><div class="remtime" style="color:${timeColor}">${timeStr} · ${fmtDate(r.date)}</div></div>
       <div class="remact">
-        ${!r.done ? `<button class="ratbtn" onclick="markRemDone(${r.id})" style="color:var(--g800);border-color:var(--g100)">✓ Done</button>` : ''}
+        ${!r.done?`<button class="ratbtn" onclick="markRemDone(${r.id})" style="color:var(--g800);border-color:var(--g100)">✓ Done</button>`:''}
         <button class="ratbtn" onclick="delRem(${r.id})" style="color:var(--r800);border-color:var(--r100)">Delete</button>
       </div>
     </div>`;
   };
-  el.innerHTML =
-    (pending.length ? `<div class="seg-label">Upcoming (${pending.length})</div>` : '') +
-    pending.map(renderRem).join('') +
-    (done.length ? `<div class="seg-label" style="margin-top:14px">Completed</div>` + done.map(renderRem).join('') : '');
+  el.innerHTML=(pending.length?`<div class="seg-label">Upcoming (${pending.length})</div>`:'')+pending.map(renderRem).join('')+(done.length?`<div class="seg-label" style="margin-top:14px">Completed</div>`+done.map(renderRem).join(''):'');
 }
+function markRemDone(id){const r=reminders.find(x=>x.id===id);if(r){r.done=true;save();toast('✓ Done');renderReminders();}}
+function delRem(id){reminders=reminders.filter(x=>x.id!==id);save();toast('Deleted');renderReminders();}
 
-function markRemDone(id) {
-  const r = reminders.find(x => x.id === id);
-  if (r) { r.done = true; save(); toast('✓ Reminder completed'); renderReminders(); }
+// ── Report ────────────────────────────────────────────────
+function buildMonthSel(){
+  const el=document.getElementById('month-sel'); const seen=new Set(); const mons=[];
+  visits.forEach(v=>{const d=new Date(v.date);const k=d.getFullYear()+'-'+d.getMonth();if(!seen.has(k)){seen.add(k);mons.push({y:d.getFullYear(),m:d.getMonth()});}});
+  mons.sort((a,b)=>b.y-a.y||b.m-a.m);
+  if(!mons.length) mons.push({y:today.getFullYear(),m:today.getMonth()});
+  el.innerHTML=mons.map(({y,m})=>`<button class="mselchip ${m===selMonth&&y===selYear?'active':''}" onclick="selMon(${m},${y},this)">${MSHORT[m]} ${y}</button>`).join('');
 }
-function delRem(id) {
-  reminders = reminders.filter(x => x.id !== id);
-  save(); toast('Reminder deleted'); renderReminders();
-}
+function selMon(m,y,btn){selMonth=m;selYear=y;document.querySelectorAll('.mselchip').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderReport();}
 
-// ── Report ─────────────────────────────────────────────────
-function buildMonthSel() {
-  const el   = document.getElementById('month-sel');
-  const seen = new Set();
-  const mons = [];
-  visits.forEach(v => {
-    const d = new Date(v.date);
-    const k = d.getFullYear() + '-' + d.getMonth();
-    if (!seen.has(k)) { seen.add(k); mons.push({ y: d.getFullYear(), m: d.getMonth() }); }
-  });
-  mons.sort((a,b) => b.y - a.y || b.m - a.m);
-  if (!mons.length) mons.push({ y: today.getFullYear(), m: today.getMonth() });
-  el.innerHTML = mons.map(({ y, m }) =>
-    `<button class="mselchip ${m===selMonth&&y===selYear?'active':''}" onclick="selMon(${m},${y},this)">${MSHORT[m]} ${y}</button>`
-  ).join('');
-}
-
-function selMon(m, y, btn) {
-  selMonth = m; selYear = y;
-  document.querySelectorAll('.mselchip').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  renderReport();
-}
-
-function renderReport() {
-  const vs = visits.filter(v => { const d = new Date(v.date); return d.getMonth()===selMonth && d.getFullYear()===selYear; });
-  const el = document.getElementById('report-content');
-  if (!vs.length) {
-    el.innerHTML = `<div class="empty"><div class="ei">📄</div><p>No visits in ${MONTHS[selMonth]} ${selYear}</p></div>`;
-    return;
-  }
-  let totalPaid = 0, totalPending = 0, totalPats = 0;
-  vs.forEach(v => v.patients.forEach(p => { totalPats++; p.paid ? totalPaid += p.fee : totalPending += p.fee; }));
-  const allPats = [];
-  vs.forEach(v => v.patients.forEach(p => allPats.push({ ...p, clinic:v.clinic, date:v.date })));
-  const pct = totalPaid + totalPending ? Math.round(totalPaid / (totalPaid + totalPending) * 100) : 0;
-
-  el.innerHTML = `
+function renderReport(){
+  const vs=visits.filter(v=>{const d=new Date(v.date);return d.getMonth()===selMonth&&d.getFullYear()===selYear;});
+  const el=document.getElementById('report-content');
+  if(!vs.length){el.innerHTML=`<div class="empty"><div class="ei">📄</div><p>No visits in ${MONTHS[selMonth]} ${selYear}</p></div>`;return;}
+  let tPaid=0,tPending=0,tPats=0,tProcs=0;
+  vs.forEach(v=>{tPats+=v.patients.length;const t=visitTotals(v);tPaid+=t.paid;tPending+=t.pending;v.patients.forEach(p=>tProcs+=p.procedures.length);});
+  const pct=tPaid+tPending?Math.round(tPaid/(tPaid+tPending)*100):0;
+  const rows=[];
+  vs.forEach(v=>v.patients.forEach(p=>p.procedures.forEach(pr=>rows.push({date:v.date,clinic:v.clinic,patient:p.name,procedure:pr.procedure,fee:pr.fee,paid:pr.paid,notes:p.notes}))));
+  el.innerHTML=`
     <div class="rptcard">
       <div class="rpthead">${MONTHS[selMonth]} ${selYear} — Summary</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
         <div class="phstat"><div class="psl">Visits</div><div class="psv">${vs.length}</div></div>
-        <div class="phstat"><div class="psl">Patients</div><div class="psv">${totalPats}</div></div>
-        <div class="phstat"><div class="psl">Collected</div><div class="psv" style="color:var(--g400)">₹${totalPaid.toLocaleString()}</div></div>
-        <div class="phstat"><div class="psl">Outstanding</div><div class="psv" style="color:var(--a400)">₹${totalPending.toLocaleString()}</div></div>
+        <div class="phstat"><div class="psl">Patients</div><div class="psv">${tPats}</div></div>
+        <div class="phstat"><div class="psl">Procedures</div><div class="psv">${tProcs}</div></div>
+        <div class="phstat"><div class="psl">Collected</div><div class="psv" style="color:var(--g400)">₹${tPaid.toLocaleString()}</div></div>
       </div>
       <div class="pbar-track" style="margin-bottom:4px"><div class="pbar-fill" style="width:${pct}%;background:var(--t400)"></div></div>
-      <div style="font-size:10px;color:var(--text2)">Collection rate: ${pct}%</div>
+      <div style="font-size:10px;color:var(--text2)">Collection rate: ${pct}% · ₹${tPending.toLocaleString()} outstanding</div>
     </div>
-
     <div class="rptcard">
-      <div class="rpthead">Visit breakdown</div>
+      <div class="rpthead">Procedure ledger</div>
       <table class="rpttable">
-        <colgroup><col style="width:30%"><col style="width:36%"><col style="width:10%"><col style="width:24%"></colgroup>
-        <tr><th>Date</th><th>Clinic</th><th>Pts</th><th>Earned</th></tr>
-        ${vs.sort((a,b) => new Date(b.date)-new Date(a.date)).map(v => {
-          const vp = v.patients.reduce((a,p) => a + (p.paid?p.fee:0), 0);
-          const vt = v.patients.reduce((a,p) => a + p.fee, 0);
-          return `<tr>
-            <td>${fmtDate(v.date).split(' ').slice(0,2).join(' ')}</td>
-            <td>${v.clinic}</td>
-            <td>${v.patients.length}</td>
-            <td style="color:var(--t600)">₹${vp.toLocaleString()}${vp<vt?'<span style="color:var(--a400);font-size:9px"> /'+vt.toLocaleString()+'</span>':''}</td>
-          </tr>`;
-        }).join('')}
-      </table>
-    </div>
-
-    <div class="rptcard">
-      <div class="rpthead">Patient ledger</div>
-      <table class="rpttable">
-        <colgroup><col style="width:32%"><col style="width:30%"><col style="width:20%"><col style="width:18%"></colgroup>
-        <tr><th>Patient</th><th>Procedure</th><th>Fee</th><th>Status</th></tr>
-        ${allPats.map(p => `<tr>
-          <td>${p.name.split(' ')[0]}</td>
-          <td>${p.procedure}</td>
-          <td>₹${p.fee.toLocaleString()}</td>
-          <td><span class="spill ${p.paid?'ppaid':'ppend'}" style="font-size:9px;padding:2px 5px">${p.paid?'Paid':'Due'}</span></td>
+        <colgroup><col style="width:24%"><col style="width:22%"><col style="width:22%"><col style="width:16%"><col style="width:16%"></colgroup>
+        <tr><th>Patient</th><th>Procedure</th><th>Clinic</th><th>Fee</th><th>Status</th></tr>
+        ${rows.map(r=>`<tr>
+          <td title="${r.patient}">${r.patient.split(' ')[0]}</td>
+          <td>${r.procedure}</td>
+          <td title="${r.clinic}">${r.clinic.split(' ')[0]}</td>
+          <td>₹${r.fee.toLocaleString()}</td>
+          <td><span class="spill ${r.paid?'ppaid':'ppend'}" style="font-size:9px;padding:2px 5px">${r.paid?'Paid':'Due'}</span></td>
         </tr>`).join('')}
       </table>
     </div>
-
     <button class="expbtn" onclick="exportCSV(${selMonth},${selYear})">⬇ Export CSV — ${MSHORT[selMonth]} ${selYear}</button>`;
 }
 
-function exportCSV(m, y) {
-  const vs = visits.filter(v => { const d = new Date(v.date); return d.getMonth()===m && d.getFullYear()===y; });
-  let csv = 'Date,Clinic,Shift,Patient,Procedure,Fee (INR),Status\n';
-  vs.forEach(v => v.patients.forEach(p => {
-    csv += `${v.date},"${v.clinic}",${v.shift},"${p.name}",${p.procedure},${p.fee},${p.paid?'Paid':'Pending'}\n`;
-  }));
-  const blob = new Blob([csv], { type: 'text/csv' });
-  const url  = URL.createObjectURL(blob);
-  const a    = document.createElement('a');
-  a.href = url; a.download = `DentTrack_${MONTHS[m]}_${y}.csv`;
-  document.body.appendChild(a); a.click(); document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+function exportCSV(m,y){
+  const vs=visits.filter(v=>{const d=new Date(v.date);return d.getMonth()===m&&d.getFullYear()===y;});
+  let csv='Date,Clinic,Shift,Patient,Procedure,Fee (INR),Status,Notes\n';
+  vs.forEach(v=>v.patients.forEach(p=>p.procedures.forEach(pr=>{
+    csv+=`${v.date},"${v.clinic}",${v.shift},"${p.name}","${pr.procedure}",${pr.fee},${pr.paid?'Paid':'Pending'},"${(p.notes||'').replace(/"/g,'""')}"\n`;
+  })));
+  const blob=new Blob([csv],{type:'text/csv'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a'); a.href=url; a.download=`DentTrack_${MONTHS[m]}_${y}.csv`;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
   toast('✓ CSV exported!');
 }
 
-// ── Analytics ──────────────────────────────────────────────
-function renderPBars() {
-  const s = getStats(visits);
-  const total = s.paid + s.pending;
-  const el = document.getElementById('pbars');
-  if (!total) { el.innerHTML = '<p style="color:var(--text3);font-size:12px">No data yet</p>'; return; }
-  const pct = Math.round(s.paid / total * 100);
-  el.innerHTML = `
-    <div class="pbar-wrap">
-      <div class="pbar-top"><span style="color:var(--g800)">Collected</span><span style="color:var(--g400);font-weight:500">₹${s.paid.toLocaleString()} (${pct}%)</span></div>
-      <div class="pbar-track"><div class="pbar-fill" style="width:${pct}%;background:var(--t400)"></div></div>
-    </div>
-    <div class="pbar-wrap">
-      <div class="pbar-top"><span style="color:var(--a800)">Outstanding</span><span style="color:var(--a400);font-weight:500">₹${s.pending.toLocaleString()} (${100-pct}%)</span></div>
-      <div class="pbar-track"><div class="pbar-fill" style="width:${100-pct}%;background:var(--a100)"></div></div>
-    </div>`;
+// ── Analytics ─────────────────────────────────────────────
+function renderPBars(){
+  const s=getStats(); const total=s.paid+s.pending;
+  const el=document.getElementById('pbars');
+  if(!total){el.innerHTML='<p style="color:var(--text3);font-size:12px">No data yet</p>';return;}
+  const pct=Math.round(s.paid/total*100);
+  el.innerHTML=`
+    <div class="pbar-wrap"><div class="pbar-top"><span style="color:var(--g800)">Collected</span><span style="color:var(--g400);font-weight:500">₹${s.paid.toLocaleString()} (${pct}%)</span></div><div class="pbar-track"><div class="pbar-fill" style="width:${pct}%;background:var(--t400)"></div></div></div>
+    <div class="pbar-wrap"><div class="pbar-top"><span style="color:var(--a800)">Outstanding</span><span style="color:var(--a400);font-weight:500">₹${s.pending.toLocaleString()} (${100-pct}%)</span></div><div class="pbar-track"><div class="pbar-fill" style="width:${100-pct}%;background:var(--a100)"></div></div></div>`;
+}
+function renderClinics(){
+  const map={};
+  visits.forEach(v=>{if(!map[v.clinic])map[v.clinic]={visits:0,patients:0,earned:0,pending:0};map[v.clinic].visits++;map[v.clinic].patients+=v.patients.length;const t=visitTotals(v);map[v.clinic].earned+=t.paid;map[v.clinic].pending+=t.pending;});
+  const el=document.getElementById('clist');
+  const entries=Object.entries(map);
+  if(!entries.length){el.innerHTML='<p style="color:var(--text3);font-size:12px">No clinics yet</p>';return;}
+  el.innerHTML=entries.sort((a,b)=>b[1].earned-a[1].earned).map(([name,d])=>`
+    <div class="crow"><div class="cico">🏥</div>
+      <div style="flex:1;min-width:0"><div class="cname" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${name}</div><div class="cstat">${d.visits} visit${d.visits>1?'s':''} · ${d.patients} patients${d.pending?` · <span style="color:var(--a400)">₹${d.pending.toLocaleString()} due</span>`:''}</div></div>
+      <div class="cearn">₹${d.earned.toLocaleString()}</div>
+    </div>`).join('');
 }
 
-function renderClinics() {
-  const map = {};
-  visits.forEach(v => {
-    if (!map[v.clinic]) map[v.clinic] = { visits:0, patients:0, earned:0, pending:0 };
-    map[v.clinic].visits++;
-    v.patients.forEach(p => {
-      map[v.clinic].patients++;
-      p.paid ? map[v.clinic].earned += p.fee : map[v.clinic].pending += p.fee;
-    });
-  });
-  const el = document.getElementById('clist');
-  const entries = Object.entries(map);
-  if (!entries.length) { el.innerHTML = '<p style="color:var(--text3);font-size:12px">No clinics yet</p>'; return; }
-  el.innerHTML = entries
-    .sort((a,b) => b[1].earned - a[1].earned)
-    .map(([name, d]) => `
-      <div class="crow">
-        <div class="cico">🏥</div>
-        <div style="flex:1;min-width:0">
-          <div class="cname" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${name}</div>
-          <div class="cstat">${d.visits} visit${d.visits>1?'s':''} · ${d.patients} patients${d.pending?` · <span style="color:var(--a400)">₹${d.pending.toLocaleString()} due</span>`:''}</div>
-        </div>
-        <div class="cearn">₹${d.earned.toLocaleString()}</div>
-      </div>`).join('');
+// ── Tab switching ─────────────────────────────────────────
+const TABS=['visits','patients','reminders','report','analytics'];
+function sw(tab,tbtn){
+  TABS.forEach(t=>{const el=document.getElementById('tab-'+t);if(el)el.style.display=t===tab?'block':'none';});
+  document.querySelectorAll('.tbtn').forEach((b,i)=>b.classList.toggle('active',TABS[i]===tab));
+  document.querySelectorAll('.nitem').forEach((b,i)=>{b.classList.toggle('active',TABS[i]===tab);const dot=b.querySelector('.ndot');if(dot)dot.style.display=TABS[i]===tab?'block':'none';});
+  if(tab==='patients') renderPatients();
+  if(tab==='reminders') renderReminders();
+  if(tab==='report'){buildMonthSel();renderReport();}
+  if(tab==='analytics'){renderPBars();renderClinics();}
 }
 
-// ── Tab switching ──────────────────────────────────────────
-const TABS = ['visits','patients','reminders','report','analytics'];
-function sw(tab, tbtn, nbtn) {
-  TABS.forEach(t => {
-    const el = document.getElementById('tab-' + t);
-    if (el) el.style.display = t === tab ? 'block' : 'none';
-  });
-  document.querySelectorAll('.tbtn').forEach((b, i) => b.classList.toggle('active', TABS[i] === tab));
-  document.querySelectorAll('.nitem').forEach((b, i) => {
-    b.classList.toggle('active', TABS[i] === tab);
-    const dot = b.querySelector('.ndot');
-    if (dot) dot.style.display = TABS[i] === tab ? 'block' : 'none';
-  });
-  if (tab === 'patients')  renderPatients();
-  if (tab === 'reminders') renderReminders();
-  if (tab === 'report')    { buildMonthSel(); renderReport(); }
-  if (tab === 'analytics') { renderPBars(); renderClinics(); }
-}
-
-// ── Visit modal ────────────────────────────────────────────
-function addPE() {
+// ── Add visit form ────────────────────────────────────────
+function addPatientEntry(){
   pEntryId++;
-  const id  = 'pe' + pEntryId;
-  const div = document.createElement('div');
-  div.className = 'pentry'; div.id = id;
-  div.innerHTML = `
-    <button class="rmbtn" onclick="document.getElementById('${id}').remove()">×</button>
-    <div class="frow2" style="margin-bottom:8px">
-      <div class="fg" style="margin-bottom:0">
-        <label class="flbl">Patient name</label>
-        <input class="finp" placeholder="Full name" data-field="name" autocapitalize="words"/>
-      </div>
-      <div class="fg" style="margin-bottom:0">
-        <label class="flbl">Procedure</label>
-        <select class="fsel" data-field="proc">${PROCS.map(p => `<option>${p}</option>`).join('')}</select>
-      </div>
+  const pid='pe'+pEntryId;
+  const num=document.querySelectorAll('.pentry').length+1;
+  const div=document.createElement('div');
+  div.className='pentry'; div.id=pid;
+  div.innerHTML=`
+    <div class="pentry-head">
+      <div class="pentry-num">${num}</div>
+      <div class="pentry-label">Patient ${num}</div>
+      <button class="rmbtn" onclick="document.getElementById('${pid}').remove();renumberPatients()">×</button>
     </div>
-    <div class="frow2">
-      <div class="fg" style="margin-bottom:0">
-        <label class="flbl">Fee (₹)</label>
-        <input class="finp" type="number" inputmode="numeric" placeholder="0" data-field="fee"/>
-      </div>
-      <div class="fg" style="margin-bottom:0">
-        <label class="flbl">Payment</label>
-        <select class="fsel" data-field="paid">
-          <option value="true">Received</option>
-          <option value="false">Pending</option>
-        </select>
-      </div>
+    <div class="fg" style="margin-bottom:9px">
+      <label class="flbl">Patient name</label>
+      <input class="finp" placeholder="Full name" data-field="name" autocapitalize="words"/>
+    </div>
+    <label class="flbl" style="margin-bottom:5px;display:block">Procedures & fees</label>
+    <div class="proc-entries" id="procs-${pid}"></div>
+    <button class="add-proc-btn" onclick="addProcEntry('${pid}')">+ Add another procedure</button>
+    <div class="fg" style="margin-top:2px;margin-bottom:0">
+      <label class="flbl">Patient notes</label>
+      <textarea class="ftarea" data-field="notes" placeholder="e.g. allergic to penicillin, follow-up needed, payment arrangement…"></textarea>
     </div>`;
   document.getElementById('pentries').appendChild(div);
+  addProcEntry(pid);
 }
 
-function saveVisit() {
-  const clinic = document.getElementById('fc').value.trim();
-  const date   = document.getElementById('fd').value;
-  const shift  = document.getElementById('fs').value;
-  if (!clinic || !date) { toast('⚠ Fill clinic name and date'); return; }
-  const entries  = document.querySelectorAll('.pentry');
-  const patients = [];
-  entries.forEach(e => {
-    const name      = e.querySelector('[data-field="name"]').value.trim();
-    const procedure = e.querySelector('[data-field="proc"]').value;
-    const fee       = parseFloat(e.querySelector('[data-field="fee"]').value) || 0;
-    const paid      = e.querySelector('[data-field="paid"]').value === 'true';
-    if (name) patients.push({ name, procedure, fee, paid });
+function addProcEntry(pid){
+  procEntryId++;
+  const prid='pr'+procEntryId;
+  const div=document.createElement('div');
+  div.className='proc-entry'; div.id=prid;
+  div.innerHTML=`
+    <select class="fsel" data-field="proc">${PROCS.map(p=>`<option>${p}</option>`).join('')}</select>
+    <input class="finp" type="number" inputmode="numeric" placeholder="Fee ₹" data-field="fee" min="0"/>
+    <select class="fsel" data-field="paid"><option value="false">Pending</option><option value="true">Received</option></select>
+    <button class="rm-proc-btn" onclick="document.getElementById('${prid}').remove()">×</button>`;
+  document.getElementById('procs-'+pid).appendChild(div);
+}
+
+function renumberPatients(){
+  document.querySelectorAll('.pentry').forEach((el,i)=>{
+    const n=el.querySelector('.pentry-num'), l=el.querySelector('.pentry-label');
+    if(n) n.textContent=i+1; if(l) l.textContent='Patient '+(i+1);
   });
-  if (!patients.length) { toast('⚠ Add at least one patient'); return; }
-  visits.unshift({ id: Date.now(), clinic, date, shift, patients });
+}
+
+function saveVisit(){
+  const clinic=document.getElementById('fc').value.trim();
+  const date=document.getElementById('fd').value;
+  const shift=document.getElementById('fs').value;
+  if(!clinic||!date){toast('⚠ Fill clinic name and date');return;}
+  const patients=[];
+  document.querySelectorAll('.pentry').forEach(pe=>{
+    const name=(pe.querySelector('[data-field="name"]').value||'').trim();
+    const notes=(pe.querySelector('[data-field="notes"]').value||'').trim();
+    if(!name) return;
+    const procedures=[];
+    pe.querySelectorAll('.proc-entry').forEach(pr=>{
+      const procedure=pr.querySelector('[data-field="proc"]').value;
+      const fee=parseFloat(pr.querySelector('[data-field="fee"]').value)||0;
+      const paid=pr.querySelector('[data-field="paid"]').value==='true';
+      procedures.push({procedure,fee,paid});
+    });
+    if(procedures.length) patients.push({name,notes,procedures});
+  });
+  if(!patients.length){toast('⚠ Add at least one patient');return;}
+  visits.unshift({id:Date.now(),clinic,date,shift,patients});
   save(); closeModal('visit-modal'); toast('✓ Visit saved!'); renderAll();
 }
 
-function openModal() {
+function openModal(){
   document.getElementById('visit-modal').classList.add('open');
-  document.getElementById('fd').value = today.toISOString().split('T')[0];
-  document.getElementById('fc').value = '';
-  document.getElementById('pentries').innerHTML = '';
-  pEntryId = 0; addPE();
+  document.getElementById('fd').value=today.toISOString().split('T')[0];
+  document.getElementById('fc').value='';
+  document.getElementById('pentries').innerHTML='';
+  pEntryId=0; procEntryId=0; addPatientEntry();
 }
 
-// ── Reminder modal ─────────────────────────────────────────
-function saveReminder() {
-  const title = document.getElementById('rt').value.trim();
-  const date  = document.getElementById('rd').value;
-  const type  = document.getElementById('rtype').value;
-  const note  = document.getElementById('rnote').value.trim();
-  if (!title || !date) { toast('⚠ Fill title and date'); return; }
-  reminders.push({ id: Date.now(), title, date, type, note, done: false });
+// ── Reminder form ─────────────────────────────────────────
+function saveReminder(){
+  const title=document.getElementById('rt').value.trim();
+  const date=document.getElementById('rd').value;
+  const type=document.getElementById('rtype').value;
+  const note=document.getElementById('rnote').value.trim();
+  if(!title||!date){toast('⚠ Fill title and date');return;}
+  reminders.push({id:Date.now(),title,date,type,note,done:false});
   save(); closeModal('rem-modal'); toast('✓ Reminder set!'); renderReminders();
 }
-
-function openRemModal() {
+function openRemModal(){
   document.getElementById('rem-modal').classList.add('open');
-  document.getElementById('rd').value = today.toISOString().split('T')[0];
-  document.getElementById('rt').value = '';
-  document.getElementById('rnote').value = '';
+  document.getElementById('rd').value=today.toISOString().split('T')[0];
+  document.getElementById('rt').value=''; document.getElementById('rnote').value='';
 }
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+document.querySelectorAll('.modal-wrap').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open');}));
 
-function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+function renderAll(){updateSummary();renderVisits();}
 
-// ── Tap-outside to close modals ────────────────────────────
-document.querySelectorAll('.modal-wrap').forEach(m => {
-  m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); });
-});
+if(!load()) seed();
+renderAll(); renderReminders();
 
-// ── Render all ─────────────────────────────────────────────
-function renderAll() { updateSummary(); renderVisits(); }
-
-// ── Boot ───────────────────────────────────────────────────
-if (!load()) seed();
-renderAll();
-renderReminders();
-
-// Prevent double-tap zoom on iOS
-let lastTap = 0;
-document.addEventListener('touchend', e => {
-  const now = Date.now();
-  if (now - lastTap < 300) e.preventDefault();
-  lastTap = now;
-}, { passive: false });
+let lastTap=0;
+document.addEventListener('touchend',e=>{const n=Date.now();if(n-lastTap<300)e.preventDefault();lastTap=n;},{passive:false});
 </script>
-
 </body>
 </html>
