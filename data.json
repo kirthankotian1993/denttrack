@@ -1,6 +1,15 @@
 {
   "visits": [],
   "reminders": [],
-  "clinics": [],
-  "savedAt": "2026-03-19T14:01:19.680Z"
+  "clinics": [
+    {
+      "id": 1773928909582,
+      "name": "Bangalore Smiles",
+      "type": "Dental Clinic",
+      "location": "Jakkur",
+      "phone": "8879787839",
+      "notes": "Dr.Neha"
+    }
+  ],
+  "savedAt": "2026-03-19T14:01:51.086Z"
 }
