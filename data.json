@@ -1,5 +1,44 @@
 {
-  "visits": [],
+  "visits": [
+    {
+      "id": 1773938595505,
+      "clinic": "Dyuthi Dental Clinic",
+      "date": "2026-03-19",
+      "shift": "Morning",
+      "patients": [
+        {
+          "name": "Kirthan",
+          "notes": "2 pupectomu",
+          "procedures": [
+            {
+              "procedure": "Pulpectomy",
+              "fee": 3000,
+              "payStatus": "pending",
+              "partialAmt": 0
+            },
+            {
+              "procedure": "Composite Filling",
+              "fee": 1000,
+              "payStatus": "pending",
+              "partialAmt": 0
+            }
+          ]
+        },
+        {
+          "name": "Kiran",
+          "notes": "",
+          "procedures": [
+            {
+              "procedure": "GIC-Filling",
+              "fee": 1200,
+              "payStatus": "pending",
+              "partialAmt": 0
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "reminders": [],
   "clinics": [
     {
@@ -107,5 +146,5 @@
       "notes": "Dr.Sindhu"
     }
   ],
-  "savedAt": "2026-03-19T16:41:28.807Z"
+  "savedAt": "2026-03-19T16:43:17.009Z"
 }
