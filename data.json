@@ -33,13 +33,13 @@
             {
               "procedure": "Extraction",
               "fee": 1000,
-              "payStatus": "pending",
+              "payStatus": "received",
               "partialAmt": 0
             },
             {
               "procedure": "Pulpectomy",
               "fee": 3000,
-              "payStatus": "pending",
+              "payStatus": "received",
               "partialAmt": 0
             }
           ]
@@ -51,13 +51,13 @@
             {
               "procedure": "Scaling",
               "fee": 500,
-              "payStatus": "pending",
+              "payStatus": "received",
               "partialAmt": 0
             },
             {
               "procedure": "Flouride",
               "fee": 700,
-              "payStatus": "pending",
+              "payStatus": "received",
               "partialAmt": 0
             }
           ]
@@ -84,5 +84,5 @@
       "notes": "Dr.Ashwini"
     }
   ],
-  "savedAt": "2026-03-19T14:06:31.169Z"
+  "savedAt": "2026-03-19T14:06:54.614Z"
 }
