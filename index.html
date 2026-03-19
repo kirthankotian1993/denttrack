@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover,user-scalable=no"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 <meta name="apple-mobile-web-app-title" content="DentTrack"/>
 <meta name="theme-color" content="#0F6E56"/>
-<title>Kirthan Consultation Ledger</title>
+<title>Dental Consulting Ledger by KirthanKotian</title>
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%230F6E56'/%3E%3Ctext x='90' y='115' font-size='80' text-anchor='middle' fill='white'%3E🦷%3C/text%3E%3C/svg%3E"/>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap');
@@ -17,6 +17,7 @@
   --a50:#FAEEDA;--a100:#FAC775;--a400:#BA7517;--a800:#633806;
   --r50:#FCEBEB;--r100:#F7C1C1;--r400:#E24B4A;--r800:#791F1F;
   --g50:#EAF3DE;--g100:#C0DD97;--g400:#639922;--g800:#27500A;
+  --p50:#EEEDFE;--p100:#CECBF6;--p400:#7F77DD;--p800:#3C3489;
   --gr50:#F1EFE8;--gr100:#D3D1C7;--gr400:#888780;
   --safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px);
   --safe-left:env(safe-area-inset-left,0px);--safe-right:env(safe-area-inset-right,0px);
@@ -25,53 +26,56 @@
 @media(prefers-color-scheme:dark){:root{
   --bg:#111;--bg2:#1c1c1e;--text:#f2f2f7;--text2:#aeaeb2;--text3:#636366;
   --border:rgba(255,255,255,0.1);
-  --t50:#0a2e22;--t100:#0d4a32;--t200:#0f5e40;--g50:#0e2408;--g100:#1a4010;
-  --a50:#2e1e00;--a100:#4a3200;--r50:#2e0a0a;--r100:#4a1010;--b50:#081830;--b100:#102440;
-  --gr50:#1c1c1e;--gr100:#2c2c2e;
+  --t50:#0a2e22;--t100:#0d4a32;--t200:#0f5e40;
+  --g50:#0e2408;--g100:#1a4010;--a50:#2e1e00;--a100:#4a3200;
+  --r50:#2e0a0a;--r100:#4a1010;--b50:#081830;--b100:#102440;
+  --p50:#1a1830;--p100:#2a2660;--gr50:#1c1c1e;--gr100:#2c2c2e;
 }}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html,body{width:100%;height:100%;overflow:hidden;font-family:'DM Sans',-apple-system,sans-serif;background:var(--t600);color:var(--text);-webkit-font-smoothing:antialiased;}
 .app{width:100%;height:100%;display:flex;flex-direction:column;background:var(--bg);overflow:hidden;max-width:430px;margin:0 auto;position:relative;}
 
-/* ── Setup screen ── */
-.setup-screen{position:absolute;inset:0;background:var(--bg);z-index:500;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:calc(var(--safe-top)+40px) 28px 40px;overflow-y:auto;}
+/* ─ Setup ─ */
+.setup-screen{position:absolute;inset:0;background:var(--bg);z-index:500;display:flex;flex-direction:column;align-items:center;padding:calc(var(--safe-top)+36px) 24px 40px;overflow-y:auto;}
 .setup-screen.hidden{display:none;}
-.setup-logo{font-size:52px;margin-bottom:16px;}
-.setup-title{font-family:'Playfair Display',serif;font-size:24px;color:var(--text);margin-bottom:8px;text-align:center;}
-.setup-sub{font-size:13px;color:var(--text2);text-align:center;line-height:1.6;margin-bottom:28px;}
-.setup-card{background:var(--bg2);border-radius:16px;padding:20px;width:100%;margin-bottom:16px;border:.5px solid var(--border);}
-.setup-card-title{font-size:13px;font-weight:500;color:var(--text);margin-bottom:12px;}
-.setup-step{display:flex;gap:10px;margin-bottom:10px;align-items:flex-start;}
-.setup-step-num{width:22px;height:22px;border-radius:50%;background:var(--t400);color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.setup-logo{font-size:48px;margin-bottom:14px;}
+.setup-title{font-family:'Playfair Display',serif;font-size:22px;color:var(--text);margin-bottom:7px;text-align:center;}
+.setup-sub{font-size:12px;color:var(--text2);text-align:center;line-height:1.6;margin-bottom:20px;}
+.setup-warn{background:var(--a50);border-radius:10px;padding:10px 13px;font-size:12px;color:var(--a800);line-height:1.5;margin-bottom:14px;border:.5px solid var(--a100);}
+.setup-card{background:var(--bg2);border-radius:13px;padding:16px;width:100%;margin-bottom:14px;border:.5px solid var(--border);}
+.setup-card-title{font-size:12px;font-weight:500;color:var(--text);margin-bottom:10px;}
+.setup-step{display:flex;gap:9px;margin-bottom:9px;align-items:flex-start;}
+.setup-step-num{width:20px;height:20px;border-radius:50%;background:var(--t400);color:#fff;font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
 .setup-step-txt{font-size:12px;color:var(--text2);line-height:1.5;}
 .setup-step-txt strong{color:var(--text);font-weight:500;}
-.setup-inp{width:100%;padding:12px 14px;border:.5px solid var(--border);border-radius:11px;font-size:14px;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);outline:none;-webkit-appearance:none;margin-bottom:12px;min-height:46px;}
+.setup-inp{width:100%;padding:11px 13px;border:.5px solid var(--border);border-radius:10px;font-size:14px;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);outline:none;-webkit-appearance:none;margin-bottom:11px;min-height:44px;}
 .setup-inp:focus{border-color:var(--t400);}
-.setup-btn{width:100%;padding:14px;background:var(--t400);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;min-height:50px;-webkit-appearance:none;}
-.setup-warn{background:var(--a50);border-radius:10px;padding:11px 14px;font-size:12px;color:var(--a800);line-height:1.5;margin-bottom:16px;border:.5px solid var(--a100);}
+.setup-btn{width:100%;padding:13px;background:var(--t400);color:#fff;border:none;border-radius:11px;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;min-height:48px;-webkit-appearance:none;}
 
-/* ── Sync status bar ── */
-.sync-bar{display:flex;align-items:center;justify-content:space-between;padding:5px 14px;background:var(--bg2);border-bottom:.5px solid var(--border);flex-shrink:0;}
+/* ─ Sync bar ─ */
+.sync-bar{display:flex;align-items:center;justify-content:space-between;padding:4px 13px;background:var(--bg2);border-bottom:.5px solid var(--border);flex-shrink:0;}
 .sync-status{font-size:10px;color:var(--text3);display:flex;align-items:center;gap:5px;}
 .sync-dot{width:7px;height:7px;border-radius:50%;background:var(--gr400);flex-shrink:0;}
 .sync-dot.synced{background:var(--g400);}
 .sync-dot.syncing{background:var(--a400);animation:pulse 1s infinite;}
 .sync-dot.error{background:var(--r400);}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
-.sync-btn{background:none;border:.5px solid var(--border);border-radius:7px;padding:3px 9px;font-size:10px;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--text2);-webkit-appearance:none;}
-.sync-settings-btn{background:none;border:none;font-size:14px;cursor:pointer;padding:2px 4px;color:var(--text2);}
+.sync-btn{background:none;border:.5px solid var(--border);border-radius:7px;padding:3px 8px;font-size:10px;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--text2);-webkit-appearance:none;}
+.sync-settings-btn{background:none;border:none;font-size:14px;cursor:pointer;padding:2px 3px;color:var(--text2);}
 
-/* ── Top bar ── */
-.topbar{background:var(--t600);padding-top:calc(var(--safe-top)+10px);padding-left:max(18px,var(--safe-left));padding-right:max(18px,var(--safe-right));flex-shrink:0;}
+/* ─ Topbar ─ */
+.topbar{background:var(--t600);padding-top:calc(var(--safe-top)+10px);padding-left:max(17px,var(--safe-left));padding-right:max(17px,var(--safe-right));flex-shrink:0;}
 .topbar-inner{padding-bottom:12px;}
 .greet{font-size:11px;color:rgba(255,255,255,.72);}
 .brand{font-family:'Playfair Display',serif;font-size:21px;color:#fff;font-weight:600;}
-.dbadge{display:inline-block;margin-top:5px;background:rgba(255,255,255,.18);border-radius:20px;padding:3px 11px;font-size:11px;color:rgba(255,255,255,.9);}
-.sumstrip{background:var(--t600);padding:0 13px 14px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;flex-shrink:0;}
+.dbadge{display:inline-block;margin-top:4px;background:rgba(255,255,255,.18);border-radius:20px;padding:3px 11px;font-size:11px;color:rgba(255,255,255,.9);}
+.sumstrip{background:var(--t600);padding:0 12px 14px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;flex-shrink:0;}
 .scard{background:rgba(255,255,255,.15);border-radius:11px;padding:9px 10px;border:.5px solid rgba(255,255,255,.2);}
 .scard .sl{font-size:10px;color:rgba(255,255,255,.72);margin-bottom:2px;}
 .scard .sv{font-size:18px;font-weight:600;color:#fff;}
 .scard .ss{font-size:9px;color:rgba(255,255,255,.6);}
+
+/* ─ Tabs ─ */
 .tabbar{display:flex;background:var(--bg);border-bottom:.5px solid var(--border);padding:0 2px;overflow-x:auto;flex-shrink:0;scrollbar-width:none;}
 .tabbar::-webkit-scrollbar{display:none;}
 .tbtn{flex:0 0 auto;padding:10px 11px;background:none;border:none;border-bottom:2px solid transparent;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;color:var(--text2);cursor:pointer;white-space:nowrap;-webkit-appearance:none;}
@@ -85,17 +89,17 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'DM Sans',-apple-sy
 .fchip{white-space:nowrap;padding:4px 12px;border-radius:20px;border:.5px solid var(--border);background:none;font-size:11px;font-family:'DM Sans',sans-serif;cursor:pointer;color:var(--text);-webkit-appearance:none;min-height:28px;}
 .fchip.active{background:var(--t50);color:var(--t600);border-color:var(--t200);}
 
-/* ── Visit cards ── */
+/* ─ Visit cards ─ */
 .vcard{background:var(--bg);border:.5px solid var(--border);border-radius:13px;padding:12px;margin-bottom:10px;}
 .vcard.expanded{border-color:var(--t400);}
 .vcard-top{display:flex;justify-content:space-between;align-items:flex-start;cursor:pointer;}
 .vct{font-size:13px;font-weight:500;color:var(--text);}
 .vcd{font-size:10px;color:var(--text2);margin-top:2px;}
-.vcard-right{display:flex;align-items:center;gap:6px;margin-left:8px;flex-shrink:0;}
+.vcard-right{display:flex;align-items:center;gap:5px;margin-left:7px;flex-shrink:0;}
 .spill{font-size:10px;font-weight:500;padding:3px 7px;border-radius:20px;flex-shrink:0;}
 .ppaid{background:var(--g50);color:var(--g800);}
 .ppend{background:var(--a50);color:var(--a800);}
-.ppart{background:var(--b50);color:var(--b800);}
+.ppart{background:var(--p50);color:var(--p800);}
 .icon-btn{background:none;border:.5px solid var(--border);border-radius:7px;padding:3px 7px;font-size:11px;cursor:pointer;color:var(--text2);font-family:'DM Sans',sans-serif;min-height:26px;-webkit-appearance:none;}
 .icon-btn.del{color:var(--r400);border-color:var(--r100);}
 .vcmeta{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;cursor:pointer;}
@@ -109,22 +113,22 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'DM Sans',-apple-sy
 .pat-name-col{flex:1;min-width:0;}
 .pname{font-size:12px;font-weight:500;color:var(--text);}
 .pat-sub{font-size:10px;color:var(--text2);}
-.proc-row{display:flex;align-items:center;gap:5px;padding:3px 0 3px 38px;}
+.proc-row{display:flex;align-items:center;gap:6px;padding:4px 0 4px 38px;}
 .proc-nm{flex:1;font-size:11px;color:var(--text2);}
-.proc-fee{font-size:11px;font-weight:500;flex-shrink:0;}
-.fpaid{color:var(--g400);}
-.fpend{color:var(--a400);}
-.paybtn{flex-shrink:0;border:none;border-radius:6px;font-size:10px;padding:3px 7px;cursor:pointer;font-family:'DM Sans',sans-serif;min-height:24px;-webkit-appearance:none;}
+.proc-amt-col{text-align:right;flex-shrink:0;}
+.paybtn{flex-shrink:0;border:none;border-radius:6px;font-size:10px;padding:4px 8px;cursor:pointer;font-family:'DM Sans',sans-serif;min-height:26px;-webkit-appearance:none;white-space:nowrap;}
 .pat-note-d{margin:4px 0 0 38px;font-size:10px;color:var(--text3);font-style:italic;background:var(--bg2);border-radius:5px;padding:4px 8px;border-left:2px solid var(--t200);}
 .vcfoot{display:none;justify-content:space-between;margin-top:7px;padding-top:6px;border-top:.5px solid var(--border);}
 .vcard.expanded .vcfoot{display:flex;}
 .ftot{font-size:11px;color:var(--text2);}
 .ftot span{font-weight:500;color:var(--text);}
+
+/* ─ Empty ─ */
 .empty{text-align:center;padding:36px 14px;color:var(--text3);}
 .empty .ei{font-size:32px;margin-bottom:7px;}
 .empty p{font-size:12px;line-height:1.6;}
 
-/* ── Analytics ── */
+/* ─ Analytics ─ */
 .sgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:13px;}
 .sblk{background:var(--bg2);border-radius:10px;padding:12px;}
 .sblk .sbl{font-size:10px;color:var(--text2);margin-bottom:3px;}
@@ -135,15 +139,15 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'DM Sans',-apple-sy
 .pbar-track{height:6px;background:var(--bg2);border-radius:3px;overflow:hidden;}
 .pbar-fill{height:100%;border-radius:3px;}
 
-/* ── Clinics ── */
+/* ─ Clinics tab ─ */
 .clinic-card{background:var(--bg);border:.5px solid var(--border);border-radius:13px;padding:12px;margin-bottom:10px;}
 .clinic-card.expanded{border-color:var(--t400);}
-.clinic-card-hdr{display:flex;align-items:center;gap:10px;}
+.clinic-card-hdr{display:flex;align-items:center;gap:10px;cursor:pointer;}
 .clinic-ico{width:38px;height:38px;background:var(--t50);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
 .clinic-nm{font-size:13px;font-weight:500;color:var(--text);}
 .clinic-tp{font-size:10px;color:var(--text2);margin-top:1px;}
-.clinic-earn{font-size:13px;font-weight:600;color:var(--t600);margin-left:auto;flex-shrink:0;}
-.clinic-actions{display:flex;gap:5px;margin-left:6px;}
+.clinic-earn{font-size:13px;font-weight:600;color:var(--t600);flex-shrink:0;}
+.clinic-actions{display:flex;gap:5px;margin-left:4px;flex-shrink:0;}
 .clinic-breakdown{display:none;margin-top:10px;border-top:.5px solid var(--border);padding-top:10px;}
 .clinic-card.expanded .clinic-breakdown{display:block;}
 .bstats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px;}
@@ -152,10 +156,8 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'DM Sans',-apple-sy
 .bstat .bsv{font-size:13px;font-weight:500;color:var(--text);}
 .visit-row{padding:7px 0;border-bottom:.5px solid var(--border);display:flex;justify-content:space-between;align-items:flex-start;}
 .visit-row:last-child{border-bottom:none;}
-.vr-date{font-size:11px;color:var(--text);font-weight:500;}
-.vr-info{font-size:10px;color:var(--text2);margin-top:1px;}
 
-/* ── Patient history ── */
+/* ─ Patient history ─ */
 .searchbox{width:100%;padding:10px 12px;border:.5px solid var(--border);border-radius:9px;font-size:13px;font-family:'DM Sans',sans-serif;background:var(--bg2);color:var(--text);outline:none;margin-bottom:10px;-webkit-appearance:none;}
 .searchbox:focus{border-color:var(--t400);background:var(--bg);}
 .phcard{background:var(--bg);border:.5px solid var(--border);border-radius:12px;padding:11px;margin-bottom:9px;cursor:pointer;}
@@ -170,13 +172,13 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'DM Sans',-apple-sy
 .phstat .psv{font-size:13px;font-weight:500;color:var(--text);}
 .phhist{margin-top:9px;border-top:.5px solid var(--border);padding-top:9px;display:none;}
 .phcard.expanded .phhist{display:block;}
-.histrow{display:flex;justify-content:space-between;align-items:flex-start;padding:5px 0;border-bottom:.5px solid var(--border);}
+.histrow{display:flex;justify-content:space-between;align-items:flex-start;padding:6px 0;border-bottom:.5px solid var(--border);}
 .histrow:last-child{border-bottom:none;}
 .hrdate{font-size:10px;color:var(--text2);margin-top:2px;}
 .hrproc{font-size:11px;color:var(--text);}
 .hrnote{font-size:10px;color:var(--text3);font-style:italic;margin-top:2px;}
 
-/* ── Reminders ── */
+/* ─ Reminders ─ */
 .rembadge{background:var(--r50);color:var(--r800);border-radius:50%;width:15px;height:15px;font-size:9px;font-weight:500;display:inline-flex;align-items:center;justify-content:center;position:relative;top:-2px;left:1px;}
 .remcard{background:var(--bg);border:.5px solid var(--border);border-radius:12px;padding:11px;margin-bottom:9px;display:flex;gap:9px;align-items:flex-start;}
 .remcard.urgent{border-left:3px solid var(--r400);border-radius:0 12px 12px 0;}
@@ -189,7 +191,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'DM Sans',-apple-sy
 .remact{margin-left:auto;display:flex;flex-direction:column;gap:5px;align-items:flex-end;flex-shrink:0;}
 .ratbtn{background:none;border:.5px solid var(--border);border-radius:7px;padding:4px 9px;font-size:10px;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--text);min-height:28px;-webkit-appearance:none;}
 
-/* ── Report ── */
+/* ─ Report ─ */
 .msel{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap;}
 .mselchip{padding:4px 12px;border-radius:20px;border:.5px solid var(--border);background:none;font-size:11px;font-family:'DM Sans',sans-serif;cursor:pointer;color:var(--text);-webkit-appearance:none;min-height:28px;}
 .mselchip.active{background:var(--t50);color:var(--t600);border-color:var(--t400);}
@@ -201,7 +203,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'DM Sans',-apple-sy
 .rpttable tr:last-child td{border-bottom:none;}
 .expbtn{width:100%;padding:11px;background:var(--t50);color:var(--t600);border:.5px solid var(--t200);border-radius:10px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:7px;min-height:42px;-webkit-appearance:none;}
 
-/* ── Bottom nav ── */
+/* ─ Bottom nav ─ */
 .bnav{display:flex;padding-top:7px;padding-bottom:calc(var(--safe-bottom)+5px);padding-left:max(0px,var(--safe-left));padding-right:max(0px,var(--safe-right));border-top:.5px solid var(--border);background:var(--bg);flex-shrink:0;}
 .nitem{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:none;cursor:pointer;padding:2px;-webkit-appearance:none;min-height:44px;}
 .nico{font-size:18px;line-height:1;}
@@ -210,7 +212,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'DM Sans',-apple-sy
 .ndot{width:4px;height:4px;border-radius:50%;background:var(--t400);margin:0 auto;display:none;}
 .nitem.active .ndot{display:block;}
 
-/* ── Modals ── */
+/* ─ Modals ─ */
 .modal-wrap{display:none;position:absolute;inset:0;background:rgba(0,0,0,.5);z-index:100;align-items:flex-end;}
 .modal-wrap.open{display:flex;}
 .msheet{background:var(--bg);border-radius:20px 20px 0 0;width:100%;padding:13px 17px;padding-bottom:calc(var(--safe-bottom)+22px);max-height:93%;overflow-y:auto;-webkit-overflow-scrolling:touch;}
@@ -224,21 +226,45 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'DM Sans',-apple-sy
 .ftarea:focus{border-color:var(--t400);}
 .frow2{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
 .fsel{width:100%;padding:10px 12px;border:.5px solid var(--border);border-radius:9px;font-size:13px;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);outline:none;-webkit-appearance:none;min-height:42px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 11px center;padding-right:30px;}
+
+/* ─ Patient entry in form ─ */
 .pentry{background:var(--bg2);border-radius:11px;padding:12px;margin-bottom:9px;border:.5px solid var(--border);}
 .pentry-head{display:flex;align-items:center;gap:7px;margin-bottom:10px;padding-bottom:9px;border-bottom:.5px solid var(--border);}
 .pentry-num{width:20px;height:20px;border-radius:50%;background:var(--t400);color:#fff;font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .pentry-label{font-size:12px;font-weight:500;color:var(--text);flex:1;}
 .rmbtn{background:none;border:none;color:var(--r400);font-size:17px;cursor:pointer;min-width:30px;min-height:30px;display:flex;align-items:center;justify-content:center;-webkit-appearance:none;}
-.proc-entry{display:grid;grid-template-columns:1fr 72px 72px 28px;gap:5px;align-items:center;margin-bottom:6px;}
-.proc-entry .finp,.proc-entry .fsel{min-height:36px;font-size:12px;padding:7px 9px;}
-.proc-entry .fsel{padding-right:22px;background-position:right 7px center;}
-.rm-proc-btn{background:none;border:none;color:var(--r400);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;min-width:24px;min-height:24px;-webkit-appearance:none;}
+
+/* ─ Procedure row in form ─ */
+.proc-entry-wrap{margin-bottom:8px;}
+.proc-row-grid{display:grid;grid-template-columns:1fr 70px 90px 28px;gap:5px;align-items:center;}
+.proc-row-grid .finp,.proc-row-grid .fsel{min-height:36px;font-size:12px;padding:7px 9px;}
+.proc-row-grid .fsel{padding-right:22px;background-position:right 6px center;}
+.rm-proc-btn{background:none;border:none;color:var(--r400);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;min-width:24px;min-height:28px;-webkit-appearance:none;}
+.partial-row{display:none;margin-top:6px;padding:8px 10px;background:var(--p50);border-radius:8px;border:.5px solid var(--p100);}
+.partial-row .flbl{color:var(--p800);margin-bottom:4px;}
+.partial-row .finp{background:var(--bg);font-size:13px;min-height:38px;}
+
 .add-proc-btn{width:100%;padding:7px;border:.5px dashed var(--t200);border-radius:7px;background:var(--t50);color:var(--t600);font-size:11px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:4px;margin-bottom:9px;min-height:33px;-webkit-appearance:none;}
 .addpbtn{width:100%;padding:10px;border:.5px dashed var(--t200);border-radius:9px;background:var(--t50);color:var(--t600);font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;min-height:42px;-webkit-appearance:none;}
 .subbtn{width:100%;padding:13px;background:var(--t400);color:#fff;border:none;border-radius:11px;font-size:15px;font-weight:500;cursor:pointer;margin-top:13px;font-family:'DM Sans',sans-serif;min-height:48px;-webkit-appearance:none;}
 .cncl{width:100%;padding:10px;background:none;border:none;color:var(--text2);font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:5px;min-height:42px;}
 .seg-label{font-size:10px;font-weight:500;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin:10px 0 7px;}
-.confirm-overlay{display:none;position:absolute;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center;padding:20px;}
+
+/* ─ Payment options popup ─ */
+.pay-popup-overlay{display:none;position:absolute;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:flex-end;}
+.pay-popup-overlay.open{display:flex;}
+.pay-popup{background:var(--bg);border-radius:20px 20px 0 0;width:100%;padding:16px 18px;padding-bottom:calc(var(--safe-bottom)+20px);}
+.pay-popup-title{font-size:13px;font-weight:500;color:var(--text);margin-bottom:14px;}
+.pay-opt-btn{width:100%;padding:13px;border-radius:10px;border:none;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;margin-bottom:9px;text-align:left;display:flex;align-items:center;gap:10px;-webkit-appearance:none;}
+.pay-opt-received{background:var(--g50);color:var(--g800);}
+.pay-opt-partial{background:var(--p50);color:var(--p800);}
+.pay-partial-inp{background:var(--bg);border:.5px solid var(--border);border-radius:9px;width:100%;padding:10px 12px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--text);outline:none;min-height:42px;margin-bottom:9px;-webkit-appearance:none;display:none;}
+.pay-partial-inp:focus{border-color:var(--p400);}
+.pay-confirm-btn{width:100%;padding:12px;background:var(--p400);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;margin-bottom:9px;display:none;min-height:44px;-webkit-appearance:none;}
+.pay-cancel-btn{width:100%;padding:9px;background:none;border:none;font-size:13px;color:var(--text2);cursor:pointer;font-family:'DM Sans',sans-serif;}
+
+/* ─ Confirm dialog ─ */
+.confirm-overlay{display:none;position:absolute;inset:0;background:rgba(0,0,0,.5);z-index:300;align-items:center;justify-content:center;padding:20px;}
 .confirm-overlay.open{display:flex;}
 .confirm-box{background:var(--bg);border-radius:16px;padding:22px 20px;width:100%;max-width:320px;}
 .confirm-title{font-size:15px;font-weight:500;color:var(--text);margin-bottom:8px;}
@@ -246,6 +272,8 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'DM Sans',-apple-sy
 .confirm-btns{display:flex;gap:9px;}
 .confirm-cancel{flex:1;padding:11px;border:.5px solid var(--border);border-radius:10px;background:none;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--text);cursor:pointer;}
 .confirm-ok{flex:1;padding:11px;border:none;border-radius:10px;background:var(--r400);font-size:13px;font-family:'DM Sans',sans-serif;color:#fff;cursor:pointer;font-weight:500;}
+
+/* ─ Toast ─ */
 .toast{position:absolute;bottom:calc(var(--safe-bottom)+76px);left:50%;transform:translateX(-50%) translateY(8px);background:#1a1a1a;color:#fff;border-radius:18px;padding:9px 18px;font-size:13px;font-weight:500;z-index:400;white-space:nowrap;opacity:0;transition:opacity .25s,transform .25s;pointer-events:none;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 </style>
@@ -253,370 +281,356 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'DM Sans',-apple-sy
 <body>
 <div class="app">
 
-  <!-- ══ SETUP SCREEN ══ -->
-  <div class="setup-screen" id="setup-screen">
-    <div class="setup-logo">🦷</div>
-    <div class="setup-title">Dental Consultation Ledger</div>
-    <div class="setup-sub">Connect your GitHub account to save all your data securely to your private repository — accessible from any device, forever.</div>
-
-    <div class="setup-warn">
-      ⚠️ Make sure your GitHub repo <strong>kirthankotian1993/denttrack</strong> is set to <strong>Private</strong> before pasting your token. Your token is stored only on this device and never sent anywhere except GitHub's API.
-    </div>
-
-    <div class="setup-card">
-      <div class="setup-card-title">How to get your GitHub token</div>
-      <div class="setup-step"><div class="setup-step-num">1</div><div class="setup-step-txt">Go to <strong>github.com</strong> → click your profile photo → <strong>Settings</strong></div></div>
-      <div class="setup-step"><div class="setup-step-num">2</div><div class="setup-step-txt">Scroll down → <strong>Developer settings</strong> → <strong>Personal access tokens</strong> → <strong>Tokens (classic)</strong></div></div>
-      <div class="setup-step"><div class="setup-step-num">3</div><div class="setup-step-txt">Click <strong>Generate new token (classic)</strong> → give it any name</div></div>
-      <div class="setup-step"><div class="setup-step-num">4</div><div class="setup-step-txt">Set expiration to <strong>No expiration</strong></div></div>
-      <div class="setup-step"><div class="setup-step-num">5</div><div class="setup-step-txt">Under Scopes tick only <strong>repo</strong> → click <strong>Generate token</strong></div></div>
-      <div class="setup-step"><div class="setup-step-num">6</div><div class="setup-step-txt">Copy the token and paste it below — GitHub only shows it <strong>once</strong></div></div>
-    </div>
-
-    <input class="setup-inp" type="password" id="token-inp" placeholder="Paste your GitHub token here (ghp_…)" autocomplete="off" autocorrect="off" spellcheck="false"/>
-    <button class="setup-btn" onclick="connectGitHub()">Connect & Start</button>
+<!-- ══ SETUP SCREEN ══ -->
+<div class="setup-screen" id="setup-screen">
+  <div class="setup-logo">🦷</div>
+  <div class="setup-title">Dental Consulting Ledger by KirthanKotian</div>
+  <div class="setup-sub">Connect GitHub to save your data securely — accessible from any device, forever.</div>
+  <div class="setup-warn">⚠️ Make sure <strong>kirthankotian1993/denttrack</strong> is <strong>Private</strong> on GitHub before connecting. Your token is stored only on this device, never in the code.</div>
+  <div class="setup-card">
+    <div class="setup-card-title">How to get your GitHub token</div>
+    <div class="setup-step"><div class="setup-step-num">1</div><div class="setup-step-txt">Go to <strong>github.com</strong> → profile photo → <strong>Settings</strong></div></div>
+    <div class="setup-step"><div class="setup-step-num">2</div><div class="setup-step-txt">Scroll → <strong>Developer settings</strong> → <strong>Personal access tokens</strong> → <strong>Tokens (classic)</strong></div></div>
+    <div class="setup-step"><div class="setup-step-num">3</div><div class="setup-step-txt">Click <strong>Generate new token (classic)</strong> → any name → expiration: <strong>No expiration</strong></div></div>
+    <div class="setup-step"><div class="setup-step-num">4</div><div class="setup-step-txt">Tick only <strong>repo</strong> → click <strong>Generate token</strong> → copy immediately (shown once)</div></div>
   </div>
-
-  <!-- ══ MAIN APP ══ -->
-  <!-- Sync bar -->
-  <div class="sync-bar">
-    <div class="sync-status">
-      <div class="sync-dot" id="sync-dot"></div>
-      <span id="sync-label">Not connected</span>
-    </div>
-    <div style="display:flex;gap:6px;align-items:center">
-      <button class="sync-btn" onclick="syncNow()">↻ Sync</button>
-      <button class="sync-settings-btn" title="GitHub settings" onclick="openSyncSettings()">⚙️</button>
-    </div>
-  </div>
-
-  <!-- Top bar -->
-  <div class="topbar"><div class="topbar-inner">
-    <div class="greet">Good morning,</div>
-    <div class="brand">Dr. Niharika Kotian</div>
-    <div class="dbadge" id="todaylbl">—</div>
-  </div></div>
-
-  <div class="sumstrip">
-    <div class="scard"><div class="sl">Visits</div><div class="sv" id="sv">0</div><div class="ss">this month</div></div>
-    <div class="scard"><div class="sl">Patients</div><div class="sv" id="sp">0</div><div class="ss">treated</div></div>
-    <div class="scard"><div class="sl">Earned</div><div class="sv" id="se">₹0</div><div class="ss">collected</div></div>
-  </div>
-
-  <div class="tabbar">
-    <button class="tbtn active" onclick="sw('visits',this)">Visits</button>
-    <button class="tbtn" onclick="sw('patients',this)">Patients</button>
-    <button class="tbtn" onclick="sw('clinics',this)">Clinics</button>
-    <button class="tbtn" onclick="sw('reminders',this)">Reminders <span class="rembadge" id="rem-badge" style="display:none">0</span></button>
-    <button class="tbtn" onclick="sw('report',this)">Report</button>
-    <button class="tbtn" onclick="sw('analytics',this)">Stats</button>
-  </div>
-
-  <div class="content" id="tab-visits">
-    <div class="sh"><h3>Consultation visits</h3><button class="addbtn" onclick="openVisitModal()">+ Add visit</button></div>
-    <div class="frow">
-      <button class="fchip active" onclick="setF('all',this)">All</button>
-      <button class="fchip" onclick="setF('paid',this)">Paid</button>
-      <button class="fchip" onclick="setF('pending',this)">Pending</button>
-      <button class="fchip" onclick="setF('partial',this)">Partial</button>
-    </div>
-    <div id="vlist"></div>
-  </div>
-
-  <div class="content" id="tab-patients" style="display:none">
-    <div class="sh"><h3>Patient history</h3></div>
-    <input class="searchbox" type="search" placeholder="Search patient name…" id="psearch" oninput="renderPatients()" autocorrect="off" autocapitalize="words"/>
-    <div id="patlist"></div>
-  </div>
-
-  <div class="content" id="tab-clinics" style="display:none">
-    <div class="sh"><h3>Clinics & Hospitals</h3><button class="addbtn" onclick="openClinicModal()">+ Add</button></div>
-    <div id="clinics-list"></div>
-  </div>
-
-  <div class="content" id="tab-reminders" style="display:none">
-    <div class="sh"><h3>Reminders & follow-ups</h3><button class="addbtn" onclick="openRemModal()">+ Add</button></div>
-    <div id="remlist"></div>
-  </div>
-
-  <div class="content" id="tab-report" style="display:none">
-    <div class="sh"><h3>Monthly report</h3></div>
-    <div class="msel" id="month-sel"></div>
-    <div id="report-content"></div>
-  </div>
-
-  <div class="content" id="tab-analytics" style="display:none">
-    <div class="sh"><h3>Overview</h3></div>
-    <div class="sgrid">
-      <div class="sblk"><div class="sbl">Collected</div><div class="sbv" id="ae">₹0</div><div class="sbs">paid</div></div>
-      <div class="sblk"><div class="sbl">Outstanding</div><div class="sbv" id="ap">₹0</div><div class="sbs">pending</div></div>
-      <div class="sblk"><div class="sbl">Clinics</div><div class="sbv" id="acl">0</div><div class="sbs">registered</div></div>
-      <div class="sblk"><div class="sbl">Patients</div><div class="sbv" id="apa">0</div><div class="sbs">treated</div></div>
-    </div>
-    <div class="sh" style="margin-top:4px"><h3>Payment breakdown</h3></div>
-    <div id="pbars"></div>
-    <div class="sh" style="margin-top:13px"><h3>Top clinics</h3></div>
-    <div id="aclist"></div>
-  </div>
-
-  <div class="bnav">
-    <button class="nitem active" onclick="sw('visits',null,this)"><span class="nico">🦷</span><span class="nlbl">Visits</span><div class="ndot"></div></button>
-    <button class="nitem" onclick="sw('patients',null,this)"><span class="nico">👤</span><span class="nlbl">Patients</span><div class="ndot"></div></button>
-    <button class="nitem" onclick="sw('clinics',null,this)"><span class="nico">🏥</span><span class="nlbl">Clinics</span><div class="ndot"></div></button>
-    <button class="nitem" onclick="sw('reminders',null,this)"><span class="nico">🔔</span><span class="nlbl">Reminders</span><div class="ndot"></div></button>
-    <button class="nitem" onclick="sw('report',null,this)"><span class="nico">📄</span><span class="nlbl">Report</span><div class="ndot"></div></button>
-    <button class="nitem" onclick="sw('analytics',null,this)"><span class="nico">📊</span><span class="nlbl">Stats</span><div class="ndot"></div></button>
-  </div>
-
-  <!-- VISIT MODAL -->
-  <div class="modal-wrap" id="visit-modal">
-    <div class="msheet">
-      <div class="mhandle"></div>
-      <div class="mtitle" id="visit-modal-title">New consultation visit</div>
-      <div class="fg"><label class="flbl">Clinic / Hospital</label><select class="fsel" id="fc" style="width:100%"></select></div>
-      <div class="frow2">
-        <div class="fg"><label class="flbl">Date</label><input class="finp" type="date" id="fd"/></div>
-        <div class="fg"><label class="flbl">Shift</label><select class="fsel" id="fs"><option>Morning</option><option>Afternoon</option><option>Evening</option></select></div>
-      </div>
-      <div class="fg"><label class="flbl">Patients treated</label><div id="pentries"></div><button class="addpbtn" onclick="addPatientEntry()">+ Add another patient</button></div>
-      <button class="subbtn" id="visit-save-btn" onclick="saveVisit()">Save visit</button>
-      <button class="cncl" onclick="closeModal('visit-modal')">Cancel</button>
-    </div>
-  </div>
-
-  <!-- CLINIC MODAL -->
-  <div class="modal-wrap" id="clinic-modal">
-    <div class="msheet">
-      <div class="mhandle"></div>
-      <div class="mtitle" id="clinic-modal-title">Add clinic / hospital</div>
-      <div class="fg"><label class="flbl">Name</label><input class="finp" id="cln" placeholder="e.g. Apollo Dental Centre"/></div>
-      <div class="fg"><label class="flbl">Type</label><select class="fsel" id="cltype"><option>Dental Clinic</option><option>Hospital</option><option>Dental College</option><option>Other</option></select></div>
-      <div class="fg"><label class="flbl">Location</label><input class="finp" id="clloc" placeholder="e.g. Koramangala, Bengaluru"/></div>
-      <div class="fg"><label class="flbl">Phone (optional)</label><input class="finp" id="clphone" placeholder="9876543210" inputmode="tel"/></div>
-      <div class="fg"><label class="flbl">Notes (optional)</label><textarea class="ftarea" id="clnotes" placeholder="Working hours, contact person…"></textarea></div>
-      <button class="subbtn" id="clinic-save-btn" onclick="saveClinic()">Save clinic</button>
-      <button class="cncl" onclick="closeModal('clinic-modal')">Cancel</button>
-    </div>
-  </div>
-
-  <!-- REMINDER MODAL -->
-  <div class="modal-wrap" id="rem-modal">
-    <div class="msheet">
-      <div class="mhandle"></div>
-      <div class="mtitle">New reminder</div>
-      <div class="fg"><label class="flbl">Title</label><input class="finp" id="rt" placeholder="e.g. Follow up with Ravi Kumar"/></div>
-      <div class="frow2">
-        <div class="fg"><label class="flbl">Date</label><input class="finp" type="date" id="rd"/></div>
-        <div class="fg"><label class="flbl">Type</label><select class="fsel" id="rtype"><option>Follow-up</option><option>Payment due</option><option>Appointment</option><option>Medication</option><option>Other</option></select></div>
-      </div>
-      <div class="fg"><label class="flbl">Note (optional)</label><input class="finp" id="rnote" placeholder="Add details…"/></div>
-      <button class="subbtn" onclick="saveReminder()">Save reminder</button>
-      <button class="cncl" onclick="closeModal('rem-modal')">Cancel</button>
-    </div>
-  </div>
-
-  <!-- PATIENT MODAL -->
-  <div class="modal-wrap" id="patient-modal">
-    <div class="msheet"><div class="mhandle"></div><div id="pat-modal-content"></div><button class="cncl" onclick="closeModal('patient-modal')">Close</button></div>
-  </div>
-
-  <!-- SYNC SETTINGS MODAL -->
-  <div class="modal-wrap" id="sync-modal">
-    <div class="msheet">
-      <div class="mhandle"></div>
-      <div class="mtitle">GitHub sync settings</div>
-      <div style="font-size:12px;color:var(--text2);margin-bottom:14px;line-height:1.6">
-        Your data saves to <strong style="color:var(--text)">kirthankotian1993/denttrack/data.json</strong> on GitHub.<br>
-        Your token is stored only on this device.
-      </div>
-      <div class="fg"><label class="flbl">GitHub token</label><input class="finp" type="password" id="token-update-inp" placeholder="Paste new token to update…" autocomplete="off"/></div>
-      <button class="subbtn" onclick="updateToken()" style="background:var(--b400)">Update token</button>
-      <button class="cncl" onclick="closeModal('sync-modal')" style="color:var(--text2)">Close</button>
-      <div style="margin-top:16px;padding-top:14px;border-top:.5px solid var(--border)">
-        <button onclick="confirmDisconnect()" style="width:100%;padding:11px;border:.5px solid var(--r100);border-radius:10px;background:var(--r50);color:var(--r800);font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer">Disconnect & reset token</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- CONFIRM -->
-  <div class="confirm-overlay" id="confirm-overlay">
-    <div class="confirm-box">
-      <div class="confirm-title" id="confirm-title">Delete?</div>
-      <div class="confirm-body" id="confirm-body">This cannot be undone.</div>
-      <div class="confirm-btns">
-        <button class="confirm-cancel" onclick="closeConfirm()">Cancel</button>
-        <button class="confirm-ok" id="confirm-ok-btn">Delete</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="toast" id="toast"></div>
+  <input class="setup-inp" type="password" id="token-inp" placeholder="Paste your GitHub token (ghp_…)" autocomplete="off" autocorrect="off" spellcheck="false"/>
+  <button class="setup-btn" onclick="connectGitHub()">Connect &amp; Start</button>
 </div>
 
-<script>
-// ── Config ────────────────────────────────────────────────
-const GH_OWNER = 'kirthankotian1993';
-const GH_REPO  = 'denttrack';
-const GH_FILE  = 'data.json';
-const GH_BRANCH= 'main';
-const TOKEN_KEY= 'denttrack_gh_token';
-const DATA_KEY = 'denttrack_v3_data';
+<!-- SYNC BAR -->
+<div class="sync-bar">
+  <div class="sync-status"><div class="sync-dot" id="sync-dot"></div><span id="sync-label">Not connected</span></div>
+  <div style="display:flex;gap:6px;align-items:center">
+    <button class="sync-btn" onclick="syncNow()">↻ Sync</button>
+    <button class="sync-settings-btn" onclick="openSyncSettings()">⚙️</button>
+  </div>
+</div>
 
-const PROCS['Composite Filling','Consultation','Crown','Extraction','Flouride','GIC-Filling','Habbit Breaking Appliance','Pulpectomy','Pulpotomy','Restoration','Scaling','Sealent','Space Maintainer','Other'];
+<!-- TOP BAR -->
+<div class="topbar"><div class="topbar-inner">
+  <div class="greet">Good morning,</div>
+  <div class="brand">Dr. Niharika Kotian</div>
+  <div class="dbadge" id="todaylbl">—</div>
+</div></div>
+
+<div class="sumstrip">
+  <div class="scard"><div class="sl">Visits</div><div class="sv" id="sv">0</div><div class="ss">this month</div></div>
+  <div class="scard"><div class="sl">Patients</div><div class="sv" id="sp">0</div><div class="ss">treated</div></div>
+  <div class="scard"><div class="sl">Earned</div><div class="sv" id="se">₹0</div><div class="ss">collected</div></div>
+</div>
+
+<div class="tabbar">
+  <button class="tbtn active" onclick="sw('visits',this)">Visits</button>
+  <button class="tbtn" onclick="sw('patients',this)">Patients</button>
+  <button class="tbtn" onclick="sw('clinics',this)">Clinics</button>
+  <button class="tbtn" onclick="sw('reminders',this)">Reminders <span class="rembadge" id="rem-badge" style="display:none">0</span></button>
+  <button class="tbtn" onclick="sw('report',this)">Report</button>
+  <button class="tbtn" onclick="sw('analytics',this)">Stats</button>
+</div>
+
+<!-- VISITS -->
+<div class="content" id="tab-visits">
+  <div class="sh"><h3>Consultation visits</h3><button class="addbtn" onclick="openVisitModal()">+ Add visit</button></div>
+  <div class="frow">
+    <button class="fchip active" onclick="setF('all',this)">All</button>
+    <button class="fchip" onclick="setF('paid',this)">Paid</button>
+    <button class="fchip" onclick="setF('pending',this)">Pending</button>
+    <button class="fchip" onclick="setF('partial',this)">Partial</button>
+  </div>
+  <div id="vlist"></div>
+</div>
+
+<!-- PATIENTS -->
+<div class="content" id="tab-patients" style="display:none">
+  <div class="sh"><h3>Patient history</h3></div>
+  <input class="searchbox" type="search" placeholder="Search patient name…" id="psearch" oninput="renderPatients()" autocorrect="off" autocapitalize="words"/>
+  <div id="patlist"></div>
+</div>
+
+<!-- CLINICS -->
+<div class="content" id="tab-clinics" style="display:none">
+  <div class="sh"><h3>Clinics &amp; Hospitals</h3><button class="addbtn" onclick="openClinicModal()">+ Add</button></div>
+  <div id="clinics-list"></div>
+</div>
+
+<!-- REMINDERS -->
+<div class="content" id="tab-reminders" style="display:none">
+  <div class="sh"><h3>Reminders &amp; follow-ups</h3><button class="addbtn" onclick="openRemModal()">+ Add</button></div>
+  <div id="remlist"></div>
+</div>
+
+<!-- REPORT -->
+<div class="content" id="tab-report" style="display:none">
+  <div class="sh"><h3>Monthly report</h3></div>
+  <div class="msel" id="month-sel"></div>
+  <div id="report-content"></div>
+</div>
+
+<!-- ANALYTICS -->
+<div class="content" id="tab-analytics" style="display:none">
+  <div class="sh"><h3>Overview</h3></div>
+  <div class="sgrid">
+    <div class="sblk"><div class="sbl">Collected</div><div class="sbv" id="ae">₹0</div><div class="sbs">paid</div></div>
+    <div class="sblk"><div class="sbl">Outstanding</div><div class="sbv" id="ap">₹0</div><div class="sbs">pending</div></div>
+    <div class="sblk"><div class="sbl">Clinics</div><div class="sbv" id="acl">0</div><div class="sbs">registered</div></div>
+    <div class="sblk"><div class="sbl">Patients</div><div class="sbv" id="apa">0</div><div class="sbs">treated</div></div>
+  </div>
+  <div class="sh" style="margin-top:4px"><h3>Payment breakdown</h3></div>
+  <div id="pbars"></div>
+  <div class="sh" style="margin-top:13px"><h3>Top clinics</h3></div>
+  <div id="aclist"></div>
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="bnav">
+  <button class="nitem active" onclick="sw('visits',null,this)"><span class="nico">🦷</span><span class="nlbl">Visits</span><div class="ndot"></div></button>
+  <button class="nitem" onclick="sw('patients',null,this)"><span class="nico">👤</span><span class="nlbl">Patients</span><div class="ndot"></div></button>
+  <button class="nitem" onclick="sw('clinics',null,this)"><span class="nico">🏥</span><span class="nlbl">Clinics</span><div class="ndot"></div></button>
+  <button class="nitem" onclick="sw('reminders',null,this)"><span class="nico">🔔</span><span class="nlbl">Reminders</span><div class="ndot"></div></button>
+  <button class="nitem" onclick="sw('report',null,this)"><span class="nico">📄</span><span class="nlbl">Report</span><div class="ndot"></div></button>
+  <button class="nitem" onclick="sw('analytics',null,this)"><span class="nico">📊</span><span class="nlbl">Stats</span><div class="ndot"></div></button>
+</div>
+
+<!-- VISIT MODAL -->
+<div class="modal-wrap" id="visit-modal">
+  <div class="msheet">
+    <div class="mhandle"></div>
+    <div class="mtitle" id="visit-modal-title">New consultation visit</div>
+    <div class="fg"><label class="flbl">Clinic / Hospital</label><select class="fsel" id="fc" style="width:100%"></select></div>
+    <div class="frow2">
+      <div class="fg"><label class="flbl">Date</label><input class="finp" type="date" id="fd"/></div>
+      <div class="fg"><label class="flbl">Shift</label><select class="fsel" id="fs"><option>Morning</option><option>Afternoon</option><option>Evening</option></select></div>
+    </div>
+    <div class="fg"><label class="flbl">Patients treated</label><div id="pentries"></div><button class="addpbtn" onclick="addPatientEntry()">+ Add another patient</button></div>
+    <button class="subbtn" id="visit-save-btn" onclick="saveVisit()">Save visit</button>
+    <button class="cncl" onclick="closeModal('visit-modal')">Cancel</button>
+  </div>
+</div>
+
+<!-- CLINIC MODAL -->
+<div class="modal-wrap" id="clinic-modal">
+  <div class="msheet">
+    <div class="mhandle"></div>
+    <div class="mtitle" id="clinic-modal-title">Add clinic / hospital</div>
+    <div class="fg"><label class="flbl">Name</label><input class="finp" id="cln" placeholder="e.g. Apollo Dental Centre"/></div>
+    <div class="fg"><label class="flbl">Type</label><select class="fsel" id="cltype"><option>Dental Clinic</option><option>Hospital</option><option>Dental College</option><option>Other</option></select></div>
+    <div class="fg"><label class="flbl">Location</label><input class="finp" id="clloc" placeholder="e.g. Koramangala, Bengaluru"/></div>
+    <div class="fg"><label class="flbl">Phone (optional)</label><input class="finp" id="clphone" placeholder="9738354989" inputmode="tel"/></div>
+    <div class="fg"><label class="flbl">Notes (optional)</label><textarea class="ftarea" id="clnotes" placeholder="Working hours, contact person…"></textarea></div>
+    <button class="subbtn" id="clinic-save-btn" onclick="saveClinic()">Save clinic</button>
+    <button class="cncl" onclick="closeModal('clinic-modal')">Cancel</button>
+  </div>
+</div>
+
+<!-- REMINDER MODAL -->
+<div class="modal-wrap" id="rem-modal">
+  <div class="msheet">
+    <div class="mhandle"></div>
+    <div class="mtitle">New reminder</div>
+    <div class="fg"><label class="flbl">Title</label><input class="finp" id="rt" placeholder="e.g. Follow up with Ravi Kumar"/></div>
+    <div class="frow2">
+      <div class="fg"><label class="flbl">Date</label><input class="finp" type="date" id="rd"/></div>
+      <div class="fg"><label class="flbl">Type</label><select class="fsel" id="rtype"><option>Follow-up</option><option>Payment due</option><option>Appointment</option><option>Medication</option><option>Other</option></select></div>
+    </div>
+    <div class="fg"><label class="flbl">Note (optional)</label><input class="finp" id="rnote" placeholder="Add details…"/></div>
+    <button class="subbtn" onclick="saveReminder()">Save reminder</button>
+    <button class="cncl" onclick="closeModal('rem-modal')">Cancel</button>
+  </div>
+</div>
+
+<!-- PATIENT MODAL -->
+<div class="modal-wrap" id="patient-modal">
+  <div class="msheet"><div class="mhandle"></div><div id="pat-modal-content"></div><button class="cncl" onclick="closeModal('patient-modal')">Close</button></div>
+</div>
+
+<!-- SYNC SETTINGS MODAL -->
+<div class="modal-wrap" id="sync-modal">
+  <div class="msheet">
+    <div class="mhandle"></div>
+    <div class="mtitle">GitHub sync settings</div>
+    <div style="font-size:12px;color:var(--text2);margin-bottom:14px;line-height:1.6">Data saves to <strong style="color:var(--text)">kirthankotian1993/denttrack/data.json</strong>. Token stored only on this device.</div>
+    <div class="fg"><label class="flbl">Update GitHub token</label><input class="finp" type="password" id="token-update-inp" placeholder="Paste new token…" autocomplete="off"/></div>
+    <button class="subbtn" onclick="updateToken()" style="background:var(--b400)">Update token</button>
+    <button class="cncl" onclick="closeModal('sync-modal')">Close</button>
+    <div style="margin-top:14px;padding-top:13px;border-top:.5px solid var(--border)">
+      <button onclick="confirmDisconnect()" style="width:100%;padding:11px;border:.5px solid var(--r100);border-radius:10px;background:var(--r50);color:var(--r800);font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer">Disconnect &amp; reset token</button>
+    </div>
+  </div>
+</div>
+
+<!-- PAYMENT OPTIONS POPUP -->
+<div class="pay-popup-overlay" id="pay-popup">
+  <div class="pay-popup">
+    <div class="pay-popup-title" id="pay-popup-title">Record payment</div>
+    <button class="pay-opt-btn pay-opt-received" onclick="selectPayReceived()">
+      <span style="font-size:16px">✅</span>
+      <div><div style="font-weight:500">Fully received</div><div style="font-size:11px;opacity:.8">Mark entire amount as paid</div></div>
+    </button>
+    <button class="pay-opt-btn pay-opt-partial" onclick="showPartialInput()">
+      <span style="font-size:16px">🔵</span>
+      <div><div style="font-weight:500">Partial payment</div><div style="font-size:11px;opacity:.8">Enter amount received so far</div></div>
+    </button>
+    <input class="pay-partial-inp" type="number" inputmode="numeric" id="pay-partial-amt" placeholder="Enter partial amount (₹)" min="0"/>
+    <button class="pay-confirm-btn" id="pay-confirm-btn" onclick="confirmPartial()">Confirm partial payment</button>
+    <button class="pay-cancel-btn" onclick="closePayPopup()">Cancel</button>
+  </div>
+</div>
+
+<!-- CONFIRM DIALOG -->
+<div class="confirm-overlay" id="confirm-overlay">
+  <div class="confirm-box">
+    <div class="confirm-title" id="confirm-title">Delete?</div>
+    <div class="confirm-body" id="confirm-body">This cannot be undone.</div>
+    <div class="confirm-btns">
+      <button class="confirm-cancel" onclick="closeConfirm()">Cancel</button>
+      <button class="confirm-ok" id="confirm-ok-btn">Delete</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+</div><!-- .app -->
+
+<script>
+// ══ CONFIG ═══════════════════════════════════════════════
+const GH_OWNER='kirthankotian1993', GH_REPO='denttrack', GH_FILE='data.json', GH_BRANCH='main';
+const TOKEN_KEY='denttrack_gh_token', DATA_KEY='denttrack_v4';
+const PROCS=['Scaling','Extraction','RCT','Crown','Filling','Whitening','Braces','Consultation','Implant','X-Ray','Denture','Root Canal','Other'];
 const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
 const MS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
-// ── State ─────────────────────────────────────────────────
+// ══ STATE ════════════════════════════════════════════════
 let visits=[],reminders=[],clinics=[],curFilter='all',selMonth,selYear;
 let pEId=0,prEId=0,editVId=null,editCId=null;
-let ghToken='', ghFileSha='', syncPending=false, lastSynced=null;
+let ghToken='',ghFileSha='',syncTimer=null;
+// payCtx: context for pay popup
+let payCtx={vid:null,pname:null,pi:null};
+
 const today=new Date();
 selMonth=today.getMonth(); selYear=today.getFullYear();
 document.getElementById('todaylbl').textContent=today.getDate()+' '+MS[today.getMonth()]+' '+today.getFullYear();
 
-// ── GitHub API ────────────────────────────────────────────
-const GH_API = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_FILE}`;
+// ══ PAYMENT HELPERS ═══════════════════════════════════════
+// payStatus: 'received' | 'partial' | 'pending'
+// partialAmt: number (amount paid when partial)
+const prPaid   =pr=>pr.payStatus==='received'?pr.fee:pr.payStatus==='partial'?(pr.partialAmt||0):0;
+const prPending=pr=>pr.fee-prPaid(pr);
 
+const visitStatus=v=>{
+  let allRec=true,allPend=true;
+  v.patients.forEach(p=>p.procedures.forEach(pr=>{
+    if(pr.payStatus!=='received')allRec=false;
+    if(pr.payStatus!=='pending')allPend=false;
+  }));
+  return allRec?'paid':allPend?'pending':'partial';
+};
+const pillC=s=>({paid:'ppaid',pending:'ppend',partial:'ppart'})[s];
+const pillL=s=>({paid:'Paid',pending:'Pending',partial:'Partial'})[s];
+const patTotal=p=>p.procedures.reduce((a,pr)=>a+pr.fee,0);
+const patPaid =p=>p.procedures.reduce((a,pr)=>a+prPaid(pr),0);
+const vTotals =v=>{let t=0,p=0;v.patients.forEach(pt=>{t+=patTotal(pt);p+=patPaid(pt);});return{total:t,paid:p,pending:t-p};};
+
+// ══ GITHUB API ════════════════════════════════════════════
+const GH_API=`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_FILE}`;
 async function ghGet(){
-  const r=await fetch(GH_API+'?ref='+GH_BRANCH+'&t='+Date.now(),{headers:{Authorization:'token '+ghToken,'Accept':'application/vnd.github.v3+json'}});
-  if(r.status===404) return null; // file doesn't exist yet
-  if(!r.ok) throw new Error('GitHub read failed: '+r.status);
-  const j=await r.json();
-  ghFileSha=j.sha;
+  const r=await fetch(GH_API+'?ref='+GH_BRANCH+'&_='+Date.now(),{headers:{Authorization:'token '+ghToken,'Accept':'application/vnd.github.v3+json'}});
+  if(r.status===404)return null;
+  if(!r.ok)throw new Error('GitHub read failed: '+r.status);
+  const j=await r.json();ghFileSha=j.sha;
   return JSON.parse(atob(j.content.replace(/\n/g,'')));
 }
-
 async function ghPut(data){
   const content=btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2))));
   const body={message:'DentTrack sync '+new Date().toISOString(),content,branch:GH_BRANCH};
-  if(ghFileSha) body.sha=ghFileSha;
+  if(ghFileSha)body.sha=ghFileSha;
   const r=await fetch(GH_API,{method:'PUT',headers:{Authorization:'token '+ghToken,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},body:JSON.stringify(body)});
-  if(!r.ok){const e=await r.json();throw new Error(e.message||'GitHub write failed: '+r.status);}
-  const j=await r.json();
-  ghFileSha=j.content.sha;
+  if(!r.ok){const e=await r.json();throw new Error(e.message||'Write failed: '+r.status);}
+  const j=await r.json();ghFileSha=j.content.sha;
 }
 
-// ── Sync state display ────────────────────────────────────
+// ══ SYNC ══════════════════════════════════════════════════
 function setSyncStatus(state,msg){
-  const dot=document.getElementById('sync-dot');
-  const lbl=document.getElementById('sync-label');
-  dot.className='sync-dot '+state;
-  lbl.textContent=msg;
+  document.getElementById('sync-dot').className='sync-dot '+state;
+  document.getElementById('sync-label').textContent=msg;
 }
-
-// ── Save + sync ───────────────────────────────────────────
-let syncTimer=null;
-function saveLocal(){
-  try{localStorage.setItem(DATA_KEY,JSON.stringify({visits,reminders,clinics,ghFileSha}));}catch(e){}
-}
+function saveLocal(){try{localStorage.setItem(DATA_KEY,JSON.stringify({visits,reminders,clinics,ghFileSha}));}catch(e){}}
 function scheduleSync(){
-  saveLocal();
-  setSyncStatus('syncing','Saving…');
-  clearTimeout(syncTimer);
-  syncTimer=setTimeout(()=>doSync(),1500);
+  saveLocal();setSyncStatus('syncing','Saving…');
+  clearTimeout(syncTimer);syncTimer=setTimeout(doSync,1500);
 }
 async function doSync(){
   if(!ghToken){setSyncStatus('error','No token');return;}
   setSyncStatus('syncing','Syncing…');
   try{
     await ghPut({visits,reminders,clinics,savedAt:new Date().toISOString()});
-    lastSynced=new Date();
-    saveLocal();
-    setSyncStatus('synced','Saved to GitHub · '+lastSynced.toLocaleTimeString());
-    toast('✓ Synced to GitHub');
-  }catch(e){
-    setSyncStatus('error','Sync failed — '+e.message);
-    toast('⚠ Sync failed: '+e.message);
-  }
+    saveLocal();setSyncStatus('synced','Saved to GitHub · '+new Date().toLocaleTimeString());
+  }catch(e){setSyncStatus('error','Sync failed — '+e.message);toast('⚠ '+e.message);}
 }
 async function syncNow(){
   if(!ghToken){toast('⚠ Connect GitHub first');return;}
   setSyncStatus('syncing','Pulling latest…');
   try{
     const remote=await ghGet();
-    if(remote){
-      visits=remote.visits||[];reminders=remote.reminders||[];clinics=remote.clinics||[];
-      migrateData();saveLocal();renderAll();renderReminders();
-      setSyncStatus('synced','Synced · '+new Date().toLocaleTimeString());
-      toast('✓ Latest data loaded');
-    } else {
-      await doSync();
-    }
+    if(remote){visits=remote.visits||[];reminders=remote.reminders||[];clinics=remote.clinics||[];migrateData();saveLocal();renderAll();renderReminders();setSyncStatus('synced','Synced · '+new Date().toLocaleTimeString());toast('✓ Latest data loaded');}
+    else await doSync();
   }catch(e){setSyncStatus('error','Pull failed');toast('⚠ '+e.message);}
 }
 
-// ── Setup / token ─────────────────────────────────────────
+// ══ SETUP ════════════════════════════════════════════════
 async function connectGitHub(){
   const tok=document.getElementById('token-inp').value.trim();
   if(!tok){toast('⚠ Paste your GitHub token');return;}
-  if(!tok.startsWith('ghp_')&&!tok.startsWith('github_pat_')){toast('⚠ Token should start with ghp_ or github_pat_');return;}
-  ghToken=tok;
-  localStorage.setItem(TOKEN_KEY,tok);
-  setSyncStatus('syncing','Connecting…');
+  ghToken=tok;localStorage.setItem(TOKEN_KEY,tok);setSyncStatus('syncing','Connecting…');
   try{
     const remote=await ghGet();
-    if(remote){
-      visits=remote.visits||[];reminders=remote.reminders||[];clinics=remote.clinics||[];
-      migrateData();saveLocal();
-      toast('✓ Connected! Data loaded from GitHub');
-    } else {
-      toast('✓ Connected! Fresh start — no existing data found');
-    }
+    if(remote){visits=remote.visits||[];reminders=remote.reminders||[];clinics=remote.clinics||[];migrateData();saveLocal();toast('✓ Connected! Data loaded');}
+    else toast('✓ Connected! Fresh start');
     document.getElementById('setup-screen').classList.add('hidden');
-    renderAll();renderReminders();
-    setSyncStatus('synced','Connected to GitHub');
+    renderAll();renderReminders();setSyncStatus('synced','Connected to GitHub');
   }catch(e){
-    ghToken='';localStorage.removeItem(TOKEN_KEY);
-    setSyncStatus('error','Connection failed');
-    toast('⚠ Failed: '+e.message+'. Check token and repo visibility.');
+    ghToken='';localStorage.removeItem(TOKEN_KEY);setSyncStatus('error','Failed');
+    toast('⚠ '+e.message+'. Check token & repo visibility.');
   }
 }
 function updateToken(){
   const tok=document.getElementById('token-update-inp').value.trim();
   if(!tok){toast('⚠ Enter a token');return;}
-  ghToken=tok;localStorage.setItem(TOKEN_KEY,tok);
-  closeModal('sync-modal');toast('✓ Token updated');setSyncStatus('synced','Token updated');
+  ghToken=tok;localStorage.setItem(TOKEN_KEY,tok);closeModal('sync-modal');toast('✓ Token updated');setSyncStatus('synced','Token updated');
 }
 function openSyncSettings(){document.getElementById('sync-modal').classList.add('open');}
 function confirmDisconnect(){
-  showConfirm('Disconnect GitHub?','Your local data stays on this device but GitHub sync will stop until you reconnect.',()=>{
-    ghToken='';localStorage.removeItem(TOKEN_KEY);
-    setSyncStatus('','Not connected');
-    closeModal('sync-modal');
-    document.getElementById('setup-screen').classList.remove('hidden');
-    toast('Disconnected');
+  showConfirm('Disconnect GitHub?','Sync stops until you reconnect. Local data stays.',()=>{
+    ghToken='';localStorage.removeItem(TOKEN_KEY);setSyncStatus('','Not connected');
+    closeModal('sync-modal');document.getElementById('setup-screen').classList.remove('hidden');toast('Disconnected');
   });
 }
 
-// ── Data migration ────────────────────────────────────────
+// ══ DATA MIGRATION ════════════════════════════════════════
 function migrateData(){
   visits=visits.map(v=>({...v,patients:v.patients.map(p=>{
-    if(p.procedures) return p;
-    return{name:p.name,notes:p.notes||'',procedures:[{procedure:p.procedure||'Consultation',fee:p.fee||0,paid:p.paid||false}]};
+    const procs=p.procedures
+      ?p.procedures.map(pr=>{
+          if(pr.payStatus)return pr;
+          // old format: paid:bool
+          return{procedure:pr.procedure,fee:pr.fee||0,payStatus:pr.paid?'received':'pending',partialAmt:0};
+        })
+      :[{procedure:p.procedure||'Consultation',fee:p.fee||0,payStatus:p.paid?'received':'pending',partialAmt:0}];
+    return{name:p.name,notes:p.notes||'',procedures:procs};
   })}));
 }
-
-// ── Load from local storage ───────────────────────────────
 function loadLocal(){
   try{
     const d=JSON.parse(localStorage.getItem(DATA_KEY));
     if(d&&d.visits){visits=d.visits;reminders=d.reminders||[];clinics=d.clinics||[];ghFileSha=d.ghFileSha||'';migrateData();return true;}
-  }catch(e){}
-  return false;
+  }catch(e){}return false;
 }
 
-// ── Helpers ───────────────────────────────────────────────
+// ══ HELPERS ═══════════════════════════════════════════════
 const fmtDate=d=>{const dt=new Date(d);return dt.getDate()+' '+MS[dt.getMonth()]+' '+dt.getFullYear();};
 const initials=n=>n.trim().split(' ').slice(0,2).map(w=>w[0]||'').join('').toUpperCase()||'?';
 const fmtRs=n=>n>=1000?'₹'+(n/1000).toFixed(1)+'k':'₹'+n;
 const esc=s=>(s||'').replace(/'/g,"\\'");
-const visitStatus=v=>{let t=0,p=0;v.patients.forEach(pt=>pt.procedures.forEach(pr=>{t++;if(pr.paid)p++;}));return p===t?'paid':p===0?'pending':'partial';};
-const pillC=s=>({paid:'ppaid',pending:'ppend',partial:'ppart'})[s];
-const pillL=s=>({paid:'Paid',pending:'Pending',partial:'Partial'})[s];
-const patTotal=p=>p.procedures.reduce((a,pr)=>a+pr.fee,0);
-const patPaid=p=>p.procedures.filter(pr=>pr.paid).reduce((a,pr)=>a+pr.fee,0);
-const vTotals=v=>{let t=0,p=0;v.patients.forEach(pt=>{t+=patTotal(pt);p+=patPaid(pt);});return{total:t,paid:p,pending:t-p};};
-
 let toastTimer;
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2600);}
 
@@ -626,24 +640,80 @@ function updateSummary(){
   document.getElementById('sv').textContent=s.visits;
   document.getElementById('sp').textContent=s.pats;
   document.getElementById('se').textContent=fmtRs(s.paid);
-  const ae=document.getElementById('ae');if(ae)ae.textContent='₹'+s.paid.toLocaleString();
-  const ap=document.getElementById('ap');if(ap)ap.textContent='₹'+s.pending.toLocaleString();
-  const apa=document.getElementById('apa');if(apa)apa.textContent=s.pats;
-  const acl=document.getElementById('acl');if(acl)acl.textContent=clinics.length;
+  ['ae','ap','apa','acl'].forEach(id=>{
+    const el=document.getElementById(id);if(!el)return;
+    if(id==='ae')el.textContent='₹'+s.paid.toLocaleString();
+    else if(id==='ap')el.textContent='₹'+s.pending.toLocaleString();
+    else if(id==='apa')el.textContent=s.pats;
+    else if(id==='acl')el.textContent=clinics.length;
+  });
 }
 
-// ── Visits ────────────────────────────────────────────────
+// ══ PAYMENT POPUP ══════════════════════════════════════════
+function openPayPopup(vid,pname,pi){
+  const v=visits.find(x=>x.id===vid);
+  const p=v&&v.patients.find(x=>x.name===pname);
+  if(!p)return;const pr=p.procedures[pi];
+  payCtx={vid,pname,pi};
+  document.getElementById('pay-popup-title').textContent=`${pr.procedure} — ₹${pr.fee.toLocaleString()}`;
+  // reset partial input UI
+  document.getElementById('pay-partial-amt').value='';
+  document.getElementById('pay-partial-amt').style.display='none';
+  document.getElementById('pay-confirm-btn').style.display='none';
+  document.getElementById('pay-popup').classList.add('open');
+}
+function closePayPopup(){document.getElementById('pay-popup').classList.remove('open');}
+function showPartialInput(){
+  document.getElementById('pay-partial-amt').style.display='block';
+  document.getElementById('pay-confirm-btn').style.display='block';
+  document.getElementById('pay-partial-amt').focus();
+}
+function selectPayReceived(){
+  const{vid,pname,pi}=payCtx;
+  const v=visits.find(x=>x.id===vid);
+  const p=v&&v.patients.find(x=>x.name===pname);
+  if(p&&p.procedures[pi]){p.procedures[pi].payStatus='received';p.procedures[pi].partialAmt=0;}
+  closePayPopup();scheduleSync();toast('✓ Fully received');renderAll();
+  const el=document.getElementById('vc-'+vid);if(el)el.classList.add('expanded');
+}
+function confirmPartial(){
+  const amt=parseFloat(document.getElementById('pay-partial-amt').value)||0;
+  if(amt<=0){toast('⚠ Enter a valid amount');return;}
+  const{vid,pname,pi}=payCtx;
+  const v=visits.find(x=>x.id===vid);
+  const p=v&&v.patients.find(x=>x.name===pname);
+  if(p&&p.procedures[pi]){
+    const pr=p.procedures[pi];
+    if(amt>=pr.fee){pr.payStatus='received';pr.partialAmt=0;toast('✓ Fully received');}
+    else{pr.payStatus='partial';pr.partialAmt=amt;toast(`✓ ₹${amt.toLocaleString()} recorded`);}
+  }
+  closePayPopup();scheduleSync();renderAll();
+  const el=document.getElementById('vc-'+vid);if(el)el.classList.add('expanded');
+}
+function cycleToReceived(vid,pname,pi){
+  // called when already partial or received → cycle to next state
+  const v=visits.find(x=>x.id===vid);const p=v&&v.patients.find(x=>x.name===pname);
+  if(!p||!p.procedures[pi])return;
+  const pr=p.procedures[pi];
+  if(pr.payStatus==='received'){pr.payStatus='pending';pr.partialAmt=0;scheduleSync();toast('Marked as pending');renderAll();const el=document.getElementById('vc-'+vid);if(el)el.classList.add('expanded');}
+  else if(pr.payStatus==='partial'){pr.payStatus='received';pr.partialAmt=0;scheduleSync();toast('✓ Fully received');renderAll();const el=document.getElementById('vc-'+vid);if(el)el.classList.add('expanded');}
+}
+
+// ══ VISITS RENDER ══════════════════════════════════════════
 function renderVisits(){
   const el=document.getElementById('vlist');
   let vs=visits;
-  if(curFilter!=='all') vs=visits.filter(v=>visitStatus(v)===curFilter);
+  if(curFilter!=='all')vs=visits.filter(v=>visitStatus(v)===curFilter);
   if(!vs.length){el.innerHTML='<div class="empty"><div class="ei">🦷</div><p>No visits found.<br>Tap "+ Add visit" to get started.</p></div>';return;}
   el.innerHTML=vs.map(v=>{
     const st=visitStatus(v),tt=vTotals(v);
     const pc=v.patients.reduce((a,p)=>a+p.procedures.length,0);
     return`<div class="vcard" id="vc-${v.id}">
       <div class="vcard-top" onclick="toggleVC(${v.id})">
-        <div style="flex:1;min-width:0"><div class="vct" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${v.clinic}</div><div class="vcd">${fmtDate(v.date)} · ${v.shift}</div></div>
+        <div style="flex:1;min-width:0">
+          <div class="vct" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${v.clinic}</div>
+          <div class="vcd">${fmtDate(v.date)} · ${v.shift}</div>
+        </div>
         <div class="vcard-right" onclick="event.stopPropagation()">
           <span class="spill ${pillC(st)}">${pillL(st)}</span>
           <button class="icon-btn" onclick="openEditVisit(${v.id})">✏️</button>
@@ -661,15 +731,30 @@ function renderVisits(){
           return`<div class="pat-block">
             <div class="pat-block-hdr">
               <div class="pav" onclick="viewPat('${esc(p.name)}')">${initials(p.name)}</div>
-              <div class="pat-name-col"><div class="pname">${p.name}</div><div class="pat-sub">₹${pp.toLocaleString()} / ₹${pt.toLocaleString()}</div></div>
+              <div class="pat-name-col">
+                <div class="pname">${p.name}</div>
+                <div class="pat-sub">₹${pp.toLocaleString()} collected / ₹${pt.toLocaleString()} total</div>
+              </div>
             </div>
-            ${p.procedures.map((pr,pi)=>`
-              <div class="proc-row">
+            ${p.procedures.map((pr,pi)=>{
+              const ps=pr.payStatus||'pending';
+              const paid=prPaid(pr),pend=prPending(pr);
+              const feeColor=ps==='received'?'var(--g400)':ps==='partial'?'var(--p400)':'var(--a400)';
+              const btnBg=ps==='received'?'var(--g50)':ps==='partial'?'var(--p50)':'var(--a50)';
+              const btnColor=ps==='received'?'var(--g800)':ps==='partial'?'var(--p800)':'var(--a800)';
+              const btnLabel=ps==='received'?'✓ Paid':ps==='partial'?`₹${paid.toLocaleString()} partial`:'Collect';
+              const onclick=ps==='pending'
+                ?`openPayPopup(${v.id},'${esc(p.name)}',${pi})`
+                :`cycleToReceived(${v.id},'${esc(p.name)}',${pi})`;
+              return`<div class="proc-row">
                 <span class="proc-nm">${pr.procedure}</span>
-                <span class="proc-fee ${pr.paid?'fpaid':'fpend'}">₹${pr.fee.toLocaleString()}</span>
-                <button class="paybtn" style="background:${pr.paid?'var(--g50)':'var(--a50)'};color:${pr.paid?'var(--g800)':'var(--a800)'}"
-                  onclick="toggleProcPay(${v.id},'${esc(p.name)}',${pi})">${pr.paid?'✓ Paid':'Collect'}</button>
-              </div>`).join('')}
+                <div class="proc-amt-col">
+                  <div style="font-size:11px;font-weight:500;color:${feeColor}">₹${pr.fee.toLocaleString()}</div>
+                  ${ps==='partial'?`<div style="font-size:9px;color:var(--a400)">₹${pend.toLocaleString()} due</div>`:''}
+                </div>
+                <button class="paybtn" style="background:${btnBg};color:${btnColor}" onclick="${onclick}">${btnLabel}</button>
+              </div>`;
+            }).join('')}
             ${p.notes?`<div class="pat-note-d">📝 ${p.notes}</div>`:''}
           </div>`;
         }).join('')}
@@ -681,18 +766,13 @@ function renderVisits(){
     </div>`;
   }).join('');
 }
-
 function toggleVC(id){const el=document.getElementById('vc-'+id);if(el)el.classList.toggle('expanded');}
-function toggleProcPay(vid,pname,pi){
-  const v=visits.find(x=>x.id===vid);const p=v&&v.patients.find(x=>x.name===pname);
-  if(p&&p.procedures[pi]){p.procedures[pi].paid=!p.procedures[pi].paid;scheduleSync();toast(p.procedures[pi].paid?'✓ Payment received':'Marked as pending');renderAll();const el=document.getElementById('vc-'+vid);if(el)el.classList.add('expanded');}
-}
 function setF(f,btn){curFilter=f;document.querySelectorAll('.fchip').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderVisits();}
 
-// ── Clinics tab ───────────────────────────────────────────
+// ══ CLINICS TAB ════════════════════════════════════════════
 function renderClinicsTab(){
   const el=document.getElementById('clinics-list');
-  if(!clinics.length){el.innerHTML='<div class="empty"><div class="ei">🏥</div><p>No clinics added yet.<br>Tap "+ Add" to register a clinic.</p></div>';return;}
+  if(!clinics.length){el.innerHTML='<div class="empty"><div class="ei">🏥</div><p>No clinics added yet.<br>Tap "+ Add" to register.</p></div>';return;}
   el.innerHTML=clinics.map(c=>{
     const cvs=visits.filter(v=>v.clinic===c.name);
     let earned=0,pending=0,pats=0,procs=0;
@@ -720,18 +800,19 @@ function renderClinicsTab(){
           <div class="bstat"><div class="bsl">Collection %</div><div class="bsv">${earned+pending?Math.round(earned/(earned+pending)*100):0}%</div></div>
         </div>
         ${c.notes?`<div style="margin-bottom:9px;padding:8px;background:var(--b50);border-radius:7px;font-size:11px;color:var(--b800)">📋 ${c.notes}</div>`:''}
+        ${pending>0?`<button onclick="event.stopPropagation();confirmAllClear('${esc(c.name)}')" style="width:100%;margin-bottom:10px;padding:11px;border:none;border-radius:10px;background:var(--g400);color:#fff;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:7px">✅ All Clear — Mark all ₹${pending.toLocaleString()} as Received</button>`:'<div style="margin-bottom:9px;padding:8px;background:var(--g50);border-radius:7px;font-size:11px;color:var(--g800);text-align:center">✓ All payments received</div>'}
         ${cvs.length?`<div class="seg-label">Visit history</div>`+
           cvs.sort((a,b)=>new Date(b.date)-new Date(a.date)).map(v=>{
             const vt=vTotals(v);
             return`<div class="visit-row">
               <div style="flex:1;min-width:0">
-                <div class="vr-date">${fmtDate(v.date)} · ${v.shift}</div>
-                <div class="vr-info">${v.patients.length} patient${v.patients.length>1?'s':''} · ${v.patients.reduce((a,p)=>a+p.procedures.length,0)} procedures</div>
+                <div style="font-size:11px;font-weight:500;color:var(--text)">${fmtDate(v.date)} · ${v.shift}</div>
+                <div style="font-size:10px;color:var(--text2)">${v.patients.length} patient${v.patients.length>1?'s':''} · ${v.patients.reduce((a,p)=>a+p.procedures.length,0)} procedures</div>
                 <div style="font-size:10px;color:var(--text3);margin-top:1px">${v.patients.map(p=>p.name.split(' ')[0]+': '+p.procedures.map(pr=>pr.procedure).join(', ')).join(' | ')}</div>
               </div>
               <div style="text-align:right;flex-shrink:0;margin-left:8px">
                 <div style="font-size:12px;font-weight:500;color:var(--g400)">₹${vt.paid.toLocaleString()}</div>
-                ${vt.pending?`<div style="font-size:10px;color:var(--a400)">₹${vt.pending.toLocaleString()} due</div>`:''}
+                ${vt.pending?`<div style="font-size:10px;color:var(--a400)">₹${vt.pending.toLocaleString()} due</div>`:'<div style="font-size:10px;color:var(--g400)">Cleared ✓</div>'}
               </div>
             </div>`;
           }).join('')
@@ -742,7 +823,22 @@ function renderClinicsTab(){
 }
 function toggleCC(id){const el=document.getElementById('cc-'+id);if(el)el.classList.toggle('expanded');}
 
-// ── Clinic CRUD ───────────────────────────────────────────
+// ══ ALL CLEAR ══════════════════════════════════════════════
+function confirmAllClear(clinicName){
+  let count=0,amount=0;
+  visits.filter(v=>v.clinic===clinicName).forEach(v=>v.patients.forEach(p=>p.procedures.forEach(pr=>{
+    if(pr.payStatus!=='received'){count++;amount+=prPending(pr);}
+  })));
+  if(!count){toast('All payments already received');return;}
+  showConfirm('All Clear?',`Mark all ${count} outstanding procedure${count>1?'s':''} (₹${amount.toLocaleString()}) at "${clinicName}" as fully Received?`,()=>{
+    visits.filter(v=>v.clinic===clinicName).forEach(v=>v.patients.forEach(p=>p.procedures.forEach(pr=>{
+      if(pr.payStatus!=='received'){pr.payStatus='received';pr.partialAmt=0;}
+    })));
+    scheduleSync();toast('✓ All payments cleared!');renderAll();renderClinicsTab();
+  });
+}
+
+// ══ CLINIC CRUD ════════════════════════════════════════════
 function openClinicModal(){
   editCId=null;
   document.getElementById('clinic-modal-title').textContent='Add clinic / hospital';
@@ -775,27 +871,24 @@ function saveClinic(){
     if(c){const old=c.name;Object.assign(c,{name,type,location,phone,notes});visits.forEach(v=>{if(v.clinic===old)v.clinic=name;});toast('✓ Clinic updated');}
   } else {
     if(clinics.find(c=>c.name.toLowerCase()===name.toLowerCase())){toast('⚠ Clinic already exists');return;}
-    clinics.push({id:Date.now(),name,type,location,phone,notes});
-    toast('✓ Clinic added');
+    clinics.push({id:Date.now(),name,type,location,phone,notes});toast('✓ Clinic added');
   }
   scheduleSync();closeModal('clinic-modal');buildClinicDropdown();renderAll();renderClinicsTab();
 }
 function confirmDeleteClinic(id){
   const c=clinics.find(x=>x.id===id);if(!c)return;
-  showConfirm('Delete clinic?',`"${c.name}" will be removed. Visits linked to it will remain.`,()=>{
-    clinics=clinics.filter(x=>x.id!==id);scheduleSync();renderClinicsTab();buildClinicDropdown();updateSummary();
-    toast('✓ Clinic deleted');
+  showConfirm('Delete clinic?',`"${c.name}" will be removed from the list. All linked visits remain.`,()=>{
+    clinics=clinics.filter(x=>x.id!==id);scheduleSync();renderClinicsTab();buildClinicDropdown();updateSummary();toast('✓ Clinic deleted');
   });
 }
 
-// ── Visit form helpers ────────────────────────────────────
+// ══ VISIT FORM ═════════════════════════════════════════════
 function buildClinicDropdown(sel){
   const el=document.getElementById('fc');if(!el)return;
   el.innerHTML='';
   if(!clinics.length){el.innerHTML='<option value="">— Add a clinic first —</option>';return;}
   clinics.forEach(c=>{const o=document.createElement('option');o.value=c.name;o.textContent=c.name;if(sel&&c.name===sel)o.selected=true;el.appendChild(o);});
 }
-
 function buildPatientEntryHTML(pid,num){
   return`<div class="pentry-head">
     <div class="pentry-num">${num}</div>
@@ -803,28 +896,45 @@ function buildPatientEntryHTML(pid,num){
     <button class="rmbtn" onclick="document.getElementById('${pid}').remove();renumberPats()">×</button>
   </div>
   <div class="fg" style="margin-bottom:8px"><label class="flbl">Patient name</label><input class="finp" placeholder="Full name" data-field="name" autocapitalize="words"/></div>
-  <label class="flbl" style="margin-bottom:4px;display:block">Procedures & fees</label>
+  <label class="flbl" style="margin-bottom:4px;display:block">Procedures &amp; fees</label>
   <div class="proc-entries" id="procs-${pid}"></div>
   <button class="add-proc-btn" onclick="addProcEntry('${pid}')">+ Add another procedure</button>
   <div class="fg" style="margin-top:1px;margin-bottom:0"><label class="flbl">Patient notes</label><textarea class="ftarea" data-field="notes" placeholder="e.g. allergic to penicillin, follow-up needed…"></textarea></div>`;
 }
 function buildProcEntryHTML(prid){
-  return`<select class="fsel" data-field="proc">${PROCS.map(p=>`<option>${p}</option>`).join('')}</select>
-    <input class="finp" type="number" inputmode="numeric" placeholder="Fee ₹" data-field="fee" min="0"/>
-    <select class="fsel" data-field="paid"><option value="false">Pending</option><option value="true">Received</option></select>
-    <button class="rm-proc-btn" onclick="document.getElementById('${prid}').remove()">×</button>`;
+  const opts=PROCS.map(p=>`<option>${p}</option>`).join('');
+  return`<div class="proc-entry-wrap" id="${prid}">
+    <div class="proc-row-grid">
+      <select class="fsel" data-field="proc">${opts}</select>
+      <input class="finp" type="number" inputmode="numeric" placeholder="Fee ₹" data-field="fee" min="0"/>
+      <select class="fsel" data-field="payStatus" onchange="onPayStatusChange('${prid}',this.value)">
+        <option value="pending">Pending</option>
+        <option value="received">Received</option>
+        <option value="partial">Partial paid</option>
+      </select>
+      <button class="rm-proc-btn" onclick="document.getElementById('${prid}').remove()">×</button>
+    </div>
+    <div class="partial-row" id="par-${prid}">
+      <label class="flbl">Partial amount received (₹)</label>
+      <input class="finp" type="number" inputmode="numeric" placeholder="Amount paid so far" data-field="partialAmt" min="0"/>
+    </div>
+  </div>`;
+}
+function onPayStatusChange(prid,val){
+  const row=document.getElementById('par-'+prid);
+  if(row)row.style.display=val==='partial'?'block':'none';
 }
 function addPatientEntry(){
   pEId++;const pid='pe'+pEId;const num=document.querySelectorAll('.pentry').length+1;
   const div=document.createElement('div');div.className='pentry';div.id=pid;
   div.innerHTML=buildPatientEntryHTML(pid,num);
-  document.getElementById('pentries').appendChild(div);addProcEntry(pid);
+  document.getElementById('pentries').appendChild(div);
+  addProcEntry(pid);
 }
 function addProcEntry(pid){
   prEId++;const prid='pr'+prEId;
-  const div=document.createElement('div');div.className='proc-entry';div.id=prid;
-  div.innerHTML=buildProcEntryHTML(prid);
-  document.getElementById('procs-'+pid).appendChild(div);
+  const temp=document.createElement('div');temp.innerHTML=buildProcEntryHTML(prid);
+  document.getElementById('procs-'+pid).appendChild(temp.firstElementChild);
 }
 function renumberPats(){
   document.querySelectorAll('.pentry').forEach((el,i)=>{
@@ -833,7 +943,7 @@ function renumberPats(){
   });
 }
 
-// ── Visit CRUD ────────────────────────────────────────────
+// ══ VISIT CRUD ═════════════════════════════════════════════
 function openVisitModal(){
   if(!clinics.length){toast('⚠ Add a clinic first');sw('clinics');return;}
   editVId=null;
@@ -863,11 +973,19 @@ function openEditVisit(id){
     div.querySelector('[data-field="notes"]').value=p.notes||'';
     const pc=div.querySelector('.proc-entries');
     p.procedures.forEach(pr=>{
-      prEId++;const prid='pr'+prEId;const pdiv=document.createElement('div');pdiv.className='proc-entry';pdiv.id=prid;
-      pdiv.innerHTML=buildProcEntryHTML(prid);pc.appendChild(pdiv);
-      pdiv.querySelector('[data-field="proc"]').value=pr.procedure;
-      pdiv.querySelector('[data-field="fee"]').value=pr.fee;
-      pdiv.querySelector('[data-field="paid"]').value=pr.paid?'true':'false';
+      prEId++;const prid='pr'+prEId;
+      const temp=document.createElement('div');temp.innerHTML=buildProcEntryHTML(prid);
+      const built=temp.firstElementChild;pc.appendChild(built);
+      built.querySelector('[data-field="proc"]').value=pr.procedure;
+      built.querySelector('[data-field="fee"]').value=pr.fee;
+      const ps=pr.payStatus||(pr.paid?'received':'pending');
+      built.querySelector('[data-field="payStatus"]').value=ps;
+      if(ps==='partial'){
+        const parRow=document.getElementById('par-'+prid);
+        if(parRow)parRow.style.display='block';
+        const partInp=built.querySelector('[data-field="partialAmt"]');
+        if(partInp)partInp.value=pr.partialAmt||0;
+      }
     });
   });
   document.getElementById('visit-modal').classList.add('open');
@@ -881,8 +999,13 @@ function saveVisit(){
     const notes=(pe.querySelector('[data-field="notes"]').value||'').trim();
     if(!name)return;
     const procedures=[];
-    pe.querySelectorAll('.proc-entry').forEach(pr=>{
-      procedures.push({procedure:pr.querySelector('[data-field="proc"]').value,fee:parseFloat(pr.querySelector('[data-field="fee"]').value)||0,paid:pr.querySelector('[data-field="paid"]').value==='true'});
+    pe.querySelectorAll('.proc-entry-wrap').forEach(pw=>{
+      const procedure=pw.querySelector('[data-field="proc"]').value;
+      const fee=parseFloat(pw.querySelector('[data-field="fee"]').value)||0;
+      const payStatus=pw.querySelector('[data-field="payStatus"]').value||'pending';
+      const partialInp=pw.querySelector('[data-field="partialAmt"]');
+      const partialAmt=payStatus==='partial'?(parseFloat(partialInp&&partialInp.value||0)||0):0;
+      procedures.push({procedure,fee,payStatus,partialAmt});
     });
     if(procedures.length)patients.push({name,notes,procedures});
   });
@@ -898,7 +1021,7 @@ function confirmDeleteVisit(id){
   });
 }
 
-// ── Patient history ───────────────────────────────────────
+// ══ PATIENT HISTORY ════════════════════════════════════════
 function getPatientMap(){
   const map={};
   visits.forEach(v=>v.patients.forEach(p=>{
@@ -910,6 +1033,13 @@ function getPatientMap(){
     if(p.notes)map[p.name].latestNote=p.notes;
   }));
   return map;
+}
+function procStatusLine(pr){
+  const ps=pr.payStatus||'pending';
+  const paid=prPaid(pr),pend=prPending(pr);
+  const c=ps==='received'?'var(--g400)':ps==='partial'?'var(--p400)':'var(--a400)';
+  const lbl=ps==='received'?'Paid':ps==='partial'?`₹${paid.toLocaleString()} partial · ₹${pend.toLocaleString()} due`:'Pending';
+  return`<div class="hrproc">${pr.procedure} <span style="font-size:10px;color:${c}">₹${pr.fee.toLocaleString()} — ${lbl}</span></div>`;
 }
 function renderPatients(){
   const q=(document.getElementById('psearch').value||'').toLowerCase();
@@ -932,7 +1062,7 @@ function renderPatients(){
         ${p.entries.sort((a,b)=>new Date(b.date)-new Date(a.date)).map(h=>`
           <div class="histrow">
             <div style="flex:1;min-width:0">
-              ${h.procedures.map(pr=>`<div class="hrproc">${pr.procedure} <span style="font-size:10px;color:${pr.paid?'var(--g400)':'var(--a400)'}">₹${pr.fee.toLocaleString()} ${pr.paid?'✓':''}</span></div>`).join('')}
+              ${h.procedures.map(procStatusLine).join('')}
               <div class="hrdate">${fmtDate(h.date)} · ${h.clinic}</div>
               ${h.notes?`<div class="hrnote">${h.notes}</div>`:''}
             </div>
@@ -962,7 +1092,7 @@ function viewPat(name){
     ${p.entries.sort((a,b)=>new Date(b.date)-new Date(a.date)).map(h=>`
       <div class="histrow">
         <div style="flex:1;min-width:0">
-          ${h.procedures.map(pr=>`<div class="hrproc">${pr.procedure} <span style="font-size:10px;color:${pr.paid?'var(--g400)':'var(--a400)'}">₹${pr.fee.toLocaleString()} ${pr.paid?'Paid':'Pending'}</span></div>`).join('')}
+          ${h.procedures.map(procStatusLine).join('')}
           <div class="hrdate">${fmtDate(h.date)} · ${h.clinic}</div>
           ${h.notes?`<div class="hrnote">${h.notes}</div>`:''}
         </div>
@@ -974,7 +1104,7 @@ function viewPat(name){
   document.getElementById('patient-modal').classList.add('open');
 }
 
-// ── Reminders ─────────────────────────────────────────────
+// ══ REMINDERS ══════════════════════════════════════════════
 function renderReminders(){
   const now=new Date();now.setHours(0,0,0,0);
   const el=document.getElementById('remlist');
@@ -1014,7 +1144,7 @@ function openRemModal(){
   document.getElementById('rt').value='';document.getElementById('rnote').value='';
 }
 
-// ── Report ────────────────────────────────────────────────
+// ══ REPORT ═════════════════════════════════════════════════
 function buildMonthSel(){
   const el=document.getElementById('month-sel');const seen=new Set();const mons=[];
   visits.forEach(v=>{const d=new Date(v.date);const k=d.getFullYear()+'-'+d.getMonth();if(!seen.has(k)){seen.add(k);mons.push({y:d.getFullYear(),m:d.getMonth()});}});
@@ -1030,7 +1160,10 @@ function renderReport(){
   let tP=0,tN=0,tPts=0,tPrc=0;
   vs.forEach(v=>{tPts+=v.patients.length;const t=vTotals(v);tP+=t.paid;tN+=t.pending;v.patients.forEach(p=>tPrc+=p.procedures.length);});
   const pct=tP+tN?Math.round(tP/(tP+tN)*100):0;
-  const rows=[];vs.forEach(v=>v.patients.forEach(p=>p.procedures.forEach(pr=>rows.push({date:v.date,clinic:v.clinic,patient:p.name,procedure:pr.procedure,fee:pr.fee,paid:pr.paid,notes:p.notes}))));
+  const rows=[];vs.forEach(v=>v.patients.forEach(p=>p.procedures.forEach(pr=>{
+    const ps=pr.payStatus||'pending';const paid=prPaid(pr);const pend=prPending(pr);
+    rows.push({date:v.date,clinic:v.clinic,patient:p.name,procedure:pr.procedure,fee:pr.fee,paid,pend,ps,notes:p.notes});
+  })));
   el.innerHTML=`
     <div class="rptcard">
       <div class="rpthead">${MONTHS[selMonth]} ${selYear} — Summary</div>
@@ -1046,29 +1179,39 @@ function renderReport(){
     <div class="rptcard">
       <div class="rpthead">Procedure ledger</div>
       <table class="rpttable">
-        <colgroup><col style="width:24%"><col style="width:22%"><col style="width:22%"><col style="width:16%"><col style="width:16%"></colgroup>
+        <colgroup><col style="width:22%"><col style="width:20%"><col style="width:20%"><col style="width:16%"><col style="width:22%"></colgroup>
         <tr><th>Patient</th><th>Procedure</th><th>Clinic</th><th>Fee</th><th>Status</th></tr>
-        ${rows.map(r=>`<tr>
-          <td title="${r.patient}">${r.patient.split(' ')[0]}</td>
-          <td>${r.procedure}</td>
-          <td title="${r.clinic}">${r.clinic.split(' ')[0]}</td>
-          <td>₹${r.fee.toLocaleString()}</td>
-          <td><span class="spill ${r.paid?'ppaid':'ppend'}" style="font-size:9px;padding:2px 4px">${r.paid?'Paid':'Due'}</span></td>
-        </tr>`).join('')}
+        ${rows.map(r=>{
+          const sc=r.ps==='received'?'var(--g800)':r.ps==='partial'?'var(--p800)':'var(--a800)';
+          const sb=r.ps==='received'?'var(--g50)':r.ps==='partial'?'var(--p50)':'var(--a50)';
+          const sl=r.ps==='received'?'Paid':r.ps==='partial'?`₹${r.paid.toLocaleString()} / ₹${r.fee.toLocaleString()}`:'Pending';
+          return`<tr>
+            <td title="${r.patient}">${r.patient.split(' ')[0]}</td>
+            <td>${r.procedure}</td>
+            <td title="${r.clinic}">${r.clinic.split(' ')[0]}</td>
+            <td>₹${r.fee.toLocaleString()}</td>
+            <td><span class="spill" style="font-size:9px;padding:2px 5px;background:${sb};color:${sc}">${sl}</span></td>
+          </tr>`;
+        }).join('')}
       </table>
     </div>
     <button class="expbtn" onclick="exportCSV(${selMonth},${selYear})">⬇ Export CSV — ${MS[selMonth]} ${selYear}</button>`;
 }
 function exportCSV(m,y){
   const vs=visits.filter(v=>{const d=new Date(v.date);return d.getMonth()===m&&d.getFullYear()===y;});
-  let csv='Date,Clinic,Shift,Patient,Procedure,Fee (INR),Status,Notes\n';
-  vs.forEach(v=>v.patients.forEach(p=>p.procedures.forEach(pr=>{csv+=`${v.date},"${v.clinic}",${v.shift},"${p.name}","${pr.procedure}",${pr.fee},${pr.paid?'Paid':'Pending'},"${(p.notes||'').replace(/"/g,'""')}"\n`;})));
+  let csv='Date,Clinic,Shift,Patient,Procedure,Total Fee,Amount Paid,Balance Due,Status,Notes\n';
+  vs.forEach(v=>v.patients.forEach(p=>p.procedures.forEach(pr=>{
+    const paid=prPaid(pr),pend=prPending(pr);
+    const ps=pr.payStatus||'pending';
+    const sl=ps==='received'?'Paid':ps==='partial'?'Partial':'Pending';
+    csv+=`${v.date},"${v.clinic}",${v.shift},"${p.name}","${pr.procedure}",${pr.fee},${paid},${pend},${sl},"${(p.notes||'').replace(/"/g,'""')}"\n`;
+  })));
   const blob=new Blob([csv],{type:'text/csv'});const url=URL.createObjectURL(blob);
   const a=document.createElement('a');a.href=url;a.download=`DentTrack_${MONTHS[m]}_${y}.csv`;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
   toast('✓ CSV exported!');
 }
 
-// ── Analytics ─────────────────────────────────────────────
+// ══ ANALYTICS ══════════════════════════════════════════════
 function renderPBars(){
   const s=getStats();const total=s.paid+s.pending;const el=document.getElementById('pbars');
   if(!total){el.innerHTML='<p style="color:var(--text3);font-size:12px">No data yet</p>';return;}
@@ -1093,7 +1236,7 @@ function renderAnalyticsClinics(){
     </div>`).join('');
 }
 
-// ── Tab switching ─────────────────────────────────────────
+// ══ TABS ═══════════════════════════════════════════════════
 const TABS=['visits','patients','clinics','reminders','report','analytics'];
 function sw(tab,tbtn){
   TABS.forEach(t=>{const el=document.getElementById('tab-'+t);if(el)el.style.display=t===tab?'block':'none';});
@@ -1106,10 +1249,10 @@ function sw(tab,tbtn){
   if(tab==='analytics'){renderPBars();renderAnalyticsClinics();updateSummary();}
 }
 
-// ── Modals ────────────────────────────────────────────────
+// ══ MODALS & CONFIRM ═══════════════════════════════════════
 function closeModal(id){document.getElementById(id).classList.remove('open');}
 document.querySelectorAll('.modal-wrap').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open');}));
-
+document.getElementById('pay-popup').addEventListener('click',e=>{if(e.target===document.getElementById('pay-popup'))closePayPopup();});
 function showConfirm(title,body,onOk){
   document.getElementById('confirm-title').textContent=title;
   document.getElementById('confirm-body').textContent=body;
@@ -1120,22 +1263,20 @@ function closeConfirm(){document.getElementById('confirm-overlay').classList.rem
 
 function renderAll(){updateSummary();renderVisits();}
 
-// ── Boot ──────────────────────────────────────────────────
+// ══ BOOT ═══════════════════════════════════════════════════
 ghToken=localStorage.getItem(TOKEN_KEY)||'';
 loadLocal();
-renderAll();
-renderReminders();
-buildClinicDropdown();
+renderAll();renderReminders();buildClinicDropdown();
 
 if(ghToken){
   document.getElementById('setup-screen').classList.add('hidden');
   setSyncStatus('synced','Connected to GitHub');
-  // pull latest data on load
-  setTimeout(()=>syncNow(),800);
+  setTimeout(syncNow,800);
 } else {
   setSyncStatus('','Not connected');
 }
 
+// Prevent double-tap zoom iOS
 let lastTap=0;
 document.addEventListener('touchend',e=>{const n=Date.now();if(n-lastTap<300)e.preventDefault();lastTap=n;},{passive:false});
 </script>
