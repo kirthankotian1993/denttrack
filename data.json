@@ -41,7 +41,15 @@
       "location": "Dasarahalli",
       "phone": "",
       "notes": "Dr.Venkatesh"
+    },
+    {
+      "id": 1773938316211,
+      "name": "Bangalore Smiles",
+      "type": "Dental Clinic",
+      "location": "Jakkur",
+      "phone": "",
+      "notes": "Dr.Neha"
     }
   ],
-  "savedAt": "2026-03-19T16:38:05.485Z"
+  "savedAt": "2026-03-19T16:38:37.713Z"
 }
