@@ -786,8 +786,8 @@ function renderClinicsTab(){
           <div class="clinic-tp">${c.type||''}${c.location?' · '+c.location:''}${c.phone?' · '+c.phone:''}</div>
         </div>
 		    <div style="flex:1;min-width:0">
-			    <div class="bsl">Received:</div><div class="clinic-earn">₹${earned.toLocaleString()}</div>
-			    <div class="bsl">Pending:</div><div class="clinic-pending">₹${pending.toLocaleString()}</div>
+			    <div class="clinic-nm">Received:</div><div class="clinic-earn">₹${earned.toLocaleString()}</div>
+			    <div class="clinic-nm">Pending:</div><div class="clinic-pending">₹${pending.toLocaleString()}</div>
 		    </div>
         <div class="clinic-actions" onclick="event.stopPropagation()">
           <button class="icon-btn" onclick="openEditClinic(${c.id})">✏️</button>
