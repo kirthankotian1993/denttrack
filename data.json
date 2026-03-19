@@ -13,7 +13,7 @@
             {
               "procedure": "GIC-Filling",
               "fee": 1200,
-              "payStatus": "pending",
+              "payStatus": "received",
               "partialAmt": 0
             }
           ]
@@ -84,5 +84,5 @@
       "notes": "Dr.Ashwini"
     }
   ],
-  "savedAt": "2026-03-19T14:06:05.989Z"
+  "savedAt": "2026-03-19T14:06:31.169Z"
 }
