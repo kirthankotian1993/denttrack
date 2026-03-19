@@ -33,7 +33,7 @@
             {
               "procedure": "Extraction",
               "fee": 1000,
-              "payStatus": "received",
+              "payStatus": "pending",
               "partialAmt": 0
             },
             {
@@ -84,5 +84,5 @@
       "notes": "Dr.Ashwini"
     }
   ],
-  "savedAt": "2026-03-19T14:06:54.614Z"
+  "savedAt": "2026-03-19T14:07:07.428Z"
 }
