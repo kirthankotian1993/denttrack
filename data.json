@@ -17,7 +17,15 @@
       "location": "8th Mile",
       "phone": "",
       "notes": ""
+    },
+    {
+      "id": 1773938218556,
+      "name": "Mallika Dental Clinic",
+      "type": "Dental Clinic",
+      "location": "Kirloskar layout",
+      "phone": "",
+      "notes": "Dr.Santhosh"
     }
   ],
-  "savedAt": "2026-03-19T16:36:23.122Z"
+  "savedAt": "2026-03-19T16:37:00.057Z"
 }
