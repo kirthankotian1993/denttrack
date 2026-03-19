@@ -1,70 +1,5 @@
 {
-  "visits": [
-    {
-      "id": 1773929075927,
-      "clinic": "Bangalore Smiles",
-      "date": "2026-03-19",
-      "shift": "Evening",
-      "patients": [
-        {
-          "name": "Divya",
-          "notes": "",
-          "procedures": [
-            {
-              "procedure": "GIC-Filling",
-              "fee": 1200,
-              "payStatus": "pending",
-              "partialAmt": 0
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": 1773929033277,
-      "clinic": "Mira Dental",
-      "date": "2026-03-18",
-      "shift": "Afternoon",
-      "patients": [
-        {
-          "name": "Kiran",
-          "notes": "1 extraction & 2 pulpectomy",
-          "procedures": [
-            {
-              "procedure": "Extraction",
-              "fee": 1000,
-              "payStatus": "received",
-              "partialAmt": 0
-            },
-            {
-              "procedure": "Pulpectomy",
-              "fee": 3000,
-              "payStatus": "received",
-              "partialAmt": 0
-            }
-          ]
-        },
-        {
-          "name": "Niran",
-          "notes": "",
-          "procedures": [
-            {
-              "procedure": "Scaling",
-              "fee": 500,
-              "payStatus": "received",
-              "partialAmt": 0
-            },
-            {
-              "procedure": "Flouride",
-              "fee": 700,
-              "payStatus": "received",
-              "partialAmt": 0
-            }
-          ]
-        }
-      ]
-    }
-  ],
+  "visits": [],
   "reminders": [],
   "clinics": [
     {
@@ -84,5 +19,5 @@
       "notes": "Dr.Ashwini"
     }
   ],
-  "savedAt": "2026-03-19T14:41:51.460Z"
+  "savedAt": "2026-03-19T16:33:49.582Z"
 }
