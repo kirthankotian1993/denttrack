@@ -81,7 +81,15 @@
       "location": "Sahakarnagar",
       "phone": "",
       "notes": "Dr.Aparna"
+    },
+    {
+      "id": 1773938441635,
+      "name": "Sai Health",
+      "type": "Dental Clinic",
+      "location": "Sahakarnagar",
+      "phone": "",
+      "notes": "Dr.Shivakumar"
     }
   ],
-  "savedAt": "2026-03-19T16:40:22.723Z"
+  "savedAt": "2026-03-19T16:40:43.136Z"
 }
