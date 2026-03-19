@@ -1,0 +1,15 @@
+{
+  "visits": [],
+  "reminders": [],
+  "clinics": [
+    {
+      "id": 1773927715721,
+      "name": "Mira Dental",
+      "type": "Dental Clinic",
+      "location": "MEI Layout",
+      "phone": "9738354989",
+      "notes": "Dr Ashwini"
+    }
+  ],
+  "savedAt": "2026-03-19T13:41:57.224Z"
+}
