@@ -1,6 +1,26 @@
 {
   "visits": [
     {
+      "id": 1773929075927,
+      "clinic": "Bangalore Smiles",
+      "date": "2026-03-19",
+      "shift": "Evening",
+      "patients": [
+        {
+          "name": "Divya",
+          "notes": "",
+          "procedures": [
+            {
+              "procedure": "GIC-Filling",
+              "fee": 1000,
+              "payStatus": "pending",
+              "partialAmt": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": 1773929033277,
       "clinic": "Mira Dental",
       "date": "2026-03-18",
@@ -64,5 +84,5 @@
       "notes": "Dr.Ashwini"
     }
   ],
-  "savedAt": "2026-03-19T14:03:54.778Z"
+  "savedAt": "2026-03-19T14:04:37.429Z"
 }
