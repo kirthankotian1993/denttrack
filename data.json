@@ -1,5 +1,26 @@
 {
-  "visits": [],
+  "visits": [
+    {
+      "id": 1773994002519,
+      "clinic": "Prakriya Hospital",
+      "date": "2026-03-02",
+      "shift": "Morning",
+      "patients": [
+        {
+          "name": "N/A",
+          "notes": "",
+          "procedures": [
+            {
+              "procedure": "Flouride",
+              "fee": 700,
+              "payStatus": "pending",
+              "partialAmt": 0
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "reminders": [],
   "clinics": [
     {
@@ -107,5 +128,5 @@
       "notes": "Dr.Sindhu"
     }
   ],
-  "savedAt": "2026-03-19T16:44:23.666Z"
+  "savedAt": "2026-03-20T08:06:44.021Z"
 }
