@@ -1,6 +1,38 @@
 {
   "visits": [
     {
+      "id": 1773995046857,
+      "clinic": "Mira Dental Clinic",
+      "date": "2026-03-10",
+      "shift": "Morning",
+      "patients": [
+        {
+          "name": "Pt1",
+          "notes": "BMP obt",
+          "procedures": [
+            {
+              "procedure": "Other",
+              "fee": 1000,
+              "payStatus": "received",
+              "partialAmt": 0
+            }
+          ]
+        },
+        {
+          "name": "Pt2",
+          "notes": "4 Gic filling",
+          "procedures": [
+            {
+              "procedure": "GIC-Filling",
+              "fee": 2000,
+              "payStatus": "received",
+              "partialAmt": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": 1773994993879,
       "clinic": "Dyuthi Dental Clinic",
       "date": "2026-03-10",
@@ -396,5 +428,5 @@
       "notes": "Dr.Sindhu"
     }
   ],
-  "savedAt": "2026-03-20T08:23:15.380Z"
+  "savedAt": "2026-03-20T08:24:08.358Z"
 }
