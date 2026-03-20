@@ -3,7 +3,7 @@
     {
       "id": 1773994705637,
       "clinic": "Dental Studio",
-      "date": "2026-03-20",
+      "date": "2026-03-04",
       "shift": "Morning",
       "patients": [
         {
@@ -55,7 +55,7 @@
             {
               "procedure": "Flouride",
               "fee": 700,
-              "payStatus": "pending",
+              "payStatus": "received",
               "partialAmt": 0
             }
           ]
@@ -312,5 +312,5 @@
       "notes": "Dr.Sindhu"
     }
   ],
-  "savedAt": "2026-03-20T08:18:27.138Z"
+  "savedAt": "2026-03-20T08:19:04.287Z"
 }
