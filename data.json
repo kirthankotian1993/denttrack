@@ -1,6 +1,68 @@
 {
   "visits": [
     {
+      "id": 1773994705637,
+      "clinic": "Dental Studio",
+      "date": "2026-03-20",
+      "shift": "Morning",
+      "patients": [
+        {
+          "name": "Pt1",
+          "notes": "",
+          "procedures": [
+            {
+              "procedure": "Consultation",
+              "fee": 300,
+              "payStatus": "received",
+              "partialAmt": 0
+            }
+          ]
+        },
+        {
+          "name": "Pt2",
+          "notes": "",
+          "procedures": [
+            {
+              "procedure": "Flouride",
+              "fee": 700,
+              "payStatus": "received",
+              "partialAmt": 0
+            },
+            {
+              "procedure": "Sealent",
+              "fee": 700,
+              "payStatus": "received",
+              "partialAmt": 0
+            }
+          ]
+        },
+        {
+          "name": "Pt3",
+          "notes": "4 Sealent, 2 GIC filling, 1 Flouride",
+          "procedures": [
+            {
+              "procedure": "Sealent",
+              "fee": 2800,
+              "payStatus": "received",
+              "partialAmt": 0
+            },
+            {
+              "procedure": "GIC-Filling",
+              "fee": 1000,
+              "payStatus": "received",
+              "partialAmt": 0
+            },
+            {
+              "procedure": "Flouride",
+              "fee": 700,
+              "payStatus": "pending",
+              "partialAmt": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": 1773994450533,
       "clinic": "Dento Health",
       "date": "2026-03-04",
@@ -250,5 +312,5 @@
       "notes": "Dr.Sindhu"
     }
   ],
-  "savedAt": "2026-03-20T08:14:28.577Z"
+  "savedAt": "2026-03-20T08:18:27.138Z"
 }
