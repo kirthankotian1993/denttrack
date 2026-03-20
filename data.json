@@ -1,6 +1,26 @@
 {
   "visits": [
     {
+      "id": 1773994247601,
+      "clinic": "Speciality Dental Clinic",
+      "date": "2026-03-03",
+      "shift": "Morning",
+      "patients": [
+        {
+          "name": "Pt",
+          "notes": "",
+          "procedures": [
+            {
+              "procedure": "Extraction",
+              "fee": 500,
+              "payStatus": "pending",
+              "partialAmt": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": 1773994186650,
       "clinic": "Mira Dental Clinic",
       "date": "2026-03-02",
@@ -178,5 +198,5 @@
       "notes": "Dr.Sindhu"
     }
   ],
-  "savedAt": "2026-03-20T08:09:48.151Z"
+  "savedAt": "2026-03-20T08:10:49.102Z"
 }
