@@ -33,7 +33,7 @@
             {
               "procedure": "Extraction",
               "fee": 500,
-              "payStatus": "pending",
+              "payStatus": "received",
               "partialAmt": 0
             }
           ]
@@ -218,5 +218,5 @@
       "notes": "Dr.Sindhu"
     }
   ],
-  "savedAt": "2026-03-20T08:11:53.962Z"
+  "savedAt": "2026-03-20T08:12:04.543Z"
 }
