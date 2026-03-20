@@ -13,8 +13,8 @@
             {
               "procedure": "Flouride",
               "fee": 700,
-              "payStatus": "pending",
-              "partialAmt": 0
+              "payStatus": "partial",
+              "partialAmt": 300
             }
           ]
         },
@@ -512,5 +512,5 @@
       "notes": "Dr.Sindhu"
     }
   ],
-  "savedAt": "2026-03-20T10:39:33.882Z"
+  "savedAt": "2026-03-20T10:39:40.110Z"
 }
