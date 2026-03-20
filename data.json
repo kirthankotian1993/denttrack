@@ -45,7 +45,7 @@
             {
               "procedure": "GIC-Filling",
               "fee": 1500,
-              "payStatus": "pending",
+              "payStatus": "received",
               "partialAmt": 0
             }
           ]
@@ -250,5 +250,5 @@
       "notes": "Dr.Sindhu"
     }
   ],
-  "savedAt": "2026-03-20T08:14:12.034Z"
+  "savedAt": "2026-03-20T08:14:28.577Z"
 }
