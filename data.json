@@ -1,6 +1,56 @@
 {
   "visits": [
     {
+      "id": 1773994186650,
+      "clinic": "Mira Dental Clinic",
+      "date": "2026-03-02",
+      "shift": "Morning",
+      "patients": [
+        {
+          "name": "Patient1 -2ndMarch",
+          "notes": "2 access opening",
+          "procedures": [
+            {
+              "procedure": "Other",
+              "fee": 1000,
+              "payStatus": "received",
+              "partialAmt": 0
+            }
+          ]
+        },
+        {
+          "name": "Patient2-2ndMarch",
+          "notes": "",
+          "procedures": [
+            {
+              "procedure": "Pulpectomy",
+              "fee": 1500,
+              "payStatus": "received",
+              "partialAmt": 0
+            },
+            {
+              "procedure": "GIC-Filling",
+              "fee": 500,
+              "payStatus": "received",
+              "partialAmt": 0
+            }
+          ]
+        },
+        {
+          "name": "Patient3-2ndMarch2026",
+          "notes": "",
+          "procedures": [
+            {
+              "procedure": "GIC-Filling",
+              "fee": 500,
+              "payStatus": "received",
+              "partialAmt": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": 1773994002519,
       "clinic": "Prakriya Hospital",
       "date": "2026-03-02",
@@ -128,5 +178,5 @@
       "notes": "Dr.Sindhu"
     }
   ],
-  "savedAt": "2026-03-20T08:06:44.021Z"
+  "savedAt": "2026-03-20T08:09:48.151Z"
 }
