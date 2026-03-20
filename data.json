@@ -1,6 +1,26 @@
 {
   "visits": [
     {
+      "id": 1773994912660,
+      "clinic": "Mira Dental Clinic",
+      "date": "2026-03-06",
+      "shift": "Morning",
+      "patients": [
+        {
+          "name": "Pt1",
+          "notes": "BMP obstruction",
+          "procedures": [
+            {
+              "procedure": "Other",
+              "fee": 1000,
+              "payStatus": "received",
+              "partialAmt": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": 1773994842759,
       "clinic": "Dyuthi Dental Clinic",
       "date": "2026-03-06",
@@ -344,5 +364,5 @@
       "notes": "Dr.Sindhu"
     }
   ],
-  "savedAt": "2026-03-20T08:20:44.260Z"
+  "savedAt": "2026-03-20T08:21:54.161Z"
 }
