@@ -1,6 +1,38 @@
 {
   "visits": [
     {
+      "id": 1773994450533,
+      "clinic": "Dento Health",
+      "date": "2026-03-04",
+      "shift": "Morning",
+      "patients": [
+        {
+          "name": "Pt1",
+          "notes": "1 fluoride varnish",
+          "procedures": [
+            {
+              "procedure": "Flouride",
+              "fee": 840,
+              "payStatus": "received",
+              "partialAmt": 0
+            }
+          ]
+        },
+        {
+          "name": "Pt2",
+          "notes": "3 GIC filling",
+          "procedures": [
+            {
+              "procedure": "GIC-Filling",
+              "fee": 1800,
+              "payStatus": "received",
+              "partialAmt": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": 1773994312461,
       "clinic": "Dyuthi Dental Clinic",
       "date": "2026-03-03",
@@ -218,5 +250,5 @@
       "notes": "Dr.Sindhu"
     }
   ],
-  "savedAt": "2026-03-20T08:12:04.543Z"
+  "savedAt": "2026-03-20T08:14:12.034Z"
 }
