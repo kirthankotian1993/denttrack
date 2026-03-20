@@ -1,6 +1,38 @@
 {
   "visits": [
     {
+      "id": 1773995127959,
+      "clinic": "Mira Dental Clinic",
+      "date": "2026-03-12",
+      "shift": "Morning",
+      "patients": [
+        {
+          "name": "Pt1",
+          "notes": "",
+          "procedures": [
+            {
+              "procedure": "Extraction",
+              "fee": 500,
+              "payStatus": "received",
+              "partialAmt": 0
+            }
+          ]
+        },
+        {
+          "name": "Pt2",
+          "notes": "",
+          "procedures": [
+            {
+              "procedure": "Consultation",
+              "fee": 200,
+              "payStatus": "received",
+              "partialAmt": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": 1773995046857,
       "clinic": "Mira Dental Clinic",
       "date": "2026-03-10",
@@ -428,5 +460,5 @@
       "notes": "Dr.Sindhu"
     }
   ],
-  "savedAt": "2026-03-20T08:24:08.358Z"
+  "savedAt": "2026-03-20T08:25:29.460Z"
 }
