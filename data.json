@@ -359,7 +359,7 @@
       "shift": "Morning",
       "patients": [
         {
-          "name": "N/A",
+          "name": "Pt1",
           "notes": "",
           "procedures": [
             {
@@ -480,5 +480,5 @@
       "notes": "Dr.Sindhu"
     }
   ],
-  "savedAt": "2026-03-20T08:27:14.910Z"
+  "savedAt": "2026-03-20T08:28:24.389Z"
 }
