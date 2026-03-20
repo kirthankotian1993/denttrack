@@ -1,6 +1,26 @@
 {
   "visits": [
     {
+      "id": 1773994312461,
+      "clinic": "Dyuthi Dental Clinic",
+      "date": "2026-03-03",
+      "shift": "Morning",
+      "patients": [
+        {
+          "name": "Pt1",
+          "notes": "3 GIC fillings",
+          "procedures": [
+            {
+              "procedure": "GIC-Filling",
+              "fee": 1500,
+              "payStatus": "pending",
+              "partialAmt": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": 1773994247601,
       "clinic": "Speciality Dental Clinic",
       "date": "2026-03-03",
@@ -198,5 +218,5 @@
       "notes": "Dr.Sindhu"
     }
   ],
-  "savedAt": "2026-03-20T08:10:49.102Z"
+  "savedAt": "2026-03-20T08:11:53.962Z"
 }
