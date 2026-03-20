@@ -309,7 +309,7 @@
       "shift": "Morning",
       "patients": [
         {
-          "name": "Patient1 -2ndMarch",
+          "name": "Pt1",
           "notes": "2 access opening",
           "procedures": [
             {
@@ -321,7 +321,7 @@
           ]
         },
         {
-          "name": "Patient2-2ndMarch",
+          "name": "Pt2",
           "notes": "",
           "procedures": [
             {
@@ -339,7 +339,7 @@
           ]
         },
         {
-          "name": "Patient3-2ndMarch2026",
+          "name": "Pt3",
           "notes": "",
           "procedures": [
             {
@@ -480,5 +480,5 @@
       "notes": "Dr.Sindhu"
     }
   ],
-  "savedAt": "2026-03-20T08:28:24.389Z"
+  "savedAt": "2026-03-20T08:28:46.959Z"
 }
