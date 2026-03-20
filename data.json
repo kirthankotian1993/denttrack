@@ -2,7 +2,7 @@
   "visits": [
     {
       "id": 1773995180422,
-      "clinic": "Mira Dental Clinic",
+      "clinic": "Prakriya Hospital",
       "date": "2026-03-18",
       "shift": "Morning",
       "patients": [
@@ -480,5 +480,5 @@
       "notes": "Dr.Sindhu"
     }
   ],
-  "savedAt": "2026-03-20T08:26:21.923Z"
+  "savedAt": "2026-03-20T08:27:14.910Z"
 }
