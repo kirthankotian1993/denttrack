@@ -1,6 +1,26 @@
 {
   "visits": [
     {
+      "id": 1773995180422,
+      "clinic": "Mira Dental Clinic",
+      "date": "2026-03-18",
+      "shift": "Morning",
+      "patients": [
+        {
+          "name": "Pt1",
+          "notes": "2 GIC fillings",
+          "procedures": [
+            {
+              "procedure": "GIC-Filling",
+              "fee": 1000,
+              "payStatus": "pending",
+              "partialAmt": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": 1773995127959,
       "clinic": "Mira Dental Clinic",
       "date": "2026-03-12",
@@ -460,5 +480,5 @@
       "notes": "Dr.Sindhu"
     }
   ],
-  "savedAt": "2026-03-20T08:25:29.460Z"
+  "savedAt": "2026-03-20T08:26:21.923Z"
 }
